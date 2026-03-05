@@ -1,0 +1,28 @@
+{
+  "VFO_A_lcdNumber": "<html><head/><body><p>Frequency setting of the VFO-A register in Hz.</p><p>The software keeps frequency values within the amateur bands:</p><p>1.8 MHz - 54.0 MHz<br/>144 MHz - 148 MHz<br/>430 MHz - 450 MHz</p><p>For extended receive operating range, start the program with the --exop parameter.</p></body></html>",
+ 
+ "VFO_A_lineEdit": "<html><head/><body><p>Entry box for manual setting of the VFO-A frequency.</p><p>Enter the frequency using the keyboard in units of MHz.</p><p>You can use a + or - sign before the number for relative increments or decrements. For example, entering +0.005 increases the current frequency by 5 kHz.</p><p>If no sign is used, the value is interpreted as an absolute frequency. For example, entering 28.4 sets the frequency to 28.4 MHz.</p></body></html>",
+
+  "VFO_A_dial": "<html><head/><body><p>Frequency dial for the VFO-A register.</p><p>Right-click on the dial to set focus.</p><p><span style=\" font-weight:700;\">Cursor up/down keys</span>: change frequency in 10 Hz steps</p><p><span style=\" font-weight:700;\">Page up/down keys</span>: change frequency in 100 Hz steps</p><p><span style=\" font-weight:700;\">FAST</span>: multiplies the frequency step size by 100.</p></body></html>",
+
+  "VFO_B_lcdNumber": "<html><head/><body><p>Frequency setting of the VFO-B register in Hz.</p><p>The software keeps frequency values within the amateur bands:</p><p>1.8 MHz - 54.0 MHz<br/>144 MHz - 148 MHz<br/>430 MHz - 450 MHz</p><p>For extended receive operating range, start the program with the --exop parameter.</p></body></html>",
+
+  "VFO_B_lineEdit": "<html><head/><body><p>Entry box for manual setting of the VFO-B frequency.</p><p>Enter the frequency using the keyboard in units of MHz.</p><p>You can use a + or - sign before the number for relative increments or decrements. For example, entering +0.005 increases the current frequency by 5 kHz.</p><p>If no sign is used, the value is interpreted as an absolute frequency. For example, entering 28.4 sets the frequency to 28.4 MHz.</p></body></html>",
+
+  "VFO_B_dial": "<html><head/><body><p>Frequency dial for the VFO-B register.</p><p>Right-click on the dial to set focus.</p><p><span style=\" font-weight:700;\">Cursor up/down keys</span>: change frequency in 10 Hz steps</p><p><span style=\" font-weight:700;\">Page up/down keys</span>: change frequency in 100 Hz steps</p><p><span style=\" font-weight:700;\">FAST</span>: multiplies the frequency step size by 100.</p></body></html>",
+
+  "Clar_dial": "<html><head/><body><p>Clarifier shift dial.</p><p>Right-click on the dial to set focus.</p><p><span style=\" font-weight:700;\">Cursor up/down keys</span>: change CLAR shift in 10 Hz steps</p><p><span style=\" font-weight:700;\">Page up/down keys</span>: change CLAR shift in 100 Hz steps</p></body></html>",
+
+  "Memory_groupBox": "<html><head/><body><p>Memory channel table.</p><p>Select a channel by clicking on a table row.</p><p><span style=\" font-weight:700;\">V/M</span>: Switches to memory mode using the selected channel. Once in memory mode, channels can be changed by clicking table rows or by using keyboard arrow keys.</p><p><span style=\" font-weight:700;\">A\u2192M</span>: Saves the current VFO-A register settings into the selected memory channel.</p><p><span style=\" font-weight:700;\">Up/Down/Stop:</span> Frequency scan controls. If the radio is in memory mode, memory scanning is performed. If the radio is in VFO mode, VFO scanning is performed.</p></body></html>",
+
+  "IF_spectrum_frame": "<html><head/><body><p>Spectrum of the received signal.</p><p>FFT parameters (Rate/Gain/Size/Window) are exclusively used by the software to control the spectrum display and have no effect on radio reception.</p></body></html>",
+
+  "EQ_filter_frame": "<html><head/><body><p>Simulated response of the microphone equalizer filter.</p><p>The filter is modeled by cascading three peaking-filter sections with the specified center frequency, gain, and Q-factor.</p><p>Displayed numbers next to the sliders represent the actual register values sent to the radio.</p></body></html>",
+
+  "Audio_filter_frame": "<html><head/><body><p>Simulated response of the Tx audio filter.</p><p>The filter is modeled by cascading low-pass and high-pass filter sections with the specified cutoff frequencies and slope parameters. The slope parameter determines the filter order.</p><p>Displayed numbers next to the sliders represent the actual register values sent to the radio.</p></body></html>",
+
+  "Message_textBrowser": "<html><head/><body><p>COM traffic between the software and the radio.</p><p>The text can be selected and copied with the mouse for debugging purposes.</p></body></html>",
+
+  "Meter_groupBox": "<html><head/><body><p>Radio meters.</p><p>Vertical red line shows the peak value.</p><p><span style=\" font-weight:700;\">S</span>: Signal strength. Displayed value can be inaccurate at very large or very small signal strengths.</p><p><span style=\" font-weight:700;\">PO</span>: Transmitter output power in watts.</p></body></html>"
+}
+
