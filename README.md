@@ -14,9 +14,19 @@
 - Audio equalizer settings
 - Receiver audio filter
 
-The program was developed using **Python 3.9.25** under **Linux**. The reference platform was **RHEL 9.7**, although it should run on other Linux distributions with little or no modification, provided that all dependencies are satisfied.
+The program was developed using **Python 3.9** under **Linux**. The reference platform was **RHEL 9.7**, although it should run on other Linux distributions with little or no modification, provided that all dependencies are satisfied.
 
-The software has **not been tested** on Microsoft Windows or macOS. However, I would be very interested to hear if it also works on those platforms.
+The software has **not been tested** on Microsoft Windows or macOS.
+
+:information_source:
+**Information:** Following radio firmware was used during the development:
+| Firmware    | Version |
+|-------------|---------|
+| Main        | V02-07  |
+| DSP         | V01-12  |
+| TFT         | V02-00  |
+| C4FM        | V04-15  |
+
 
 'Radio' and 'Transceiver' words are used interchangeably throughout this README.md file.
 
@@ -29,10 +39,26 @@ The program supports saving and loading:
 - Radio menu settings  
 - Memory channels  
 
-While the radio menu settings are well documented, the official FT-991A memory channel read/write commands do not support all settings that are copied when the **A→M** button on the front panel is pressed. To overcome this limitation, the software uses **raw memory read/write functions** for the memory-channel operations based on the work of **Gil Kloepfer**. For more background information and protocol details, please refer to https://www.kloepfer.org/ft991a/  
+While the radio menu settings are well documented, the official FT-991A memory-channel read/write commands do not support all settings that are saved when the **A→M** button on the front panel is pressed. To overcome this limitation, the software uses **raw memory read/write functions** for the memory-channel operations based on the work of **Gil Kloepfer**. For more background information and protocol details, please refer to https://www.kloepfer.org/ft991a/ 
+
+Note that the raw read/write commands are only used during memory-channel operations. All other controls are performed using commands documented in FT-991A CAT Operation Reference Manual, YAESU, 2017.
 
 :warning:
 **Warning:** The raw write function must be used with extreme care. Writing to an incorrect address may render your transceiver inoperable or seriously degrade its performance. By default, program's `spw` (raw write) function writes only to addresses used by the memory channels.
+
+:bulb:
+**Tip:** If you are planning to experiment with the `spw` command, consider saving the radio's NVRAM first using the `--dumpram` command-line parameter in case you need to verify it later.
+
+---
+
+## Future Improvements
+
+The following is my current plan for future improvements:
+
+- Add controls for CW
+- Explore possibility of pandapter or SDR support
+- Add controls for QSO logging
+- Test the software on Microsoft Windows & macOS
 
 ---
 
@@ -73,7 +99,7 @@ Replace `<venv_name>` with the desired environment name (typically a hidden dire
 
 ## Running the Program
 
-Be sure that the virtual environment is activated.
+Be sure that the virtual Python environment is activated if you are using one.
 
 ### Step 1 – Connect the transceiver
 
@@ -87,14 +113,14 @@ Connect the FT-991A to your computer via USB and power it on.
 ### Step 2 – Baud rate
 
 The default baud rate is **38400**.  
-Ensure that the transceiver's baud rate is set to the same value.
+Ensure that the transceiver's baud rate is set to the same value (Menu# 31).
 
 ---
 
 ### Step 3 – List available devices
 
 ```bash
-python ft991a_main.py --listcom --listsound
+ft991a_boss.py --listcom --listsound
 ```
 
 You should see output similar to the following:
@@ -113,31 +139,31 @@ The permissions for the serial ports should indicate `True`, meaning you have wr
 ### Step 4 – Start the GUI
 
 ```bash
-python ft991a_main.py -cid <control_id> -sid <sound_id>
+ft991a_boss.py -cid <control_id> -sid <sound_id>
 ```
 
 Example:
 
 ```bash
-python ft991a_main.py -cid 3 -sid 1
+ft991a_boss.py -cid 3 -sid 1
 ```
 
 ---
 
 ### QWidgets Application Arguments
 
-Program also supports passing QWidgets application arguments. These arguments are given in addition to the arguments that `ft991a_main.py` is using. Please refer to QWidgets documentation for more details.
+Program also supports passing QWidgets application arguments. These arguments are given in addition to the arguments that `ft991a_boss.py` is using. Please refer to QWidgets documentation for more details.
 
 As an example, you can choose Windows or Fusion style widgets using the following arguments:
 
 **Windows** style:
 ```bash
-python ft991a_main.py --style windows
+ft991a_boss.py --style windows
 ```
 
 **Fusion** style:
 ```bash
-python ft991a_main.py --style fusion
+ft991a_boss.py --style fusion
 ```
 
 ---
@@ -146,19 +172,19 @@ python ft991a_main.py --style fusion
 
 The program provides a graphical user interface (GUI) in which transceiver control functions are grouped into tabs according to their functionality. This organization helps reduce visual clutter and makes related controls easier to locate.
 
-The program comes with two different GUI layouts: vertical and horizontal. You can switch between the two layouts by importing the correct module:
+The program comes with two different GUI layouts: vertical and horizontal. You can choose between the two layouts by importing the correct module:
 
 **Normal** layout (default):
 ```python
-from ft991a_gui import Ui_MainWindow
+from ft991a_ui import Ui_MainWindow
 ```
 
 **Wide** layout:
 ```python
-from ft991a_gui_wide import Ui_MainWindow
+from ft991a_wide_ui import Ui_MainWindow
 ```
 
-Most widgets provide additional information via tooltips. To view the tooltip for a widget, simply hover the mouse cursor over it.
+Most widgets provide additional information via tooltips. To view the tooltip for a widget, simply hover the mouse cursor over it and wait a few seconds.
 
 All slider and knob controls support keyboard-based adjustment:
 
@@ -198,6 +224,9 @@ These functions allow transceiver settings to be stored and restored at a later 
 
 All data files are saved in **XML text format** and may be edited using a text editor if needed.
 
+:bulb:
+**Tip:** Consider saving both radio menu and memory channels when you first start the program.
+
 Each memory-channel entry includes a **checksum** to ensure data integrity, as memory data is written directly to the transceiver using raw memory write commands. Memory channels may be reordered or renumbered manually in the XML file, provided that each channel is moved as a complete block together with its checksum.
 
 Radio menu settings may also be edited directly in the XML file, as long as the values remain within the allowable range defined by the transceiver. Before sending any menu data to the transceiver, the software validates all values against the allowable set and ignores invalid entries.
@@ -205,18 +234,15 @@ Radio menu settings may also be edited directly in the XML file, as long as the 
 :information_source:
 **Information:** Loading memory channels from disk is a slow process due to the large number of bytes that need to be written to the radio.
 
-:bulb:
-**Tip:** Consider saving both radio menu and memory channels when you first start the program.
-
 ---
 
 ### Refresh Menu
 
-The **Refresh** menu provides commands to synchronize the GUI with the current transceiver state.
+The **Refresh** menu provides commands to synchronize the GUI with the current transceiver state. 
 
-Under normal operation, manual refresh is not required as long as all transceiver parameters are adjusted through the GUI. The program also performs automatic refresh operations when certain triggers occur.
+Under normal operation, manual refresh is not required as long as all transceiver parameters are adjusted through the GUI. The program also performs automatic refresh operations when certain triggers occur. The program does not use `ai` (auto information) feature of the transceiver.
 
-However, if the transceiver is adjusted directly using the front panel, some GUI elements may become out of sync. In such cases, the commands in this menu can be used to force a refresh and restore consistency between the GUI and the transceiver.
+If the transceiver is adjusted directly using the front panel, some GUI controls may become out of sync. In such cases, the commands in this menu can be used to force a refresh and restore consistency between the GUI and the transceiver.
 
 ---
 
@@ -252,9 +278,9 @@ The keyboard input supports **relative frequency entry** when a sign is used. Fo
 - Entering `+0.003` shifts the frequency by +3 kHz  
 - Entering `28.3` sets the frequency to 28.3 MHz  
 
-All frequency entries are specified in **MHz**. You can also copy-and-paste a frequency text as shown in DXCluster in this field.
+All frequency entries are specified in **MHz**. You can also copy-and-paste a frequency text as shown in DXCluster&reg; in this field.
 
-The meter group displays signal strength (**S**) and output power (**PO**) meters. Both meters show peak values, and the S-meter also displays an average value. Note that the signal strenth indicator can be inaccurate for very large RF input powers particularly at VHF and UHF frequencies.
+The meter group displays signal strength (**S**) and output power (**PO**) meters. Both meters have red indicators that show peak values. Note that the signal strenth indicator can be inaccurate for very large RF input powers particularly on FM mode.
 
 The memory group displays the currently active memory channels retrieved from the transceiver using raw memory read commands. Memory data is written back using raw memory write commands.
 
@@ -276,13 +302,13 @@ Entering split-memory data (different Rx and Tx frequencies) requires simultaneo
 The program also supports memory scanning using the provided controls.
 
 :information_source:
-**Information:** In rare cases, the transceiver may get stuck on a memory channel while switching back and forth between the memory and VFO modes. This is a temporary state. To revert to the normal operation, proceed as follows using the front panel of the transceiver: 
+**Information:** In rare cases, the transceiver can get stuck on a memory channel while switching between memory and VFO modes. This is a temporary state. To revert to the normal operation, proceed as follows using the front panel of the transceiver:
 
-1. Press V/M to enter the memory mode
-2. Go to memory channel #1
+1. Press **V/M** to enter the memory mode
+2. Go to memory channel #1 (**F Button→MCH→Multi Dial**)
 3. Enter the memory-tune mode by moving the VFO dial
-4. Press V/M to leave the memory-tune mode
-5. Press V/M again to leave the memory mode
+4. Press **V/M** to leave the memory-tune mode
+5. Press **V/M** again to leave the memory mode
 
 ---
 
@@ -304,10 +330,10 @@ This tab also includes a **real-time spectrum display** of the received signal. 
 
 For example:
 
-- Adjusting the notch filter frequency moves a vertical indicator line  
-- Changing IF filter bandwidth modifies the displayed filter response  
+- Adjusting the notch filter frequency moves a vertical indicator line
+- Changing IF filter bandwidth/shift modifies the simulated filter response
 
-Most interference rejection functions apply to **SSB, CW, RTTY, DATA, and AM** modes. These features are generally not available in **FM** mode.
+Most interference rejection functions apply to **SSB, CW, RTTY, DATA,** and **AM** modes. These features are generally not available in **FM** mode.
 
 :information_source:
 **Information:** The FFT parameters are used exclusively for visualization of the spectrum and do **not** affect signal demodulation.
@@ -324,11 +350,14 @@ The **Speech Processing** tab contains widget groups for:
 
 ![Speech processing tab](images/speech_processing_tab.png)
 
-Each equalizer filter-bank is modeled by cascading three peaking-filter sections. Each filter section provides adjustable center frequency, gain, and bandwidth, as defined in the FT-991A Operating Manual (page 67).
+Each equalizer filter-bank is modeled by cascade connection of three peaking-filter sections. Each filter section provides adjustable center frequency, gain, and bandwidth, as defined in the FT-991A Operating Manual (page 67).
 
 As parameters are adjusted, changes are applied to the transceiver in real time and the corresponding filter response is displayed graphically.
 
 To evaluate the effect of speech processing and equalization, users may enable the transceiver’s internal monitor function (see FT-991A Operating Manual, pages 65 and 74).
+
+:information_source:
+**Information:** Microphone equalizer button must be turned on to see effect of the equalizer.
 
 Several preset equalizer configurations are also provided for experimentation.
 
@@ -340,9 +369,9 @@ The **Audio Filter** tab provides controls for the adjustable receiver audio fil
 
 ![Audio filter tab](images/audio_filter_tab.png)
 
-There are five different filter sets corresponding to each operating mode. Each filter set provides adjustable low-cutoff frequency, high-cutoff frequency, and slope. Filter parameter ranges depend on the selected operating mode, as documented in the FT-991A Operating Manual (page 60). Users can select the appropriate parameter set by pressing the corresponding mode buttons on the screen.
+There are five different filter sets corresponding to each operating mode. Each filter set provides adjustable low-cutoff frequency, high-cutoff frequency, and slope. Furthermore, each filter set is modeled by cascade connection of a low-pass filter and a high-pass filter. The slope parameter determines the filter order. 
 
-The filters are modeled by cascading low-pass and high-pass filter sections. The slope parameter determines the filter order. Changes are applied in real time and the resulting filter response is displayed graphically.
+Filter parameter ranges depend on the selected operating mode, as documented in the FT-991A Operating Manual (page 60). Users can select the appropriate parameter set by pressing the corresponding mode buttons on the screen. Changes are applied in real time and the resulting filter response is displayed graphically.
 
 :information_source:
 **Information:** Selecting a mode on this tab **does not change the transceiver’s operating mode**. It only selects the correct audio filter parameter set from the transceiver menu. If the transceiver is switched to that mode later, the associated filter settings will automatically be used.
