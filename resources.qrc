@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="data">
+    <file>./resources/meter_S_grid.png</file>
+    <file>./resources/meter_PO_grid.png</file>
+    <file>./resources/help.json</file>
+  </qresource>
+</RCC>
