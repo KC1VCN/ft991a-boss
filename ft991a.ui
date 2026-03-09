@@ -2700,7 +2700,7 @@ QPushButton::pressed {background-color: red;}</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true"/>
+        <string notr="true">QHeaderView::section{ font-family: 'Monospace'; font-size: 12pt; font-weight: normal;}</string>
        </property>
        <property name="verticalScrollBarPolicy">
         <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOn</enum>
@@ -2718,7 +2718,7 @@ QPushButton::pressed {background-color: red;}</string>
         <enum>QAbstractItemView::ScrollMode::ScrollPerPixel</enum>
        </property>
        <property name="rowCount">
-        <number>99</number>
+        <number>117</number>
        </property>
        <property name="columnCount">
         <number>8</number>
@@ -2726,6 +2726,30 @@ QPushButton::pressed {background-color: red;}</string>
        <attribute name="horizontalHeaderVisible">
         <bool>true</bool>
        </attribute>
+       <attribute name="verticalHeaderVisible">
+        <bool>true</bool>
+       </attribute>
+       <attribute name="verticalHeaderCascadingSectionResizes">
+        <bool>false</bool>
+       </attribute>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
        <row/>
        <row/>
        <row/>
@@ -2829,6 +2853,11 @@ QPushButton::pressed {background-color: red;}</string>
         <property name="text">
          <string>Freq</string>
         </property>
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+         </font>
+        </property>
         <property name="textAlignment">
          <set>AlignLeading|AlignVCenter</set>
         </property>
@@ -2836,6 +2865,11 @@ QPushButton::pressed {background-color: red;}</string>
        <column>
         <property name="text">
          <string>Mode</string>
+        </property>
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+         </font>
         </property>
         <property name="textAlignment">
          <set>AlignLeading|AlignVCenter</set>
@@ -2845,6 +2879,11 @@ QPushButton::pressed {background-color: red;}</string>
         <property name="text">
          <string>Tag</string>
         </property>
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+         </font>
+        </property>
         <property name="textAlignment">
          <set>AlignLeading|AlignVCenter</set>
         </property>
@@ -2852,6 +2891,11 @@ QPushButton::pressed {background-color: red;}</string>
        <column>
         <property name="text">
          <string>Skip</string>
+        </property>
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+         </font>
         </property>
         <property name="textAlignment">
          <set>AlignLeading|AlignVCenter</set>
@@ -2861,6 +2905,11 @@ QPushButton::pressed {background-color: red;}</string>
         <property name="text">
          <string>CTCSS</string>
         </property>
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+         </font>
+        </property>
         <property name="textAlignment">
          <set>AlignLeading|AlignVCenter</set>
         </property>
@@ -2868,6 +2917,11 @@ QPushButton::pressed {background-color: red;}</string>
        <column>
         <property name="text">
          <string>DCS</string>
+        </property>
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+         </font>
         </property>
         <property name="textAlignment">
          <set>AlignLeading|AlignVCenter</set>
@@ -2877,6 +2931,11 @@ QPushButton::pressed {background-color: red;}</string>
         <property name="text">
          <string>Split</string>
         </property>
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+         </font>
+        </property>
         <property name="textAlignment">
          <set>AlignLeading|AlignVCenter</set>
         </property>
@@ -2885,10 +2944,25 @@ QPushButton::pressed {background-color: red;}</string>
         <property name="text">
          <string>Tx Freq</string>
         </property>
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+         </font>
+        </property>
         <property name="textAlignment">
          <set>AlignLeading|AlignVCenter</set>
         </property>
        </column>
+       <item row="0" column="0">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+         </font>
+        </property>
+       </item>
       </widget>
       <widget class="QPushButton" name="Memory_AM_pushButton">
        <property name="geometry">
@@ -11282,12 +11356,12 @@ QStatusBar{ color: red;}</string>
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="EQ_buttonGroup"/>
-  <buttongroup name="Mode_buttonGroup"/>
   <buttongroup name="FFT_buttonGroup"/>
+  <buttongroup name="EQ_buttonGroup"/>
   <buttongroup name="Rx_buttonGroup"/>
   <buttongroup name="Audio_buttonGroup"/>
-  <buttongroup name="IF_buttonGroup"/>
   <buttongroup name="Tx_buttonGroup"/>
+  <buttongroup name="Mode_buttonGroup"/>
+  <buttongroup name="IF_buttonGroup"/>
  </buttongroups>
 </ui>

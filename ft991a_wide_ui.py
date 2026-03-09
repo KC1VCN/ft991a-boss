@@ -848,44 +848,52 @@ class Ui_MainWindow(object):
         self.Memory_tableWidget = QTableWidget(self.Memory_groupBox)
         if (self.Memory_tableWidget.columnCount() < 8):
             self.Memory_tableWidget.setColumnCount(8)
+        font11 = QFont()
+        font11.setFamilies([u"Monospace"])
         __qtablewidgetitem = QTableWidgetItem()
         __qtablewidgetitem.setTextAlignment(Qt.AlignLeading|Qt.AlignVCenter);
+        __qtablewidgetitem.setFont(font11);
         self.Memory_tableWidget.setHorizontalHeaderItem(0, __qtablewidgetitem)
         __qtablewidgetitem1 = QTableWidgetItem()
         __qtablewidgetitem1.setTextAlignment(Qt.AlignLeading|Qt.AlignVCenter);
+        __qtablewidgetitem1.setFont(font11);
         self.Memory_tableWidget.setHorizontalHeaderItem(1, __qtablewidgetitem1)
         __qtablewidgetitem2 = QTableWidgetItem()
         __qtablewidgetitem2.setTextAlignment(Qt.AlignLeading|Qt.AlignVCenter);
+        __qtablewidgetitem2.setFont(font11);
         self.Memory_tableWidget.setHorizontalHeaderItem(2, __qtablewidgetitem2)
         __qtablewidgetitem3 = QTableWidgetItem()
         __qtablewidgetitem3.setTextAlignment(Qt.AlignLeading|Qt.AlignVCenter);
+        __qtablewidgetitem3.setFont(font11);
         self.Memory_tableWidget.setHorizontalHeaderItem(3, __qtablewidgetitem3)
         __qtablewidgetitem4 = QTableWidgetItem()
         __qtablewidgetitem4.setTextAlignment(Qt.AlignLeading|Qt.AlignVCenter);
+        __qtablewidgetitem4.setFont(font11);
         self.Memory_tableWidget.setHorizontalHeaderItem(4, __qtablewidgetitem4)
         __qtablewidgetitem5 = QTableWidgetItem()
         __qtablewidgetitem5.setTextAlignment(Qt.AlignLeading|Qt.AlignVCenter);
+        __qtablewidgetitem5.setFont(font11);
         self.Memory_tableWidget.setHorizontalHeaderItem(5, __qtablewidgetitem5)
         __qtablewidgetitem6 = QTableWidgetItem()
         __qtablewidgetitem6.setTextAlignment(Qt.AlignLeading|Qt.AlignVCenter);
+        __qtablewidgetitem6.setFont(font11);
         self.Memory_tableWidget.setHorizontalHeaderItem(6, __qtablewidgetitem6)
         __qtablewidgetitem7 = QTableWidgetItem()
         __qtablewidgetitem7.setTextAlignment(Qt.AlignLeading|Qt.AlignVCenter);
+        __qtablewidgetitem7.setFont(font11);
         self.Memory_tableWidget.setHorizontalHeaderItem(7, __qtablewidgetitem7)
-        if (self.Memory_tableWidget.rowCount() < 99):
-            self.Memory_tableWidget.setRowCount(99)
+        if (self.Memory_tableWidget.rowCount() < 117):
+            self.Memory_tableWidget.setRowCount(117)
         self.Memory_tableWidget.setObjectName(u"Memory_tableWidget")
         self.Memory_tableWidget.setGeometry(QRect(10, 30, 341, 201))
-        font11 = QFont()
-        font11.setFamilies([u"Monospace"])
         self.Memory_tableWidget.setFont(font11)
-        self.Memory_tableWidget.setStyleSheet(u"")
+        self.Memory_tableWidget.setStyleSheet(u"QHeaderView::section{ font-family: 'Monospace'; font-size: 12pt; font-weight: normal;}")
         self.Memory_tableWidget.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOn)
         self.Memory_tableWidget.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOn)
         self.Memory_tableWidget.setAutoScroll(False)
         self.Memory_tableWidget.setVerticalScrollMode(QAbstractItemView.ScrollMode.ScrollPerPixel)
         self.Memory_tableWidget.setHorizontalScrollMode(QAbstractItemView.ScrollMode.ScrollPerPixel)
-        self.Memory_tableWidget.setRowCount(99)
+        self.Memory_tableWidget.setRowCount(117)
         self.Memory_tableWidget.setColumnCount(8)
         self.Memory_tableWidget.horizontalHeader().setVisible(True)
         self.Memory_AM_pushButton = QPushButton(self.Memory_groupBox)

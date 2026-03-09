@@ -211,13 +211,22 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 #        self.Memory_tableWidget.cellClicked.connect(self.on_Memory_cell_changed)
         self.Memory_tableWidget.currentCellChanged.connect(self.on_Memory_cell_changed)
 
+        header_labels = []
+        for i in range(99):
+            header_labels.append('%02dch' % (i+1))
+
+        for i in range(10):
+            header_labels.append('P-%dL' % (i+1))
+            header_labels.append('P-%dU' % (i+1))
+
+        self.Memory_tableWidget.setVerticalHeaderLabels(header_labels)
+
         self.Memory_AM_pushButton.clicked.connect(self.on_Memory_AM_button_clicked)
         self.Memory_VM_pushButton.clicked.connect(self.on_Memory_VM_button_clicked)
         self.Memory_scan_up_pushButton.clicked.connect(self.on_Memory_scan_button_clicked)
         self.Memory_scan_down_pushButton.clicked.connect(self.on_Memory_scan_button_clicked)
         self.Memory_scan_stop_pushButton.clicked.connect(self.on_Memory_scan_button_clicked)
 
-#
         self.Memory_tableWidget.setColumnWidth(0, 125)
         self.Memory_tableWidget.setColumnWidth(1, 50)
         self.Memory_tableWidget.setColumnWidth(2, 130)
@@ -1853,7 +1862,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 #
         was_blocked = self.Memory_tableWidget.blockSignals(True)
 
-        for i in range(99):
+        for i in range(117):
             if ((i+1) in active_memory_channels):
                 memory, _ = ft991a.get_memory_direct(i)
 
@@ -1916,7 +1925,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 #
         root = ET.Element('memory_channel')
 
-        for i in range(99):
+        for i in range(117):
             if ((i+1) in active_memory_channels):
                 memory, data = ft991a.get_memory_direct(i)
 
@@ -2176,7 +2185,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
         active_memory_channels = ft991a.get_active_memory()
 
 #
-        for i in range(99):
+        for i in range(117):
             if ((i+1) in active_memory_channels):
                 data = ft991a.get_memory_direct_raw(i)
                 channel_tag = ''.join([chr(x) for x in data[84:96]])
@@ -3281,16 +3290,17 @@ def auto_detect_port(baudrate):
 def dump_memory():
     data = ft991a.dump_memory()
     data_hex = bytearray(data).hex()
-
-    data = []
         
     utc_time = datetime.now(timezone.utc).strftime('%H%M%S%f')[:-3]
     fp = open('radio_nvram_%s' % (utc_time), 'w')  
 
-    for i in range(len(data_hex)//32):
-        data.append(' '.join(re.findall(f'.{{1,{2}}}', data_hex[i*32:i*32+32])).upper())
+    hex2ascii = lambda data: ''.join(chr(b) if (32 <= b <= 126) else '.' for b in data)
 
-        fp.write('%04X  %s\n' % (16*i, data[-1]))
+    for i in range(len(data_hex)//32):
+        mem = ' '.join(re.findall(f'.{{1,{2}}}', data_hex[i*32:i*32+32])).upper()
+        mem_ascii = hex2ascii(data[i*16:i*16+16])
+
+        fp.write('%04X  %s  %s\n' % (16*i, mem, mem_ascii))
 
     fp.close()
 
@@ -3411,10 +3421,11 @@ if __name__ == "__main__":
     ft991a.set_auto_info(0)
     ft991a.SERIAL_HANDLE.reset_input_buffer()
     ft991a.SERIAL_HANDLE.reset_output_buffer()
+#    ft991a.set_date_time()
 
 #
     if (dump_ram):
-        print('\nDumping radio\'s NVRAM... This may take a while.')
+        print('\nDumping radio\'s NVRAM... This will take a few minutes.')
 
         dump_memory()
 

@@ -1416,14 +1416,16 @@ def get_id():
 ##############################
 # Date and Time
 ##############################
-def set_date_time(value):
-    utc_time = datetime.now(timezone.utc).strftime('%H%M%S')
-    utc_date = datetime.now(timezone.utc).strftime('%Y%m%d')
+def set_date_time():
+    utc_time = datetime.now(timezone.utc)
 
-    command = 'DT0%s;' % (utc_date)
+    utc_time_HMS = utc_time.strftime('%H%M%S')
+    utc_time_Ymd = utc_time.strftime('%Y%m%d')
+
+    command = 'DT1%s;' % (utc_time_HMS)
     serial_write(command.encode('ASCII'))
 
-    command = 'DT1%s;' % (utc_time)
+    command = 'DT0%s;' % (utc_time_Ymd)
     serial_write(command.encode('ASCII'))
 
 ##############################
@@ -3261,7 +3263,18 @@ def dump_memory():
 
 #
     for address in range(0x000, 0x8000, 2):
-        data[address:address+2] = spr(address)
+        attempt = 0
+
+        while True:
+            try:
+                data[address:address+2] = spr(address)
+                break
+
+            except:
+                attempt = attempt+1
+
+                if (attempt > 3):
+                    raise
 
 #
     return data
