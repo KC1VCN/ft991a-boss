@@ -44,16 +44,16 @@ While the radio menu settings are well documented, the official FT-991A memory-c
 Note that the raw read/write commands are only used during memory-channel operations. All other controls are performed using commands documented in FT-991A CAT Operation Reference Manual, YAESU, 2017.
 
 :warning:
-**Warning:** The raw write function must be used with extreme care. Writing to an incorrect address may render your transceiver inoperable or seriously degrade its performance. By default, program's `spw` (raw write) function writes only to addresses used by the memory channels.
+**Warning:** The raw write function must be used with extreme care. Writing to an incorrect NVRAM address may render your transceiver inoperable or seriously degrade its performance. By default, program's `spw` (raw write) function writes only to NVRAM addresses used by memory channels.
 
 :bulb:
-**Tip:** If you are planning to experiment with the `spw` command, consider saving the radio's NVRAM first using the `--dumpram` command-line parameter in case you need to verify it later.
+**Tip:** If you are planning to experiment with the `spw` command, it is strongly recommended that the radio's NVRAM content is first saved using `--dumpram` command-line argument in case you need to verify it later.
 
 ---
 
 ## Future Improvements
 
-The following is my current plan for future improvements:
+The following items are planned for future improvements:
 
 - Add controls for CW
 - Explore possibility of pandapter or SDR support
@@ -70,8 +70,9 @@ Following are the modules and their versions used by the software:
 
 | Module      | Version |
 |-------------|---------|
-| PySide6     | 6.10.1  |
+| numpy       | 2.0.2   |
 | xlrd        | 2.0.2   |
+| PySide6     | 6.10.1  |
 | SoundCard   | 0.4.5   |
 | matplotlib  | 3.9.4   |
 | pyserial    | 3.5     |
@@ -86,8 +87,9 @@ It is advisable to setup a virtual Python environment to use the program. This a
 python -m venv <venv_name>
 source <venv_name>/bin/activate
 pip install --upgrade pip
-pip install PySide6
+pip install numpy
 pip install xlrd
+pip install PySide6
 pip install SoundCard
 pip install matplotlib
 pip install pyserial
@@ -113,7 +115,7 @@ Connect the FT-991A to your computer via USB and power it on.
 ### Step 2 – Baud rate
 
 The default baud rate is **38400**.  
-Ensure that the transceiver's baud rate is set to the same value (Menu# 31).
+Ensure that the transceiver's baud rate is set to the same value (031 CAT RATE).
 
 ---
 
@@ -189,7 +191,7 @@ Most widgets provide additional information via tooltips. To view the tooltip fo
 All slider and knob controls support keyboard-based adjustment:
 
 - **Cursor Up / Down**: fine adjustment  
-- **Page Up / Page Down**: faster adjustment  
+- **Page Up / Down**: faster adjustment  
 
 To use the keyboard, first set focus on the desired widget by right-clicking on it.
 
@@ -288,7 +290,10 @@ To use memory functions:
 
 1. Select a memory channel using the mouse  
 2. Press **A→M** to store the current VFO-A settings into the selected memory  
-3. Press **A/M** to toggle between VFO and memory mode  
+3. Press **A/M** to toggle between VFO and memory mode
+
+:information_source:
+**Information:** Program won't be able to store memory channels if the radio is on the **M-LIST** screen (i.e., displaying the memory channels). In order to be able to store memory channels using the program, exit from the **M-LIST** screen using the **BACK** soft-button.
 
 If memory channel data is modified directly from the transceiver front panel (e.g., changing a memory tag), the memory table can be refreshed using **Refresh → Memory Channel**.
 
@@ -305,7 +310,7 @@ The program also supports memory scanning using the provided controls.
 **Information:** In rare cases, the transceiver can get stuck on a memory channel while switching between memory and VFO modes. This is a temporary state. To revert to the normal operation, proceed as follows using the front panel of the transceiver:
 
 1. Press **V/M** to enter the memory mode
-2. Go to memory channel #1 (**F Button→MCH→Multi Dial**)
+2. Go to memory channel #1 using **F(M-LIST)**→**MCH**→**MULTI DIAL**
 3. Enter the memory-tune mode by moving the VFO dial
 4. Press **V/M** to leave the memory-tune mode
 5. Press **V/M** again to leave the memory mode
@@ -394,3 +399,5 @@ Transceiver menu parameters may be saved and loaded using:
 
 - **File → Save Radio Menu**  
 - **File → Load Radio Menu**
+
+
