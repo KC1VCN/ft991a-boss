@@ -23,6 +23,7 @@ import re
 import time
 import locale
 import threading
+import functools
 
 locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
 
@@ -49,7 +50,7 @@ def serial_read_until(*args, **kwargs):
         data = data+SERIAL_HANDLE.read_until(*args, **kwargs)
 
 #
-    if (MESSAGE_FLAG == True and TEXT_BROWSER != None):
+    if (MESSAGE_FLAG and TEXT_BROWSER is not None):
         utc_time = datetime.now(timezone.utc).strftime('%H%M%S.%f')[:-3]
         message = '%s: RCVD: <font color="green">%s</font>' % (utc_time, data)
         message = message.encode('unicode-escape').decode('ascii')
@@ -67,7 +68,7 @@ def serial_write(*args, **kwargs):
     SERIAL_HANDLE.write(*args, **kwargs)
 
 #
-    if (MESSAGE_FLAG == True and TEXT_BROWSER != None):
+    if (MESSAGE_FLAG and TEXT_BROWSER is not None):
         utc_time = datetime.now(timezone.utc).strftime('%H%M%S.%f')[:-3]
         message = '%s: SENT: <font color="yellow">%s</font>' % (utc_time, args[0])
         message = message.encode('unicode-escape').decode('ascii')
@@ -92,6 +93,28 @@ def open_serial():
 
 #
     return True
+
+#
+def validate_return_value(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        count = 0
+
+        while count < 3:
+            result = func(*args, **kwargs)
+
+            if (result is None):
+                count = count+1
+
+            else:
+                break
+
+        if (result is None):
+            raise Exception('data transmit error')
+
+        return result
+
+    return wrapper
 
 #
 menu = {
@@ -3025,10 +3048,7 @@ def set_active_memory(channels):
 
 #
     for offset in range(8):
-        value = spw(address+2*offset, data[2*offset:2*offset+2])
-
-        if (value == None):
-            raise Exception('data transmit error')
+        spw(address+2*offset, data[2*offset:2*offset+2])
 
 #
     return data
@@ -3059,7 +3079,7 @@ def get_memory_direct(channel):
     data[94:96] = spr(address+94)
 
 #
-    if (MESSAGE_FLAG == True and TEXT_BROWSER != None):
+    if (MESSAGE_FLAG and TEXT_BROWSER is not None):
         utc_time = datetime.now(timezone.utc).strftime('%H%M%S.%f')[:-3]
         message = '<br>'.join(re.findall(f'.{{1,{32}}}', bytearray(data).hex()))
         message = 'address %X data: <br>%s' % (address, message)
@@ -3189,7 +3209,7 @@ def set_memory_direct(channel, memory):
     data[84:96] = [ord(x) for x in memory['tag']]
 
 #
-    if (MESSAGE_FLAG == True and TEXT_BROWSER != None):
+    if (MESSAGE_FLAG and TEXT_BROWSER is not None):
         utc_time = datetime.now(timezone.utc).strftime('%H%M%S.%f')[:-3]
         message = '<br>'.join(re.findall(f'.{{1,{32}}}', bytearray(data).hex()))
         message = 'address %X data: <br>%s' % (address, message)
@@ -3226,7 +3246,7 @@ def get_memory_direct_raw(channel):
         data[2*offset:2*offset+2] = spr(address+2*offset)
 
 #
-    if (MESSAGE_FLAG == True and TEXT_BROWSER != None):
+    if (MESSAGE_FLAG and TEXT_BROWSER is not None):
         utc_time = datetime.now(timezone.utc).strftime('%H%M%S.%f')[:-3]
         message = '<br>'.join(re.findall(f'.{{1,{32}}}', bytearray(data).hex()))
         message = 'address %X data: <br>%s' % (address, message)
@@ -3243,13 +3263,10 @@ def set_memory_direct_raw(channel, data):
 
 #
     for offset in range(48):
-        value = spw(address+2*offset, data[2*offset:2*offset+2])
-
-        if (value == None):
-            raise Exception('data transmit error')
+        spw(address+2*offset, data[2*offset:2*offset+2])
 
 #
-    if (MESSAGE_FLAG == True and TEXT_BROWSER != None):
+    if (MESSAGE_FLAG and TEXT_BROWSER is not None):
         utc_time = datetime.now(timezone.utc).strftime('%H%M%S.%f')[:-3]
         message = '<br>'.join(re.findall(f'.{{1,{32}}}', bytearray(data).hex()))
         message = 'address %X data: <br>%s' % (address, message)
@@ -3263,27 +3280,18 @@ def dump_memory():
 
 #
     for address in range(0x000, 0x8000, 2):
-        attempt = 0
-
-        while True:
-            try:
-                data[address:address+2] = spr(address)
-                break
-
-            except:
-                attempt = attempt+1
-
-                if (attempt > 3):
-                    raise
+        data[address:address+2] = spr(address)
 
 #
     return data
 
 #
+@validate_return_value
 def spr(address):
     if (address < 0) or (address > 32767):
         return None
 
+#
     address_high = (address & 0xFF00) >> 8
     address_low = (address & 0x00FF)
 
@@ -3310,6 +3318,7 @@ def spr(address):
         return None
 
 #
+@validate_return_value
 def spw(address, data):
     address_range = [(0x3229, 0x3238), (0x3249, 0x6368)]
     in_range = any(start <= address <= end for start, end in address_range)
