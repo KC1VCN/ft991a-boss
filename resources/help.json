@@ -23,6 +23,8 @@
 
   "Message_textBrowser": "<html><head/><body><p>COM traffic between the software and the radio.</p><p>The text can be selected and copied with the mouse for debugging purposes.</p></body></html>",
 
-  "Meter_groupBox": "<html><head/><body><p>Radio meters.</p><p>Vertical red line shows the peak value.</p><p><span style=\" font-weight:700;\">S</span>: Signal strength. Displayed value can be inaccurate at very large or very small signal strengths.</p><p><span style=\" font-weight:700;\">PO</span>: Transmitter output power in watts.</p></body></html>"
+  "Meter_groupBox": "<html><head/><body><p>Radio meters.</p><p>Vertical red line shows the peak value.</p><p><span style=\" font-weight:700;\">S</span>: Signal strength. Displayed value can be inaccurate at very large or very small signal strengths.</p><p><span style=\" font-weight:700;\">PO</span>: Transmitter output power in watts.</p></body></html>",
+
+"VM_groupBox": "<html><head/><body><p>Voice memory.</p><p>Select a voice memory channel.</p><p><span style=\" font-weight:700;\">Load</span>: Press to initiate message recording. Then press PTT momentarily to start recording and speak into the microphone. To stop the recording, un-check the button.</p><p><span style=\" font-weight:700;\">Playback</span>: Press to start message playback. No signal is transmitted unless the break-in is also pressed. To stop the playback, un-check the button.</p><p><span style=\" font-weight:700;\">Break-in:</span> Engages transmitter during the playback.</p><p><span style=\" font-weight:700;\">Rx Out Level:</span> Playback level of the recording.</p><p><span style=\" font-weight:700;\">Tx Out Level:</span> Transmit level of the recording.</p><p><span style=\" font-weight:700;\">Playback Loop:</span> Automatically repeats the playback after given seconds.</p></body></html>"
 }
 
