@@ -22,7 +22,6 @@ import os
 import sys
 import math
 import re
-import xlrd
 import serial
 import time
 import ast
@@ -104,6 +103,7 @@ def pause_GUI_update(func):
     def wrapper(self, *args, **kwargs):
         window.timer_1.stop()
         window.timer_2.stop()
+        window.timer_3.stop()
         window.ani_IF.pause()
         ft991a.MESSAGE_FLAG = False
 
@@ -111,6 +111,7 @@ def pause_GUI_update(func):
 
         ft991a.MESSAGE_FLAG = True
         window.ani_IF.resume()
+        window.timer_3.start()
         window.timer_2.start()
         window.timer_1.start()
 
@@ -373,6 +374,21 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.Monitor_state_pushButton.clicked.connect(self.set_monitor_state)
 
 #
+        self.VOX_state_pushButton.clicked.connect(self.set_VOX_state)
+        self.VOX_gain_horizontalSlider.valueChanged.connect(self.set_VOX_Gain)
+        self.VOX_delay_horizontalSlider.valueChanged.connect(self.set_VOX_Delay)
+
+#
+        self.VM_load_pushButton.clicked.connect(self.on_VM_load)
+        self.VM_playback_pushButton.clicked.connect(self.on_VM_playback)
+        self.VM_breakin_pushButton.clicked.connect(self.on_VM_break_in)
+        self.VM_rx_out_horizontalSlider.valueChanged.connect(self.set_VM_rx_out)
+        self.VM_tx_out_horizontalSlider.valueChanged.connect(self.set_VM_tx_out)
+
+        self.vm_playback_count = 0
+        self.vm_channel = 1
+
+#
         self.EQ_1_center_verticalSlider.valueChanged.connect(self.set_EQ_center)
         self.EQ_1_gain_verticalSlider.valueChanged.connect(self.set_EQ_gain)
         self.EQ_1_BW_verticalSlider.valueChanged.connect(self.set_EQ_BW)
@@ -465,7 +481,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.actionRefresh_Radio_Menu.triggered.connect(self.update_Radio_menu)
         self.actionRefresh_Memory_Channel.triggered.connect(self.update_Memory)
-        self.actionRefresh_Settings.triggered.connect(self.update_RF_settings)
+        self.actionRefresh_Settings.triggered.connect(lambda: self.update_RF_settings(control=-1))
         self.actionRefresh_Equalizer.triggered.connect(self.EQ_get_parameters)
         self.actionRefresh_Audio_Filter.triggered.connect(self.Audio_filter_get_cutoff)
         self.actionRefresh_Audio_Filter.triggered.connect(self.Audio_filter_get_slope)
@@ -488,6 +504,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.timer_2.setInterval(25)
         self.timer_2.timeout.connect(self.update_gui_meters)
         self.timer_2.start()
+
+        self.timer_3 = QTimer(self)
+        self.timer_3.setInterval(1000)
+        self.timer_3.timeout.connect(lambda: self.update_RF_settings(control=0))
+        self.timer_3.start()
+
+        self.timer_4 = QTimer(self)
+        self.timer_4.setInterval(1000)
+        self.timer_4.timeout.connect(self.VM_playback)
 
 #
 #        self.Radio_tabWidget.currentChanged.connect(self.on_tab_changed)
@@ -533,9 +558,11 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 
 #
     def on_tab_changed(self):
-        self.update_RF_settings()
+        self.update_RF_settings(control=0)
 
-#
+##############################
+# Event Filters
+##############################
     def eventFilter(self, obj, event):
         if (obj is self.S_meter_progressBar) and (event.type() == QtCore.QEvent.Paint):
             obj.paintEvent(event)
@@ -585,14 +612,36 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 
             return True
 
+#
         return super().eventFilter(obj, event)
+
+##############################
+# VM Playback
+##############################
+    @Slot()
+    def VM_playback(self):
+        playback_delay = self.VM_delay_spinBox.value()
+
+        self.vm_playback_count = self.vm_playback_count+1
+
+        if (self.vm_playback_count == playback_delay):
+            ft991a.set_playback(0)
+            ft991a.set_playback(self.vm_channel)
+
+            self.vm_playback_count = 0
+
+        self.VM_delay_label.setText('%d' % (self.vm_playback_count))
 
 ##############################
 # GUI Update - RF Settings
 ##############################
-    @pause_GUI_update
-    def update_RF_settings(self, control=0b11111111111111111111111111111111):
+    @Slot()
+    def update_RF_settings(self, control=-1):
+        ft991a.MESSAGE_FLAG = False
+
+#
         operating_mode = ft991a.get_operating_mode()
+
         if (operating_mode is not None):
             self.mode = operating_mode
             mode_button = self.mode_button[operating_mode]
@@ -633,7 +682,20 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
             self.Noise_NB_pushButton.setEnabled(state[0])
             self.Noise_NB_comboBox.setEnabled(state[0])
 
-# Control 0
+#       
+        if (control == 0):
+            active_widget = self.Radio_tabWidget.currentWidget()
+            tab_name = active_widget.objectName()
+
+            widget_index = {'tab_1': [0,1,2,3,4,5,6,7,8,9], \
+                            'tab_2': [10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25], \
+                            'tab_3': [26,27,28,29,30,31,32,33,34,35,36,37,38], \
+                            'tab_4': [], \
+                            'tab_5': []}[tab_name]
+
+            control = sum((1 << w) for w in widget_index)
+
+# Control 0, RF Power
         if (control & 1):
             RF_power = ft991a.get_RF_power()
             if (RF_power is not None):
@@ -642,7 +704,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.RF_power_verticalSlider.setValue(int(RF_power))
                 self.RF_power_verticalSlider.blockSignals(was_blocked)
 
-# Control 1
+# Control 1, AF Gain
         if (control & (1 << 1)):
             AF_gain = ft991a.get_AF_gain()
             if (AF_gain is not None):
@@ -651,7 +713,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.AF_gain_verticalSlider.setValue(int(AF_gain))
                 self.AF_gain_verticalSlider.blockSignals(was_blocked)
 
-# Control 2
+# Control 2, RF Gain
         if (control & (1 << 2)):
             RF_gain = ft991a.get_RF_gain()
             if (RF_gain is not None):
@@ -660,7 +722,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.RF_gain_verticalSlider.setValue(int(RF_gain))
                 self.RF_gain_verticalSlider.blockSignals(was_blocked)
 
-# Control 3
+# Control 3, RF Squelch
         if (control & (1 << 3)):
             RF_squelch = ft991a.get_RF_squelch()
             if (RF_squelch is not None):
@@ -669,7 +731,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.RF_squelch_verticalSlider.setValue(RF_squelch)
                 self.RF_squelch_verticalSlider.blockSignals(was_blocked)
 
-# Control 4
+# Control 4, CTCSS Tone
         if (control & (1 << 4)):
             ctcss_tone = ft991a.get_ctcss_tone_freq()
             if (ctcss_tone is not None):
@@ -677,7 +739,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.Squelch_CTCSS_comboBox.setCurrentText('%.1f' % (ctcss_tone))
                 self.Squelch_CTCSS_comboBox.blockSignals(was_blocked)
 
-# Control 5
+# Control 5, DCS Mode
         if (control & (1 << 5)):
             dcs_tone = ft991a.get_dcs_code()
             if (dcs_tone is not None):
@@ -685,7 +747,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.Squelch_DCS_comboBox.setCurrentText('%d' % (dcs_tone))
                 self.Squelch_DCS_comboBox.blockSignals(was_blocked)
 
-# Control 6
+# Control 6, Repeater Offset
         if (control & (1 << 6)):
             offset = ft991a.get_repeater_shift()
             if (offset is not None):
@@ -693,7 +755,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.Squelch_offset_comboBox.setCurrentText('%s' % (offset))
                 self.Squelch_offset_comboBox.blockSignals(was_blocked)
 
-# Control 7
+# Control 7, CTCSS Mode
         if (control & (1 << 7)):
             ctcss_mode = ft991a.get_ctcss_mode()
             if (ctcss_mode is not None):
@@ -701,7 +763,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.Squelch_mode_comboBox.setCurrentText('%s' % (ctcss_mode))
                 self.Squelch_mode_comboBox.blockSignals(was_blocked)
 
-# Control 8
+# Control 8, Tx Mode
         if (control & (1 << 8)):
             Tx_mode = ft991a.get_function_Tx()
             if (Tx_mode is not None):
@@ -709,7 +771,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.A_B_pushButton_3.setChecked(split)
                 self.VFO_B_Tx_radioButton.setChecked(split)
 
-# Control 9
+# Control 9, Clarifier Control
         if (control & (1 << 9)):
             clar_Rx = ft991a.get_RF_clar_state()
             clar_Tx = ft991a.get_RF_clar_state_Tx()
@@ -719,7 +781,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.Clar_comboBox.setCurrentText(clar_mode)
                 self.Clar_comboBox.blockSignals(was_blocked)
 
-# Control 10
+# Control 10, Notch Frequency
         if (control & (1 << 10)):
             notch_freq = ft991a.get_manual_notch_level()
             if (notch_freq is not None):
@@ -729,7 +791,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.Notch_freq_horizontalSlider.setValue(self.Notch_freq/10)
                 self.Notch_freq_horizontalSlider.blockSignals(was_blocked)
 
-# Control 11
+# Control 11, Notch State
         if (control & (1 << 11)):
             notch_state = ft991a.get_manual_notch_state()
             if (notch_state is not None):
@@ -737,7 +799,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.Notch_pushButton.setChecked(notch_state)
                 self.Notch_pushButton.blockSignals(was_blocked)
 
-# Control 12
+# Control 12, Contour Frequency
         if (control & (1 << 12)):
             contour_freq = int(ft991a.get_contour_level())
             if (contour_freq is not None):
@@ -747,7 +809,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.Contour_freq_horizontalSlider.setValue(self.Contour_freq/10)
                 self.Contour_freq_horizontalSlider.blockSignals(was_blocked)
 
-# Control 13
+# Control 13, Contour State
         if (control & (1 << 13)):
             contour_state = ft991a.get_contour_state()
             if (contour_state is not None):
@@ -755,7 +817,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.Contour_pushButton.setChecked(contour_state)
                 self.Contour_pushButton.blockSignals(was_blocked)
 
-# Control 14
+# Control 14, Contour Level
         if (control & (1 << 14)):
             contour_level = ft991a.get_menu_value(112)
             if (contour_level is not None):
@@ -764,7 +826,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.Contour_level_spinBox.setValue(contour_level)
                 self.Contour_level_spinBox.blockSignals(was_blocked)
 
-# Control 15
+# Control 15, Contour Bandwidth
         if (control & (1 << 15)):
             contour_BW = ft991a.get_menu_value(113)
             if (contour_BW is not None):
@@ -773,7 +835,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.Contour_BW_spinBox.setValue(contour_BW)
                 self.Contour_BW_spinBox.blockSignals(was_blocked)
 
-# Control 16
+# Control 16, IF Filter
         if (control & (1 << 16)):
             IF_filter_type = ft991a.get_IF_filter_type()
             if (IF_filter_type is not None):
@@ -783,7 +845,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 push_button.click()
                 push_button.blockSignals(was_blocked)
 
-# Control 17
+# Control 17, IF Bandwidth
         if (control & (1 << 17)):
             IF_bandwidth, index = ft991a.get_IF_bandwidth(self.mode, self.IF_filter_type)
             if (IF_bandwidth is not None):
@@ -793,7 +855,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.IF_filter_BW_horizontalSlider.setValue(index)
                 self.IF_filter_BW_horizontalSlider.blockSignals(was_blocked)
 
-# Control 18
+# Control 18, IF Shift
         if (control & (1 << 18)):
             IF_shift = ft991a.get_IF_shift_level()
             if (IF_shift is not None):
@@ -803,7 +865,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.IF_filter_shift_horizontalSlider.setValue(IF_shift/20)
                 self.IF_filter_shift_horizontalSlider.blockSignals(was_blocked)
 
-# Control 19
+# Control 19, RF Attenuator State
         if (control & (1 << 19)):
             attenuator_state = ft991a.get_RF_attenuator()
             if (attenuator_state is not None):
@@ -811,7 +873,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.FrontEnd_ATT_pushButton.setChecked(attenuator_state)
                 self.FrontEnd_ATT_pushButton.blockSignals(was_blocked)
 
-# Control 20
+# Control 20, Intercept Point
         if (control & (1 << 20)):
             IPO = ft991a.get_IPO()
             if (IPO is not None):
@@ -819,7 +881,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.FrontEnd_IPO_comboBox.setCurrentText(IPO)
                 self.FrontEnd_IPO_comboBox.blockSignals(was_blocked)
 
-# Control 21
+# Control 21, Noise Blocker State
         if (control & (1 << 21)):
             NB_state = ft991a.get_NB_state()
             if (NB_state is not None):
@@ -827,7 +889,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.Noise_NB_pushButton.setChecked(NB_state)
                 self.Noise_NB_pushButton.blockSignals(was_blocked)
 
-# Control 22
+# Control 22, Noise Blocker Level
         if (control & (1 << 22)):
             NB_level = ft991a.get_NB_level()
             if (NB_level is not None):
@@ -835,7 +897,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.Noise_NB_comboBox.setCurrentIndex(int(NB_level))
                 self.Noise_NB_comboBox.blockSignals(was_blocked)
 
-# Control 23
+# Control 23, Noise Reduction State
         if (control & (1 << 23)):
             NR_state = ft991a.get_NR_state()
             if (NR_state is not None):
@@ -843,7 +905,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.Noise_DNR_pushButton.setChecked(NR_state)
                 self.Noise_DNR_pushButton.blockSignals(was_blocked)
 
-# Control 24
+# Control 24, Noise Reduction Level
         if (control & (1 << 24)):
             NR_level = ft991a.get_NR_level()
             if (NR_level is not None):
@@ -851,7 +913,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.Noise_DNR_comboBox.setCurrentIndex(int(NR_level)-1)
                 self.Noise_DNR_comboBox.blockSignals(was_blocked)
 
-# Control 25
+# Control 25, Digital Noise Filter
         if (control & (1 << 25)):
             DNF_state = ft991a.get_digital_notch_state()
             if (DNF_state is not None):
@@ -859,7 +921,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.Noise_DNF_pushButton.setChecked(DNF_state)
                 self.Noise_DNF_pushButton.blockSignals(was_blocked)
 
-# Control 26
+# Control 26, Speech Processor State
         if (control & (1 << 26)):
             SP_state = ft991a.get_SP_state()
             if (SP_state is not None):
@@ -867,7 +929,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.Speech_Proc_pushButton.setChecked(SP_state)
                 self.Speech_Proc_pushButton.blockSignals(was_blocked)
 
-# Control 27
+# Control 27, EQ State
         if (control & (1 << 27)):
             EQ_state = ft991a.get_SP_EQ_state()
             if (EQ_state is not None):
@@ -875,7 +937,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.Speech_Proc_EQ_pushButton.setChecked(EQ_state)
                 self.Speech_Proc_EQ_pushButton.blockSignals(was_blocked)
 
-# Control 28
+# Control 28, EQ Level
         if (control & (1 << 28)):
             EQ_level = ft991a.get_SP_level()
             if (EQ_level is not None):
@@ -884,7 +946,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.Speech_Proc_horizontalSlider.setValue(EQ_level)
                 self.Speech_Proc_horizontalSlider.blockSignals(was_blocked)
 
-# Control 29
+# Control 29, Monitor State
         if (control & (1 << 29)):
             monitor_state = ft991a.get_monitor_state()
             if (monitor_state is not None):
@@ -892,7 +954,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.Monitor_state_pushButton.setChecked(monitor_state)
                 self.Monitor_state_pushButton.blockSignals(was_blocked)
 
-# Control 30
+# Control 30, Monitor Level
         if (control & (1 << 30)):
             monitor_level = ft991a.get_monitor_level()
             if (monitor_level is not None):
@@ -901,7 +963,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.Monitor_level_horizontalSlider.setValue(monitor_level)
                 self.Monitor_level_horizontalSlider.blockSignals(was_blocked)
 
-# Control 31
+# Control 31, Microphone Gain
         if (control & (1 << 31)):
             mic_gain = ft991a.get_microphone_gain()
             if (mic_gain is not None):
@@ -910,16 +972,72 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.Microphone_Gain_horizontalSlider.setValue(mic_gain)
                 self.Microphone_Gain_horizontalSlider.blockSignals(was_blocked)
 
-# Control 32
+# Control 32, Tx Audio Bandwidth
         if (control & (1 << 32)):
             Tx_audio_BW = ft991a.get_menu_value(110)
             if (Tx_audio_BW is not None):
                 value = ft991a.menu['110'][1](Tx_audio_BW)
                 self.Tx_Audio_BW_comboBox.setCurrentText(value)
 
+# Control 33, VOX State
+        if (control & (1 << 33)):
+            vox_state = ft991a.get_VOX_state()
+            if (vox_state is not None):
+                was_blocked = self.VOX_state_pushButton.blockSignals(True) 
+                self.VOX_state_pushButton.setChecked(vox_state)
+                self.VOX_state_pushButton.blockSignals(was_blocked)
+
+# Control 34, VOX Gain
+        if (control & (1 << 34)):
+            vox_gain = ft991a.get_VOX_gain()
+            if (vox_gain is not None):
+                self.VOX_gain_lcdNumber.display(vox_gain)
+                was_blocked = self.VOX_gain_horizontalSlider.blockSignals(True)
+                self.VOX_gain_horizontalSlider.setValue(vox_gain)
+                self.VOX_gain_horizontalSlider.blockSignals(was_blocked)
+            
+# Control 35, VOX Delay
+        if (control & (1 << 35)):
+            vox_delay = ft991a.get_VOX_delay()
+            if (vox_delay is not None):
+                self.VOX_delay_lcdNumber.display(vox_delay)
+                was_blocked = self.VOX_delay_horizontalSlider.blockSignals(True)
+                self.VOX_delay_horizontalSlider.setValue(vox_delay)
+                self.VOX_delay_horizontalSlider.blockSignals(was_blocked)
+
+# Control 36, VM Rx Out
+        if (control & (1 << 36)):
+            vm_rx_out = ft991a.get_menu_value(10)
+            if (vm_rx_out is not None):
+                self.VM_rx_out_lcdNumber.display(vm_rx_out)
+                was_blocked = self.VM_rx_out_horizontalSlider.blockSignals(True)
+                self.VM_rx_out_horizontalSlider.setValue(int(vm_rx_out))
+                self.VM_rx_out_horizontalSlider.blockSignals(was_blocked)
+
+# Control 37, VM Rx Out
+        if (control & (1 << 37)):
+            vm_tx_out = ft991a.get_menu_value(11)
+            if (vm_rx_out is not None):
+                self.VM_tx_out_lcdNumber.display(vm_tx_out)
+                was_blocked = self.VM_tx_out_horizontalSlider.blockSignals(True)
+                self.VM_tx_out_horizontalSlider.setValue(int(vm_tx_out))
+                self.VM_tx_out_horizontalSlider.blockSignals(was_blocked)
+
+# Control 38, Break-in
+        if (control & (1 << 38)):
+            break_in = ft991a.get_break_in()
+            if (break_in is not None):
+                was_blocked = self.VM_breakin_pushButton.blockSignals(True)
+                self.VM_breakin_pushButton.setChecked(break_in)
+                self.VM_breakin_pushButton.blockSignals(was_blocked)
+
+#
+        ft991a.MESSAGE_FLAG = True
+
 ##############################
 # GUI Update - VFO Registers
 ##############################
+    @Slot()
     def update_VFO_registers(self):
         ft991a.MESSAGE_FLAG = False
 
@@ -973,10 +1091,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 
 #
         if (operating_mode != self.mode):
-            self.update_RF_settings()
-
-        else:
-            self.update_RF_settings(0b1111)
+            self.update_RF_settings(control=-1)
 
 #
         ft991a.MESSAGE_FLAG = True
@@ -984,6 +1099,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 ##############################
 # GUI Update - Meters
 ##############################
+    @Slot()
     def update_gui_meters(self):
         active_widget = self.Radio_tabWidget.currentWidget()
         tab_name = active_widget.objectName()
@@ -1141,11 +1257,11 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
             self.ani_IF.event_source.stop()
             del self.ani_IF
 
-        self.ani_IF = animation.FuncAnimation(self.figure_IF, self.update_gui_IF_spectrum, \
+        self.ani_IF = animation.FuncAnimation(self.figure_IF, self.update_IF_spectrum, \
                                               interval=10, blit=True, cache_frame_data=False)
 
 #
-    def update_gui_IF_spectrum(self, frame):
+    def update_IF_spectrum(self, frame):
         active_widget = self.Radio_tabWidget.currentWidget()
         tab_name = active_widget.objectName()
 
@@ -1498,7 +1614,6 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 #   
     def Notch_filter_state(self):
         sender_object = self.sender()
-
         button_state = sender_object.isChecked()
 
         if (button_state):
@@ -1512,7 +1627,6 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 ##############################
     def set_FrontEnd_ATT(self):
         sender_object = self.sender()
-
         button_state = sender_object.isChecked()
 
         if (button_state):
@@ -1532,7 +1646,6 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 ##############################
     def set_Noise_DNF(self):
         sender_object = self.sender()
-
         button_state = sender_object.isChecked()
 
         if (button_state):
@@ -1544,7 +1657,6 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 #
     def set_Noise_DNR(self):
         sender_object = self.sender()
-
         button_state = sender_object.isChecked()
 
         if (button_state):
@@ -1564,7 +1676,6 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 #
     def set_Noise_NB(self):
         sender_object = self.sender()
-
         button_state = sender_object.isChecked()
 
         if (button_state):
@@ -1593,12 +1704,9 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 #
     def set_Tx_Audio_BW(self):
         combo_box = self.sender()
-        BW = combo_box.currentText()
-
-        BW = {'50~3000': 0, '100~2900': 1, '200~2800':2, '300~2700':3, '400~2600':4}[BW]
+        BW = combo_box.currentIndex()
 
         value = '%d' % (BW)
-
         value = ft991a.set_menu_value(110, value)
 
         value = ft991a.menu['110'][1](value)
@@ -1614,7 +1722,6 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 #
     def set_monitor_state(self, value):
         sender_object = self.sender()
-
         button_state = sender_object.isChecked()
 
         if (button_state):
@@ -1628,7 +1735,6 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 ##############################
     def set_Speech_Proc(self):
         sender_object = self.sender()
-
         button_state = sender_object.isChecked()
 
         if (button_state):
@@ -1640,7 +1746,6 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 #
     def set_Speech_Proc_EQ(self):
         sender_object = self.sender()
-
         button_state = sender_object.isChecked()
 
         if (button_state):
@@ -1657,6 +1762,98 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
             self.Speech_Proc_lcdNumber.display(PROC_level)
 
 ##############################
+# VOX
+##############################
+    def set_VOX_state(self):
+        sender_object = self.sender()
+        button_state = sender_object.isChecked()
+
+        if (button_state):
+            ft991a.set_VOX_state(1)
+
+        else:
+            ft991a.set_VOX_state(0)
+
+#
+    def set_VOX_Gain(self, value):
+        vox_gain = ft991a.set_VOX_gain(value)
+
+        if (vox_gain is not None):
+            self.VOX_gain_lcdNumber.display(vox_gain)
+
+#
+    def set_VOX_Delay(self, value):
+        vox_delay = ft991a.set_VOX_delay(value)
+
+        if (vox_delay is not None):
+            self.VOX_delay_lcdNumber.display(vox_delay)
+
+##############################
+# Voice Memory
+##############################
+    def on_VM_break_in(self):
+        sender_object = self.sender()
+        button_state = sender_object.isChecked()
+
+        if (button_state):
+            ft991a.set_break_in(1)
+
+        else:
+            ft991a.set_break_in(0)
+
+#
+    def on_VM_playback(self):
+        self.vm_channel = self.VM_channel_comboBox.currentIndex()+1
+
+        sender_object = self.sender()
+        button_state = sender_object.isChecked()
+
+        if (button_state):
+            ft991a.set_playback(self.vm_channel)
+
+            self.vm_playback_count = 0
+
+            self.timer_4.start()
+
+        else:
+            self.timer_4.stop()
+
+            self.vm_playback_count = 0
+
+            ft991a.set_playback(0)
+
+            self.VM_delay_label.setText('--')
+
+#
+    def on_VM_load(self):
+        self.vm_channel = self.VM_channel_comboBox.currentIndex()+1
+
+        sender_object = self.sender()
+        button_state = sender_object.isChecked()
+
+        if (button_state):
+            ft991a.set_load_message(self.vm_channel)
+
+        else:
+            ft991a.set_load_message(0)
+
+#
+    def set_VM_tx_out(self, value):
+        value = '%03d' % (value)
+        vm_tx_out = ft991a.set_menu_value(11, value)
+
+        if (vm_tx_out is not None):
+            self.VM_tx_out_lcdNumber.display(vm_tx_out)
+
+#
+    def set_VM_rx_out(self, value):
+        value = '%03d' % (value)
+        vm_rx_out = ft991a.set_menu_value(10, value)
+
+        if (vm_rx_out is not None):
+            self.VM_rx_out_lcdNumber.display(vm_rx_out)
+
+##############################
 # Contour Filter
 ##############################
     def set_Contour_filter(self, value):
@@ -1669,7 +1866,6 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 #   
     def Contour_filter_state(self):
         sender_object = self.sender()
-
         button_state = sender_object.isChecked()
 
         if (button_state):
@@ -1680,22 +1876,18 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 
 #   
     def on_Contour_BW_changed(self, value):
-        sender_object = self.sender()
-
         value = '%02d' % (value)
-
         value = ft991a.set_menu_value(113, value)
 
+        sender_object = self.sender()
         sender_object.setValue(int(value))
 
 #
     def on_Contour_level_changed(self, value):
-        sender_object = self.sender()
-
         value = '%+03d' % (value)
-
         value = ft991a.set_menu_value(112, value)
 
+        sender_object = self.sender()
         sender_object.setValue(int(value))
 
 ##############################
@@ -1723,7 +1915,6 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 ##############################
     def set_IF_filter_type(self):
         sender_object = self.sender()
-
         filter_type = sender_object.text()
 
         IF_filter_type = ft991a.set_IF_filter_type(filter_type)
@@ -1746,19 +1937,15 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 ##############################
     def on_band_button_clicked(self):
         sender_object = self.sender()
-
         band = sender_object.text()
 
         ft991a.set_band(band)
-
-        self.update_RF_settings()
 
 ##############################
 # Operating Mode
 ##############################
     def on_mode_button_clicked(self):
         sender_object = self.sender()
-
         operating_mode = sender_object.text()
         
         ft991a.set_operating_mode(operating_mode)
@@ -1780,7 +1967,6 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 ##############################
     def on_split_button_clicked(self):
         sender_object = self.sender()
-
         button_state = sender_object.isChecked()
 
         if (button_state):
@@ -1794,7 +1980,6 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 ##############################
     def on_Memory_scan_button_clicked(self):
         sender_object = self.sender()
-
         scan = sender_object.property('scan')
 
         ft991a.set_scan(scan)
@@ -2105,7 +2290,6 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 
             if root.tag != 'memory_channel':
                 raise Exception('incorrect xml root tag')
-
 
             memory = {}
 
@@ -2545,16 +2729,15 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 ##############################
     def on_Squelch_mode_changed(self):
         combo_box = self.sender()
-        Squelch_mode = combo_box.currentText()
+        squelch_mode = combo_box.currentText()
 
-        ft991a.set_ctcss_mode(Squelch_mode)
+        ft991a.set_ctcss_mode(squelch_mode)
 
 ##############################
 # EQ
 ##############################
     def on_EQ_bank(self):
         sender_object = self.sender()
-
         EQ_bank = sender_object.text()
 
         self.EQ_bank = {'Bank 1': 1, 'Bank 2': 2}[EQ_bank]
@@ -2716,7 +2899,6 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                       2: {1: 128, 2: 131, 3: 134}}[self.EQ_bank][EQ_band]
 
         value = '%02d' % (value)
-
         value = ft991a.set_menu_value(menu_index, value)
 
         value = ft991a.menu['%03d' % (menu_index)][1](value)
@@ -2734,7 +2916,6 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                       2: {1: 129, 2: 132, 3: 135}}[self.EQ_bank][EQ_band]
 
         value = '%+03d' % (value)
-
         value = ft991a.set_menu_value(menu_index, value)
 
         value = ft991a.menu['%03d' % (menu_index)][1](value)
@@ -2751,7 +2932,6 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                       2: {1: 130, 2: 133, 3: 136}}[self.EQ_bank][EQ_band]
 
         value = '%02d' % (value)
-
         value = ft991a.set_menu_value(menu_index, value)
 
         value = ft991a.menu['%03d' % (menu_index)][1](value)
@@ -2762,7 +2942,6 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 ##############################
     def on_Audio_filter_bank(self):
         sender_object = self.sender()
-
         self.Audio_filter_bank = sender_object.property('bank')
 
         self.Audio_filter_get_cutoff()
@@ -2842,7 +3021,6 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
     def set_Audio_filter_cutoff(self, value):
         slider = self.sender() 
         slider_name = slider.objectName()
-
         side = slider.property('side')
 
         menu_index = {1: {1:  41, 2:  43},
@@ -2852,7 +3030,6 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                       5: {1: 102, 2: 104}}[self.Audio_filter_bank][side]
 
         value = '%02d' % (value)
-
         value = ft991a.set_menu_value(menu_index, value)
 
         value = ft991a.menu['%03d' % (menu_index)][1](value)
@@ -2863,7 +3040,6 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
     def set_Audio_filter_slope(self, value):
         combo_box = self.sender() 
         combo_box_name = combo_box.objectName()
-
         side = combo_box.property('side')
 
         menu_index = {1: {1:  42, 2:  44},
@@ -2873,7 +3049,6 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                       5: {1: 103, 2: 105}}[self.Audio_filter_bank][side]
 
         value = '%d' % (value)
-
         value = ft991a.set_menu_value(menu_index, value)
 
         value = ft991a.menu['%03d' % (menu_index)][1](value)
@@ -3002,7 +3177,6 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 ##############################
     def on_default_button_clicked(self):
         sender_object = self.sender()
-
         menu_index = int(sender_object.objectName().split('_')[2])
 
         object_name = u'menu_comboBox_%s' % (menu_index)
@@ -3039,7 +3213,6 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 ##############################
     def on_menu_parameter_changed(self, index):
         sender_object = self.sender()
-
         menu_index = int(sender_object.objectName().split('_')[2])
 
         object_name = u'menu_comboBox_%s' % (menu_index)
@@ -3479,7 +3652,7 @@ if __name__ == "__main__":
 
 #
     window.mic = mic
-    window.update_RF_settings()
+    window.update_RF_settings(control=-1)
     window.update_Memory()
     window.update_Radio_menu()
     window.EQ_get_parameters()

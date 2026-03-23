@@ -6453,6 +6453,677 @@ QPushButton::checked{ background-color: red; color: black}</string>
        </widget>
       </widget>
      </widget>
+     <widget class="QGroupBox" name="VOX_groupBox">
+      <property name="geometry">
+       <rect>
+        <x>1090</x>
+        <y>10</y>
+        <width>411</width>
+        <height>221</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QWidget{ background-color: lightgray;}</string>
+      </property>
+      <property name="title">
+       <string> VOX</string>
+      </property>
+      <widget class="QFrame" name="VOX_frame_1">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>40</y>
+         <width>251</width>
+         <height>81</height>
+        </rect>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Shape::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Shadow::Raised</enum>
+       </property>
+       <widget class="QLabel" name="VOX_label_1">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>10</y>
+          <width>141</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>VOX Gain</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLCDNumber" name="VOX_gain_lcdNumber">
+        <property name="geometry">
+         <rect>
+          <x>190</x>
+          <y>30</y>
+          <width>51</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QWidget{ border: 2px black; background-color: black;border-radius: 4px;}
+QLCDNumber {color: yellow;}</string>
+        </property>
+        <property name="digitCount">
+         <number>2</number>
+        </property>
+        <property name="intValue" stdset="0">
+         <number>50</number>
+        </property>
+       </widget>
+       <widget class="QSlider" name="VOX_gain_horizontalSlider">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>35</y>
+          <width>151</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QSlider::groove:horizontal{background: lightgray; height: 10px; border-radius: 3px;}
+QSlider::handle:horizontal{background: lightblue; border: 1px solid black; width: 10px; height: 30px; margin-top: -10px; margin-bottom: -10px; border-radius: 5px;}
+QSlider::sub-page:horizontal{background: white;}
+QSlider::add-page:horizontal{background: white;}
+QSlider:disabled{color: darkgrey;}
+QSlider:handle:disabled{background-color: darkgrey;  color: darkgrey;}</string>
+        </property>
+        <property name="value">
+         <number>50</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QFrame" name="VOX_frame_2">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>130</y>
+         <width>251</width>
+         <height>81</height>
+        </rect>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Shape::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Shadow::Raised</enum>
+       </property>
+       <widget class="QLabel" name="VOX_label_2">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>10</y>
+          <width>121</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>VOX Delay</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLCDNumber" name="VOX_delay_lcdNumber">
+        <property name="geometry">
+         <rect>
+          <x>150</x>
+          <y>30</y>
+          <width>91</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QWidget{ border: 2px black; background-color: black;border-radius: 4px;}
+QLCDNumber {color: yellow;}</string>
+        </property>
+        <property name="digitCount">
+         <number>4</number>
+        </property>
+        <property name="intValue" stdset="0">
+         <number>500</number>
+        </property>
+       </widget>
+       <widget class="QSlider" name="VOX_delay_horizontalSlider">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>35</y>
+          <width>111</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QSlider::groove:horizontal{background: lightgray; height: 10px; border-radius: 3px;}
+QSlider::handle:horizontal{background: lightblue; border: 1px solid black; width: 10px; height: 30px; margin-top: -10px; margin-bottom: -10px; border-radius: 5px;}
+QSlider::sub-page:horizontal{background: white;}
+QSlider::add-page:horizontal{background: white;}
+QSlider:disabled{color: darkgrey;}
+QSlider:handle:disabled{background-color: darkgrey;  color: darkgrey;}</string>
+        </property>
+        <property name="minimum">
+         <number>30</number>
+        </property>
+        <property name="maximum">
+         <number>3000</number>
+        </property>
+        <property name="singleStep">
+         <number>10</number>
+        </property>
+        <property name="pageStep">
+         <number>100</number>
+        </property>
+        <property name="value">
+         <number>500</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QPushButton" name="VOX_state_pushButton">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>50</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton{ background-color: lightblue; color: grey}
+QPushButton::checked{ background-color: red; color: black}</string>
+       </property>
+       <property name="text">
+        <string>On</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="checked">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="VM_groupBox">
+      <property name="geometry">
+       <rect>
+        <x>1090</x>
+        <y>240</y>
+        <width>411</width>
+        <height>301</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QWidget{ background-color: lightgray;}</string>
+      </property>
+      <property name="title">
+       <string> Voice Memory</string>
+      </property>
+      <widget class="QFrame" name="VM_frame_1">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>40</y>
+         <width>251</width>
+         <height>81</height>
+        </rect>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Shape::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Shadow::Raised</enum>
+       </property>
+       <widget class="QLabel" name="VM_label_1">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>10</y>
+          <width>141</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Rx Out Level</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLCDNumber" name="VM_rx_out_lcdNumber">
+        <property name="geometry">
+         <rect>
+          <x>190</x>
+          <y>30</y>
+          <width>51</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QWidget{ border: 2px black; background-color: black;border-radius: 4px;}
+QLCDNumber {color: yellow;}</string>
+        </property>
+        <property name="digitCount">
+         <number>2</number>
+        </property>
+        <property name="intValue" stdset="0">
+         <number>50</number>
+        </property>
+       </widget>
+       <widget class="QSlider" name="VM_rx_out_horizontalSlider">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>35</y>
+          <width>151</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QSlider::groove:horizontal{background: lightgray; height: 10px; border-radius: 3px;}
+QSlider::handle:horizontal{background: lightblue; border: 1px solid black; width: 10px; height: 30px; margin-top: -10px; margin-bottom: -10px; border-radius: 5px;}
+QSlider::sub-page:horizontal{background: white;}
+QSlider::add-page:horizontal{background: white;}
+QSlider:disabled{color: darkgrey;}
+QSlider:handle:disabled{background-color: darkgrey;  color: darkgrey;}</string>
+        </property>
+        <property name="value">
+         <number>50</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QFrame" name="VM_frame_2">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>130</y>
+         <width>251</width>
+         <height>81</height>
+        </rect>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Shape::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Shadow::Raised</enum>
+       </property>
+       <widget class="QLabel" name="VM_label_2">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>10</y>
+          <width>121</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Tx Out Level</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLCDNumber" name="VM_tx_out_lcdNumber">
+        <property name="geometry">
+         <rect>
+          <x>190</x>
+          <y>30</y>
+          <width>51</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QWidget{ border: 2px black; background-color: black;border-radius: 4px;}
+QLCDNumber {color: yellow;}</string>
+        </property>
+        <property name="digitCount">
+         <number>2</number>
+        </property>
+        <property name="intValue" stdset="0">
+         <number>50</number>
+        </property>
+       </widget>
+       <widget class="QSlider" name="VM_tx_out_horizontalSlider">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>35</y>
+          <width>151</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QSlider::groove:horizontal{background: lightgray; height: 10px; border-radius: 3px;}
+QSlider::handle:horizontal{background: lightblue; border: 1px solid black; width: 10px; height: 30px; margin-top: -10px; margin-bottom: -10px; border-radius: 5px;}
+QSlider::sub-page:horizontal{background: white;}
+QSlider::add-page:horizontal{background: white;}
+QSlider:disabled{color: darkgrey;}
+QSlider:handle:disabled{background-color: darkgrey;  color: darkgrey;}</string>
+        </property>
+        <property name="minimum">
+         <number>0</number>
+        </property>
+        <property name="maximum">
+         <number>99</number>
+        </property>
+        <property name="singleStep">
+         <number>1</number>
+        </property>
+        <property name="pageStep">
+         <number>10</number>
+        </property>
+        <property name="value">
+         <number>50</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QPushButton" name="VM_load_pushButton">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>130</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton{ background-color: lightblue; color: grey}
+QPushButton::checked{ background-color: red; color: black}</string>
+       </property>
+       <property name="text">
+        <string>Load</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="checked">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="VM_channel_comboBox">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>40</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <item>
+        <property name="text">
+         <string>CH1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>CH2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>CH3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>CH4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>CH5</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QPushButton" name="VM_playback_pushButton">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>170</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton{ background-color: lightblue; color: grey}
+QPushButton::checked{ background-color: red; color: black}</string>
+       </property>
+       <property name="text">
+        <string>Playback</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="checked">
+        <bool>false</bool>
+       </property>
+       <property name="autoRepeat">
+        <bool>false</bool>
+       </property>
+       <property name="autoRepeatInterval">
+        <number>100</number>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="VM_breakin_pushButton">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>80</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton{ background-color: lightblue; color: grey}
+QPushButton::checked{ background-color: red; color: black}</string>
+       </property>
+       <property name="text">
+        <string>Break-in</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="checked">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QFrame" name="VM_frame_3">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>220</y>
+         <width>251</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Shape::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Shadow::Raised</enum>
+       </property>
+       <widget class="QSpinBox" name="VM_delay_spinBox">
+        <property name="geometry">
+         <rect>
+          <x>135</x>
+          <y>5</y>
+          <width>61</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QSpinBox{ background-color: white;}
+#QSpinBox::up-button{ background-color: lightgreen;  min-width: 20px; min-height: 15px;}
+#QSpinBox::up-button:hover{ background-color: red;}
+#QSpinBox::down-button{ background-color: lightgreen; min-width: 20px; min-height: 15px;}
+#QSpinBox::down-button:hover{ background-color: red;}
+#QSpinBox::up-arrow{ border-left: 5px solid none; border-right: 5px solid none; border-bottom: 5px solid black; width: 0px; height: 0px;}
+#QSpinBox::down-arrow{ border-left: 5px solid none; border-right: 5px solid none; border-top: 5px solid black; width: 0px; height: 0px;}</string>
+        </property>
+        <property name="buttonSymbols">
+         <enum>QAbstractSpinBox::ButtonSymbols::UpDownArrows</enum>
+        </property>
+        <property name="accelerated">
+         <bool>true</bool>
+        </property>
+        <property name="minimum">
+         <number>5</number>
+        </property>
+        <property name="maximum">
+         <number>30</number>
+        </property>
+        <property name="value">
+         <number>10</number>
+        </property>
+       </widget>
+       <widget class="QLabel" name="VM_delay_label">
+        <property name="geometry">
+         <rect>
+          <x>205</x>
+          <y>15</y>
+          <width>31</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Liberation Mono</family>
+          <pointsize>18</pointsize>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>--</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="VM_label_3">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>15</y>
+          <width>111</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Playback Loop</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </widget>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_4">
      <property name="styleSheet">
@@ -10957,7 +11628,7 @@ QScrollBar:vertical {width: 20px;}</string>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>10</y>
+      <y>255</y>
       <width>321</width>
       <height>341</height>
      </rect>
@@ -11340,12 +12011,12 @@ QStatusBar{ color: red;}</string>
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="Rx_buttonGroup"/>
-  <buttongroup name="IF_buttonGroup"/>
   <buttongroup name="Tx_buttonGroup"/>
   <buttongroup name="Audio_buttonGroup"/>
+  <buttongroup name="IF_buttonGroup"/>
   <buttongroup name="EQ_buttonGroup"/>
-  <buttongroup name="FFT_buttonGroup"/>
   <buttongroup name="Mode_buttonGroup"/>
+  <buttongroup name="Rx_buttonGroup"/>
+  <buttongroup name="FFT_buttonGroup"/>
  </buttongroups>
 </ui>

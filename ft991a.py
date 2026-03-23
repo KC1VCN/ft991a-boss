@@ -1522,6 +1522,7 @@ def get_operating_mode():
     serial_write(command.encode('ASCII'))
     data = serial_read_until(expected=b';').decode('ASCII')
 
+#
     data = re.findall('MD0(.*?);', data)
 
     if (data != []):
@@ -1544,6 +1545,9 @@ def set_auto_info(value):
     auto_info = '%d' % (value)
     command = 'AI%s;' % (auto_info)
     serial_write(command.encode('ASCII'))
+
+#
+    return get_auto_info()
 
 #
 def get_auto_info():
@@ -1570,6 +1574,9 @@ def set_function_Tx(VFO):
     serial_write(command.encode('ASCII'))
 
 #
+    return get_function_Tx()
+
+#
 def get_function_Tx():
     VFO = {'0': 'VFO_A', '1': 'VFO_B'}
     
@@ -1577,6 +1584,7 @@ def get_function_Tx():
     serial_write(command.encode('ASCII'))
     data = serial_read_until(expected=b';').decode('ASCII')
 
+#
     data = re.findall('FT(.*?);', data)
 
     if (data != []):
@@ -1605,6 +1613,7 @@ def get_ctcss_mode():
     serial_write(command.encode('ASCII'))
     data = serial_read_until(expected=b';').decode('ASCII')
 
+#
     data = re.findall('CT0(.*?);', data)
 
     if (data != []):
@@ -1633,6 +1642,7 @@ def get_repeater_shift():
     serial_write(command.encode('ASCII'))
     data = serial_read_until(expected=b';').decode('ASCII')
 
+#
     data = re.findall('OS0(.*?);', data)
 
     if (data != []):
@@ -1662,21 +1672,6 @@ def get_ctcss_tone_freq():
 
     if (data != []):
         return CTCSS_tone[data[-1]]
-
-    else:
-        return None
-
-#
-def get_dcs_code():
-    command = 'CN01;'
-    serial_write(command.encode('ASCII'))
-    data = serial_read_until(expected=b';').decode('ASCII')
-
-#
-    data = re.findall('CN01(.*?);', data)
-
-    if (data != []):
-        return DCS_code[data[-1]]
 
     else:
         return None
@@ -1743,6 +1738,13 @@ def get_digital_notch_state():
 # Notch Filter
 ##############################
 def set_manual_notch_state(value):
+    if (value  < 0):
+        value = 0
+        
+    elif (value > 1):
+        value = 1
+
+#
     notch_state = '%03d' % (value)
     command = 'BP00%s;' % (notch_state)
     serial_write(command.encode('ASCII'))
@@ -1800,6 +1802,13 @@ def get_manual_notch_level():
 # Contour Filter
 ##############################
 def set_contour_state(value):
+    if (value  < 0):
+        value = 0
+        
+    elif (value > 1):
+        value = 1
+
+#
     contour_state = '0%04d' % (value)
     command = 'CO0%s;' % (contour_state)
     serial_write(command.encode('ASCII'))
@@ -2017,9 +2026,19 @@ def get_IF_bandwidth(mode, filter_type):
 # Audio Peak Filter (APF)
 ##############################
 def set_APF_state(value):
-    contour_state = '2%04d' % (value)
-    command = 'CO0%s;' % (contour_state)
+    if (value  < 0):
+        value = 0
+        
+    elif (value > 1):
+        value = 1
+
+#
+    APF_state = '2%04d' % (value)
+    command = 'CO0%s;' % (APF_state)
     serial_write(command.encode('ASCII'))
+
+#
+    return get_APF_state()
 
 #
 def get_APF_state():
@@ -2048,8 +2067,8 @@ def set_APF_level(value):
     value = int((value+250)/10)
 
 #
-    APF_value = '3%04d' % (value)
-    command = 'CO0%s;' % (APF_value)
+    APF_level = '3%04d' % (value)
+    command = 'CO0%s;' % (APF_level)
     serial_write(command.encode('ASCII'))
 
 #
@@ -2138,10 +2157,18 @@ def get_NB_level():
 # Noise Reduction (NR)
 ##############################
 def set_NR_state(value):
+    if (value  < 0):
+        value = 0
+        
+    elif (value > 1):
+        value = 1
+
+#
     NR_state = '%d' % (value)
     command = 'NR0%s;' % (NR_state)
     serial_write(command.encode('ASCII'))
 
+#
     return get_NR_state()
 
 #
@@ -2193,15 +2220,15 @@ def get_NR_level():
 ##############################
 # Monitor Level
 ##############################
-def set_monitor_state(state):
-    if (state < 0):
-        state = 0
+def set_monitor_state(value):
+    if (value < 0):
+        value = 0
         
-    elif (state > 1):
-        state = 1
+    elif (value > 1):
+        value = 1
 
 #
-    monitor_state = '%03d' % (state)
+    monitor_state = '%03d' % (value)
     command = 'ML0%s;' % (monitor_state)
     serial_write(command.encode('ASCII'))
 
@@ -2296,7 +2323,7 @@ def set_SP_EQ_state(value):
     command = 'PR1%s;' % (SP_state)
     serial_write(command.encode('ASCII'))
 
-    return get_SP_state()
+    return get_SP_EQ_state()
 
 #
 def get_SP_EQ_state():
@@ -2395,9 +2422,19 @@ def swap_VFO():
 # CLAR Rx
 ##############################
 def set_RF_clar_state(value):
+    if (value < 0):
+        value = 0
+        
+    elif (value > 1):
+        value = 1
+
+#
     rf_clar_state = '%d' % (value)
     command = 'RT%s;' % (rf_clar_state)
     serial_write(command.encode('ASCII'))
+
+#
+    return get_RF_clar_state()
 
 #
 def get_RF_clar_state():
@@ -2418,9 +2455,19 @@ def get_RF_clar_state():
 # CLAR Tx
 ##############################
 def set_RF_clar_state_Tx(value):
+    if (value < 0):
+        value = 0
+        
+    elif (value > 1):
+        value = 1
+
+#
     rf_clar_state_tx = '%d' % (value)
     command = 'XT%s;' % (rf_clar_state_tx)
     serial_write(command.encode('ASCII'))
+
+#
+    return get_RF_clar_state_Tx()
 
 #
 def get_RF_clar_state_Tx():
@@ -2649,6 +2696,200 @@ def get_RF_power():
 
     if (data != []):
         return int(data[-1])
+
+    else:
+        return None
+
+##############################
+# VOX
+##############################
+def set_VOX_state(value):
+    if (value  < 0):
+        value = 0
+        
+    elif (value > 1):
+        value = 1
+
+#
+    VOX_state = '%d' % (value)
+    command = 'VX%s;' % (VOX_state)
+    serial_write(command.encode('ASCII'))
+
+#
+    return get_VOX_state()
+
+#
+def get_VOX_state():
+    command = 'VX;'
+    serial_write(command.encode('ASCII'))
+    data = serial_read_until(expected=b';').decode('ASCII')
+
+#
+    data = re.findall('VX(.*?);', data)
+
+    if (data != []):
+        return int(data[-1])
+
+    else:
+        return None
+
+#
+def set_VOX_gain(value):
+    if (value  < 0):
+        value = 0
+        
+    elif (value > 100):
+        value = 100
+
+#
+    VOX_gain = '%03d' % (value)
+    command = 'VG%s;' % (VOX_gain)
+    serial_write(command.encode('ASCII'))
+
+#
+    return get_VOX_gain()
+
+#
+def get_VOX_gain():
+    command = 'VG;'
+    serial_write(command.encode('ASCII'))
+    data = serial_read_until(expected=b';').decode('ASCII')
+
+#
+    data = re.findall('VG(.*?);', data)
+
+    if (data != []):
+        return int(data[-1])
+
+    else:
+        return None
+
+#
+def set_VOX_delay(value):
+    if (value  < 30):
+        value = 30
+        
+    elif (value > 3000):
+        value = 3000
+
+#
+    VOX_delay = '%04d' % (value)
+    command = 'VD%s;' % (VOX_delay)
+    serial_write(command.encode('ASCII'))
+
+#
+    return get_VOX_delay()
+
+#
+def get_VOX_delay():
+    command = 'VD;'
+    serial_write(command.encode('ASCII'))
+    data = serial_read_until(expected=b';').decode('ASCII')
+
+#
+    data = re.findall('VD(.*?);', data)
+
+    if (data != []):
+        return int(data[-1])
+
+    else:
+        return None
+
+##############################
+# Voice Memory
+##############################
+def set_break_in(value):
+    if (value  < 0):
+        value = 0
+        
+    elif (value > 1):
+        value = 1
+
+#
+    breakin = '%d' % (value)
+    command = 'BI%s;' % (breakin)
+    serial_write(command.encode('ASCII'))
+
+#
+    return get_break_in()
+
+#
+def get_break_in():
+    command = 'BI;'
+    serial_write(command.encode('ASCII'))
+    data = serial_read_until(expected=b';').decode('ASCII')
+
+#
+    data = re.findall('BI(.*?);', data)
+
+    if (data != []):
+        return int(data[-1])
+
+    else:
+        return None
+
+#
+def set_playback(value):
+    if (value  < 0):
+        value = 0
+        
+    elif (value > 5):
+        value = 5
+
+#
+    channel = '%d' % (value)
+    command = 'PB0%s;' % (channel)
+    serial_write(command.encode('ASCII'))
+
+#
+    return get_playback()
+
+#
+def get_playback():
+    channel = {0: 'STOP', 1: 'CH1', 2: 'CH2', 3: 'CH3', 4: 'CH4', 5: 'CH5'}
+
+    command = 'PB0;'
+    serial_write(command.encode('ASCII'))
+    data = serial_read_until(expected=b';').decode('ASCII')
+
+#
+    data = re.findall('PB0(.*?);', data)
+
+    if (data != []):
+        return channel[int(data[-1])+1]
+
+    else:
+        return None
+
+#
+def set_load_message(value):
+    if (value  < 0):
+        value = 0
+        
+    elif (value > 5):
+        value = 5
+
+#
+    channel = '%d' % (value)
+    command = 'LM0%s;' % (channel)
+    serial_write(command.encode('ASCII'))
+
+#
+    return get_load_message()
+
+#
+def get_load_message():
+    channel = {0: 'STOP', 1: 'CH1', 2: 'CH2', 3: 'CH3', 4: 'CH4', 5: 'CH5'}
+
+    command = 'LM0;'
+    serial_write(command.encode('ASCII'))
+    data = serial_read_until(expected=b';').decode('ASCII')
+
+#
+    data = re.findall('LM0(.*?);', data)
+
+    if (data != []):
+        return channel[int(data[-1])+1]
 
     else:
         return None
