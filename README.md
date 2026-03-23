@@ -71,7 +71,6 @@ Following are the modules and their versions used by the software:
 | Module      | Version |
 |-------------|---------|
 | numpy       | 2.0.2   |
-| xlrd        | 2.0.2   |
 | PySide6     | 6.10.1  |
 | SoundCard   | 0.4.5   |
 | matplotlib  | 3.9.4   |
@@ -88,7 +87,6 @@ python -m venv <venv_name>
 source <venv_name>/bin/activate
 pip install --upgrade pip
 pip install numpy
-pip install xlrd
 pip install PySide6
 pip install SoundCard
 pip install matplotlib
