@@ -18,6 +18,9 @@
 # ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK
 #
 
+__version__ = "0.1.4"
+__author__  = "Noyan Kinayman"
+
 import os
 import sys
 import math
@@ -79,6 +82,7 @@ from PySide6.QtCore import QMetaObject
 from PySide6.QtGui import QDoubleValidator
 from PySide6.QtGui import QPainter
 from PySide6.QtGui import QColor
+from PySide6.QtGui import QFont
 from PySide6.QtGui import QPen
 
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
@@ -573,23 +577,34 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
             pen = QPen(QColor('red'), 3)
             painter.setPen(pen)
 
-            peak = obj.property('peak')
+            peak_S = obj.property('peak')
 
-            peak_ratio = (peak-obj.minimum())/float(obj.maximum()-obj.minimum())
+            peak_ratio = (peak_S-obj.minimum())/float(obj.maximum()-obj.minimum())
             peak_x = int(peak_ratio*obj.width())
 
             painter.drawLine(peak_x, 0, peak_x, obj.height())
 
 #
-            pen = QPen(QColor('blue'), 3)
-            painter.setPen(pen)
+#            pen = QPen(QColor('blue'), 3)
+#            painter.setPen(pen)
 
-            average = obj.property('average')
+#            average = obj.property('average')
 
-            average_ratio = (average-obj.minimum())/float(obj.maximum()-obj.minimum())
-            average_x = int(average_ratio*obj.width())
+#            average_ratio = (average-obj.minimum())/float(obj.maximum()-obj.minimum())
+#            average_x = int(average_ratio*obj.width())
 
 #            painter.drawLine(average_x, 0, average_x, obj.height())
+
+#
+            font = QFont("Arial", 16)
+            font.setBold(True)
+            painter.setFont(font)
+            painter.setPen(QColor('black'))
+
+            S_map = {'0':0, '1':10, '2':23, '3':40, '4':51, '5':67, '6':84, '7':95, '8':112, '9':127, '9+':150}
+            indices = [S_key for S_key in list(S_map.keys()) if S_map[S_key] <= peak_S]
+
+            painter.drawText(QRect(0, 0, obj.width(), obj.height()), Qt.AlignCenter, 'S%s' % (indices[-1]))
 
             return True
 
@@ -1127,19 +1142,19 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.S_meter_progressBar.setProperty('hold', hold)
 
 #
-            byte_data = self.S_meter_progressBar.property('samples')
-            byte_data = byte_data+'%c' % (int(value))
+#            byte_data = self.S_meter_progressBar.property('samples')
+#            byte_data = byte_data+'%c' % (int(value))
 
-            if len(byte_data) > 30:
-                byte_data = byte_data[1:]
+#            if len(byte_data) > 30:
+#                byte_data = byte_data[1:]
 
-            self.S_meter_progressBar.setProperty('samples', byte_data)
+#            self.S_meter_progressBar.setProperty('samples', byte_data)
 
-            window_size = 30
-            data = numpy.frombuffer(byte_data.encode('utf-8').replace(b'\xc2', b''), dtype=numpy.uint8)
-            rolling_avg = numpy.convolve(data, numpy.ones(window_size), 'valid')/window_size
+#            window_size = 30
+#            data = numpy.frombuffer(byte_data.encode('utf-8').replace(b'\xc2', b''), dtype=numpy.uint8)
+#            rolling_avg = numpy.convolve(data, numpy.ones(window_size), 'valid')/window_size
 
-            self.S_meter_progressBar.setProperty('average', rolling_avg[-1])
+#            self.S_meter_progressBar.setProperty('average', rolling_avg[-1])
 
 #
         value = ft991a.get_meter('PO')
@@ -3502,9 +3517,13 @@ def auto_detect_port(baudrate):
 def dump_memory():
     data = ft991a.dump_memory()
     data_hex = bytearray(data).hex()
-        
-    utc_time = datetime.now(timezone.utc).strftime('%H%M%S%f')[:-3]
-    fp = open('radio_nvram_%s' % (utc_time), 'w')  
+
+    utc_time = datetime.now(timezone.utc)
+
+    utc_time_HMS = utc_time.strftime('%H%M%S')
+    utc_time_Ymd = utc_time.strftime('%Y%m%d')
+
+    fp = open('radio_nvram_%s%s' % (utc_time_Ymd, utc_time_HMS), 'w')  
 
     hex2ascii = lambda data: ''.join(chr(b) if (32 <= b <= 126) else '.' for b in data)
 
@@ -3519,10 +3538,10 @@ def dump_memory():
 #
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(prog='ft991a_boss.py',
-                    description='A Python based control software for the Yaesu FT991A transceiver.',
+                    description='A computer program for controlling the Yaesu FT-991A transceiver.',
                     epilog='', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
-    required_named = parser.add_argument_group('required named arguments')
+    parser.add_argument('-v', '--version', action='version', version=f'%(prog)s {__version__}')
 
     parser.add_argument('-baud', metavar='<baudrate>', dest='baudrate', default='38400',
                         help='data rate of the radio serial port.')
