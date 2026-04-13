@@ -15,14 +15,30 @@
 # Copyright (c) 2026 Noyan Kinayman, KC1VCN
 #
 # spr, spw pseudocode: Copyright (c) 2025 Gil Kloepfer, KI5BPK
-# ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK
+# FT-991A memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK
 #
 
-__version__ = "0.1.4"
+__version__ = "0.2.0"
 __author__  = "Noyan Kinayman"
 
-import os
 import sys
+import ctypes
+
+if sys.platform.startswith('win'):
+    try:
+        r = ctypes.windll.ole32.CoInitialize(None)
+
+        if (r == 1 or r == 0):
+            print('INFO: COM library initialized successfully.')
+
+        else:
+            print('ERROR: COM library initialization failed.')
+
+    except:
+        print('ERROR: COM library initialization failed.')
+        sys.exit(1)
+
+import os
 import math
 import re
 import serial
@@ -64,7 +80,7 @@ from PySide6.QtWidgets import QPlainTextEdit
 from PySide6.QtWidgets import QAbstractButton
 from PySide6.QtWidgets import QDialog
 from PySide6.QtWidgets import QDialogButtonBox
-
+from PySide6.QtWidgets import QToolTip
 
 from PySide6.QtCore import QLocale
 from PySide6.QtCore import QFile
@@ -148,11 +164,19 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 _object.setToolTipDuration(-1)
 
         else:
-            print('\nError: can\'t load resource help file.')
+            print('ERROR: can\'t load resource help file.')
+
+        help_font = QFont('Arial', 14)
+        help_font.setStyleHint(QFont.StyleHint.SansSerif)
+        QToolTip.setFont(help_font)
 
 # Radio menu table
         for m in ft991a.menu.keys():
             menu_index = int(m)-1
+
+#
+            menu_font = QFont('Arial', 12)
+            menu_font.setStyleHint(QFont.StyleHint.SansSerif)
 
 #
             menu_name = ft991a.menu[m][0]
@@ -165,6 +189,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 # Radio menu controls
             object_name = u'menu_label_%d' % (2*menu_index+1)
             menu_label = getattr(self, object_name)
+            menu_label.setFont(menu_font)
             menu_label.setText('%s' % (m))
 #            menu_label.setFixedHeight(30)
             menu_label.setFixedWidth(50)
@@ -173,6 +198,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 #
             object_name = u'menu_label_%d' % (2*menu_index+2)
             menu_label = getattr(self, object_name)
+            menu_label.setFont(menu_font)
             menu_label.setText('%s' % (menu_name.replace('_', ' ')))
 #            menu_label.setFixedHeight(30)
             menu_label.setFixedWidth(200)
@@ -181,6 +207,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 #
             object_name = u'menu_pushButton_%d' % (menu_index+1)
             menu_button = getattr(self, object_name)
+            menu_button.setFont(menu_font)
             menu_button.setFixedWidth(100)
 #            menu_button.setFixedHeight(30)
             menu_button.setText('Default')
@@ -189,6 +216,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 #
             object_name = u'menu_comboBox_%d' % (menu_index+1)
             menu_combo_box = getattr(self, object_name)
+            menu_combo_box.setFont(menu_font)
             menu_combo_box.setMaxVisibleItems(10)
             menu_combo_box.setFixedWidth(250)
 #            menu_combo_box.setFixedHeight(30)
@@ -241,6 +269,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.Memory_tableWidget.setColumnWidth(6, 50)
         self.Memory_tableWidget.setColumnWidth(7, 125)
 
+        table_font = QFont('Monospace', 12)
+        table_font.setStyleHint(QFont.StyleHint.Monospace) 
+        self.Memory_tableWidget.setFont(table_font)
+
 # Radio operating mode
         self.mode = ''
         self.mode_button = {'LSB':      '1',    'USB':      '2',    'CW-LSB':   '3',    'CW-USB':   '4',
@@ -253,14 +285,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.Squelch_CTCSS_comboBox.addItem('%s' % (ft991a.CTCSS_tone[k]))
 
         self.Squelch_CTCSS_comboBox.setMaxVisibleItems(10)
-        self.Squelch_CTCSS_comboBox.setStyleSheet('QComboBox { combobox-popup: 0; }')
+        self.Squelch_CTCSS_comboBox.setStyleSheet('QComboBox{ combobox-popup: 0; }\nQComboBox{ font-family: "Arial"; font-size: 16px;}')
 
 #
         for k in ft991a.DCS_code.keys():
             self.Squelch_DCS_comboBox.addItem('%s' % (ft991a.DCS_code[k]))
 
         self.Squelch_DCS_comboBox.setMaxVisibleItems(10)
-        self.Squelch_DCS_comboBox.setStyleSheet('QComboBox { combobox-popup: 0; }')
+        self.Squelch_DCS_comboBox.setStyleSheet('QComboBox{ combobox-popup: 0; }\nQComboBox{ font-family: "Arial"; font-size: 16px;}')
 
 #
         self.VFO_A_dial.valueChanged.connect(self.VFO_A_dial_frequency)
@@ -269,12 +301,21 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.VFO_A_fast_radioButton.toggled.connect(self.VFO_A_set_fast)
         self.VFO_A_fast = 1
 
+        text_font = QFont('Monospace', 12)
+        text_font.setStyleHint(QFont.StyleHint.Monospace) 
+        self.VFO_A_textBrowser.setFont(text_font)
+
         self.VFO_B_dial.valueChanged.connect(self.VFO_B_dial_frequency)
         self.VFO_B_lineEdit.editingFinished.connect(self.VFO_B_set_frequency)
         self.VFO_B_Tx_radioButton.toggled.connect(self.VFO_B_set_Tx)
         self.VFO_B_fast_radioButton.toggled.connect(self.VFO_B_set_fast)
         self.VFO_B_fast = 1
 
+        text_font = QFont('Monospace', 12)
+        text_font.setStyleHint(QFont.StyleHint.Monospace) 
+        self.VFO_B_textBrowser.setFont(text_font)
+
+#
         self.RF_power_verticalSlider.valueChanged.connect(self.set_RF_power)
         self.AF_gain_verticalSlider.valueChanged.connect(self.set_AF_gain)
         self.RF_gain_verticalSlider.valueChanged.connect(self.set_RF_gain)
@@ -331,6 +372,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 #
         self.Notch_freq_horizontalSlider.valueChanged.connect(self.set_Notch_filter)
         self.Notch_pushButton.clicked.connect(self.Notch_filter_state)
+        self.Notch_BW_wide_pushButton.clicked.connect(self.set_Notch_type)
+        self.Notch_BW_narrow_pushButton.clicked.connect(self.set_Notch_type)
         self.Notch_freq = 0
 
         self.Contour_freq_horizontalSlider.valueChanged.connect(self.set_Contour_filter)
@@ -494,6 +537,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.actionExit.triggered.connect(self.exit)
 
+# Message window
+        message_font = QFont('Monospace', 14)
+        message_font.setStyleHint(QFont.StyleHint.Monospace) 
+        self.Message_textBrowser.setFont(message_font)
+
 # Radio meter events for custom painting
         self.PO_meter_progressBar.installEventFilter(self)
         self.S_meter_progressBar.installEventFilter(self)
@@ -532,21 +580,24 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 #
     @pause_GUI_update
     def about(self):
+        width = 630
+        height = 475
+
         about_window = QtWidgets.QDialog()
-        about_window.resize(581, 390)
+        about_window.resize(width, height)
         about_window.setObjectName(u'About')
         about_window.setWindowTitle(u'About')
 
         buttonBox = QDialogButtonBox(about_window)
         buttonBox.setObjectName(u'buttonBox')
-        buttonBox.setGeometry(QRect(250, 340, 81, 32))
+        buttonBox.setGeometry(QRect(width/2-80/2, height-45, 80, 32))
         buttonBox.setOrientation(Qt.Orientation.Horizontal)
         buttonBox.setStandardButtons(QDialogButtonBox.StandardButton.Ok)
         buttonBox.accepted.connect(about_window.accept)
 
         plainTextEdit = QPlainTextEdit(about_window)
         plainTextEdit.setObjectName(u'plainTextEdit')
-        plainTextEdit.setGeometry(QRect(15, 10, 551, 311))
+        plainTextEdit.setGeometry(QRect(15, 10, width-30, height-80))
         plainTextEdit.setPlainText(QCoreApplication.translate('', u'ft991a-boss is free software: you can redistribute it \
 and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 3.\n\n\
 ft991a-boss is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty \
@@ -554,7 +605,11 @@ of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Publ
 received a copy of the GNU General Public License along with ft991a-boss. If not, see https://www.gnu.org/licenses/\n\n\
 Copyright (c) 2026 Noyan Kinayman, KC1VCN\n\n\
 spr, spw pseudocode : Copyright (c) 2025 Gil Kloepfer, KI5BPK\n\
-ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
+FT-991A memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
+
+        text_font = QFont('Arial', 14)
+        text_font.setStyleHint(QFont.StyleHint.SansSerif)
+        plainTextEdit.setFont(text_font)
 
         QMetaObject.connectSlotsByName(about_window)
 
@@ -596,9 +651,11 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 #            painter.drawLine(average_x, 0, average_x, obj.height())
 
 #
-            font = QFont("Arial", 16)
-            font.setBold(True)
-            painter.setFont(font)
+            meter_font = QFont('Arial', 16)
+            meter_font.setStyleHint(QFont.StyleHint.SansSerif)
+            meter_font.setBold(True)
+            painter.setFont(meter_font)
+
             painter.setPen(QColor('black'))
 
             S_map = {'0':0, '1':10, '2':23, '3':40, '4':51, '5':67, '6':84, '7':95, '8':112, '9':127, '9+':150}
@@ -696,6 +753,8 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
             self.Noise_DNR_comboBox.setEnabled(state[0])
             self.Noise_NB_pushButton.setEnabled(state[0])
             self.Noise_NB_comboBox.setEnabled(state[0])
+            self.FrontEnd_ATT_pushButton.setEnabled(state[0])
+            self.Speech_Proc_pushButton.setEnabled(state[0])
 
 #       
         if (control == 0):
@@ -703,7 +762,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
             tab_name = active_widget.objectName()
 
             widget_index = {'tab_1': [0,1,2,3,4,5,6,7,8,9], \
-                            'tab_2': [10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25], \
+                            'tab_2': [10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,39], \
                             'tab_3': [26,27,28,29,30,31,32,33,34,35,36,37,38], \
                             'tab_4': [], \
                             'tab_5': []}[tab_name]
@@ -809,7 +868,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 # Control 11, Notch State
         if (control & (1 << 11)):
             notch_state = ft991a.get_manual_notch_state()
-            if (notch_state is not None):
+            if ((notch_state is not None) and self.Notch_pushButton.isEnabled()):
                 was_blocked = self.Notch_pushButton.blockSignals(True)
                 self.Notch_pushButton.setChecked(notch_state)
                 self.Notch_pushButton.blockSignals(was_blocked)
@@ -827,7 +886,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 # Control 13, Contour State
         if (control & (1 << 13)):
             contour_state = ft991a.get_contour_state()
-            if (contour_state is not None):
+            if ((contour_state is not None) and self.Contour_pushButton.isEnabled()):
                 was_blocked = self.Contour_pushButton.blockSignals(True)
                 self.Contour_pushButton.setChecked(contour_state)
                 self.Contour_pushButton.blockSignals(was_blocked)
@@ -836,21 +895,21 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
         if (control & (1 << 14)):
             contour_level = ft991a.get_menu_value(112)
             if (contour_level is not None):
-                contour_level = int(contour_level)
+                contour_level = ft991a.menu['112'][1](contour_level)
                 was_blocked = self.Contour_level_spinBox.blockSignals(True) 
-                self.Contour_level_spinBox.setValue(contour_level)
+                self.Contour_level_spinBox.setValue(int(contour_level))
                 self.Contour_level_spinBox.blockSignals(was_blocked)
 
 # Control 15, Contour Bandwidth
         if (control & (1 << 15)):
             contour_BW = ft991a.get_menu_value(113)
             if (contour_BW is not None):
-                contour_BW = int(contour_BW)
+                contour_BW = ft991a.menu['113'][1](contour_BW)
                 was_blocked = self.Contour_BW_spinBox.blockSignals(True) 
-                self.Contour_BW_spinBox.setValue(contour_BW)
+                self.Contour_BW_spinBox.setValue(int(contour_BW))
                 self.Contour_BW_spinBox.blockSignals(was_blocked)
 
-# Control 16, IF Filter
+# Control 16, IF Filter Type
         if (control & (1 << 16)):
             IF_filter_type = ft991a.get_IF_filter_type()
             if (IF_filter_type is not None):
@@ -1046,6 +1105,15 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                 self.VM_breakin_pushButton.setChecked(break_in)
                 self.VM_breakin_pushButton.blockSignals(was_blocked)
 
+# Control 39, Notch Type
+        if (control & (1 << 39)):
+            notch_type = ft991a.get_menu_value(114)
+            if (notch_type is not None):
+                notch_type = ft991a.menu['114'][1](notch_type)
+                push_button = getattr(self, 'Notch_BW_%s_pushButton' % (notch_type.lower()))
+                was_blocked = push_button.blockSignals(True) 
+                push_button.click()
+                push_button.blockSignals(was_blocked)
 #
         ft991a.MESSAGE_FLAG = True
 
@@ -1330,7 +1398,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
             self.IF_filter_rect.set_xy(vertices)
        
         except Exception as e:
-            print('\nError: can\'t read from microphone.')
+            print('ERROR: can\'t read from microphone.')
 
 #
         return self.IF_line, self.IF_notch_line, self.IF_contour_line, self.IF_filter_rect
@@ -1617,27 +1685,6 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
         self.set_IF_spectrum_plot()
 
 ##############################
-# Notch Filter
-##############################
-    def set_Notch_filter(self, value):
-        notch_freq = ft991a.set_manual_notch_level(value*10)
-
-        if (notch_freq is not None):
-            self.Notch_freq_lcdNumber.display(notch_freq)
-            self.Notch_freq = int(notch_freq)
-
-#   
-    def Notch_filter_state(self):
-        sender_object = self.sender()
-        button_state = sender_object.isChecked()
-
-        if (button_state):
-            ft991a.set_manual_notch_state(1)
-
-        else:
-            ft991a.set_manual_notch_state(0)
-
-##############################
 # RF Front End - IPO
 ##############################
     def set_FrontEnd_ATT(self):
@@ -1869,6 +1916,36 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
             self.VM_rx_out_lcdNumber.display(vm_rx_out)
 
 ##############################
+# Notch Filter
+##############################
+    def set_Notch_filter(self, value):
+        notch_freq = ft991a.set_manual_notch_level(value*10)
+
+        if (notch_freq is not None):
+            self.Notch_freq_lcdNumber.display(notch_freq)
+            self.Notch_freq = int(notch_freq)
+
+#   
+    def Notch_filter_state(self):
+        sender_object = self.sender()
+        button_state = sender_object.isChecked()
+
+        if (button_state):
+            ft991a.set_manual_notch_state(1)
+
+        else:
+            ft991a.set_manual_notch_state(0)
+
+#
+    def set_Notch_type(self):
+        sender_object = self.sender()
+        notch_type = sender_object.text()
+
+        value = {'NARROW':0, 'WIDE':1}[notch_type.upper()]
+
+        ft991a.set_menu_value(114, value)
+
+##############################
 # Contour Filter
 ##############################
     def set_Contour_filter(self, value):
@@ -1906,7 +1983,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
         sender_object.setValue(int(value))
 
 ##############################
-# IF Shift
+# IF Filter
 ##############################
     def set_IF_filter_shift(self, value):
         IF_shift = ft991a.set_IF_shift_level(value*20)
@@ -1915,9 +1992,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
             self.IF_filter_shift_lcdNumber.display(IF_shift)
             self.IF_filter_shift = int(IF_shift)
 
-##############################
-# IF Bandwidth
-##############################
+#
     def set_IF_filter_bandwidth(self, value):
         IF_bandwidth, _ = ft991a.set_IF_bandwidth(value, self.mode, self.IF_filter_type)
 
@@ -1925,9 +2000,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
             self.IF_filter_BW_lcdNumber.display(IF_bandwidth)
             self.IF_filter_bandwidth = int(IF_bandwidth)
 
-##############################
-# IF Filter Type
-##############################
+#
     def set_IF_filter_type(self):
         sender_object = self.sender()
         filter_type = sender_object.text()
@@ -2155,7 +2228,8 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 #
     @pause_GUI_update
     def save_Memory(self):
-        file_path, _ = QFileDialog.getSaveFileName(self, 'Save Memory Channel', dir=os.getcwd(), filter='XML Files (*.xml)')
+        options = QFileDialog.Option.DontUseNativeDialog
+        file_path, _ = QFileDialog.getSaveFileName(self, 'Save Memory Channel', dir=os.getcwd(), filter='XML Files (*.xml)', options=options)
 
         if (file_path == ''):
             return
@@ -2284,7 +2358,8 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 #
     @pause_GUI_update
     def load_Memory(self):
-        file_path, _ = QFileDialog.getOpenFileName(self, 'Load Memory Channel', dir=os.getcwd(), filter='XML Files (*.xml)')
+        options = QFileDialog.Option.DontUseNativeDialog
+        file_path, _ = QFileDialog.getOpenFileName(self, 'Load Memory Channel', dir=os.getcwd(), filter='XML Files (*.xml)', options=options)
 
         if (file_path == ''):
             return
@@ -2413,7 +2488,8 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 #
     @pause_GUI_update
     def save_Memory_raw(self):
-        file_path, _ = QFileDialog.getSaveFileName(self, 'Save Memory Channel', dir=os.getcwd(), filter='XML Files (*.xml)')
+        options = QFileDialog.Option.DontUseNativeDialog
+        file_path, _ = QFileDialog.getSaveFileName(self, 'Save Memory Channel', dir=os.getcwd(), filter='XML Files (*.xml)', options=options)
 
         if (file_path == ''):
             return
@@ -2489,7 +2565,8 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 #
     @pause_GUI_update
     def load_Memory_raw(self):
-        file_path, _ = QFileDialog.getOpenFileName(self, 'Load Memory Channel', dir=os.getcwd(), filter='XML Files (*.xml)')
+        options = QFileDialog.Option.DontUseNativeDialog
+        file_path, _ = QFileDialog.getOpenFileName(self, 'Load Memory Channel', dir=os.getcwd(), filter='XML Files (*.xml)', options=options)
 
         if (file_path == ''):
             return
@@ -2871,6 +2948,8 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 #
         self.EQ_set_parameters(EQ_param[self.EQ_bank])
 
+        self.EQ_comboBox.setCurrentIndex(0)
+
 #
     def on_EQ_preset_selected(self):
         combo_box = self.sender()
@@ -2882,18 +2961,18 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 #
         EQ_preset = {'High Boost 1': {1: {'center':  0, 'gain':  5,  'Q': 10},
                                       2: {'center':  8, 'gain':  3,  'Q':  1},
-                                      3: {'center': 15, 'gain':  3,  'Q':  1}},
+                                      3: {'center': 12, 'gain':  4,  'Q':  1}},
 
-                     'High Boost 2': {1: {'center':  0, 'gain':  5,  'Q': 10},
-                                      2: {'center':  8, 'gain':  3,  'Q':  2},
-                                      3: {'center':  7, 'gain':  3,  'Q':  2}},
+                     'High Boost 2': {1: {'center':  2, 'gain': -5,  'Q':  1},
+                                      2: {'center':  8, 'gain':  3,  'Q':  1},
+                                      3: {'center': 12, 'gain':  4,  'Q':  1}},
 
                      'Mid Boost 1':  {1: {'center': 7,  'gain':  3,  'Q':  1},
-                                      2: {'center': 9,  'gain':  3,  'Q':  1},
+                                      2: {'center': 6,  'gain':  3,  'Q':  1},
                                       3: {'center': 0,  'gain':  5,  'Q': 10}},
 
-                     'Mid Boost 2':  {1: {'center': 7,  'gain':  5,  'Q':  2},
-                                      2: {'center': 5,  'gain':  5,  'Q':  2},
+                     'Mid Boost 2':  {1: {'center': 1,  'gain': -4,  'Q':  1},
+                                      2: {'center': 3,  'gain':  6,  'Q':  1},
                                       3: {'center': 0,  'gain':  5,  'Q': 10}},
 
                     'Studio Mic 1':  {1: {'center': 1,  'gain': -10, 'Q':  2},
@@ -3128,7 +3207,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
         button = self.sender()
 
         if button.isChecked():
-            self.VFO_A_fast = 100
+            self.VFO_A_fast = 10
 
         else:
             self.VFO_A_fast = 1
@@ -3161,7 +3240,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
         button = self.sender()
 
         if button.isChecked():
-            self.VFO_B_fast = 100
+            self.VFO_B_fast = 10
 
         else:
             self.VFO_B_fast = 1
@@ -3218,7 +3297,7 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 
         combo_box.setCurrentText(menu_function(value))
 
-        combo_style = 'QComboBox{combobox-popup: 0;}\n'
+        combo_style = 'QComboBox{ combobox-popup: 0;}\n'
         combo_box.setStyleSheet(combo_style)
 
         combo_box.blockSignals(was_blocked)
@@ -3243,10 +3322,10 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
         default_index = combo_box.findText(menu_default)
 
 #
-        combo_style = 'QComboBox{combobox-popup: 0;}\n'
+        combo_style = 'QComboBox{ combobox-popup: 0;}\n'
 
         if (default_index != index):
-            combo_style = combo_style+'QComboBox{color: red;}'
+            combo_style = combo_style+'QComboBox{ color: red;}'
 
         combo_box.setStyleSheet(combo_style)
 
@@ -3270,7 +3349,8 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 ##############################
     @pause_GUI_update
     def save_Radio_menu(self):
-        file_path, _ = QFileDialog.getSaveFileName(self, 'Save Radio Menu', dir=os.getcwd(), filter='XML Files (*.xml)')
+        options = QFileDialog.Option.DontUseNativeDialog
+        file_path, _ = QFileDialog.getSaveFileName(self, 'Save Radio Menu', dir=os.getcwd(), filter='XML Files (*.xml)', options=options)
 
         if (file_path == ''):
             return
@@ -3325,7 +3405,8 @@ ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 #
     @pause_GUI_update
     def load_Radio_menu(self):
-        file_path, _ = QFileDialog.getOpenFileName(self, 'Load Radio Menu', dir=os.getcwd(), filter='XML Files (*.xml)')
+        options = QFileDialog.Option.DontUseNativeDialog
+        file_path, _ = QFileDialog.getOpenFileName(self, 'Load Radio Menu', dir=os.getcwd(), filter='XML Files (*.xml)', options=options)
 
         if (file_path == ''):
             return
@@ -3570,34 +3651,37 @@ if __name__ == "__main__":
 
 #
     mics = soundcard.all_microphones()
+    comports = get_serial_ports()
 
 #
     if (list_com):
-        comports = get_serial_ports()
-
-        print('\nAvailable serial ports:\n')
-
-        print('%s  %-14s  %-64s  %-54s  %s' % ('No', 'Port', 'Description', 'HWID', 'Permission'))
-        print('%s  %-14s  %-64s  %-54s  %s' % ('--', '-'*14, '-'*64,        '-'*54, '-'*10))
+        print('\nAvailable serial ports:')
+        print('-----------------------\n')
 
         for i in range(len(comports)):
-            port = comports[i]
+            com = comports[i]
 
-            print('%2d  %-14s  %-64s  %-54s  %s' % (i+1, port['dev'][:14], port['desc'][:64], port['hwid'][:54], port['perm']))
-        print('\n')
+            print('No:          %d' % (i+1))
+            print('Port:        %s' % (com['dev'][:20]))
+            print('Description: %s' % (com['desc'][:60]))
+            print('HWID:        %s' % (com['hwid'][:60]))
+            print('Permission:  %s' % (com['perm']))
+
+            print('')
 
 #
     if (list_sound):
-        print('\nAvailable sound interfaces:\n')
-
-        print('%s  %-50s  %-64s' % ('No', 'Name', 'ID'))
-        print('%s  %-50s  %-64s' % ('--', '-'*50, '-'*70))
+        print('\nAvailable sound interfaces:')
+        print('---------------------------\n')
 
         for i in range(len(mics)):
             mic = mics[i]
 
-            print('%2d  %-50s  %-70s' % (i+1, mic.name[:50], mic.id[:70]))
-        print('\n')
+            print('No:          %d' % (i+1))
+            print('Name:        %s' % (mic.name[:60]))
+            print('ID:          %s' % (mic.id[:80]))
+
+            print('')
 
 #
     if (list_sound or list_com):
@@ -3609,29 +3693,23 @@ if __name__ == "__main__":
             radio_id, port = auto_detect_port(baudrate)
 
             if (radio_id == '0670'):
-                print('\nInfo: using com port %s' % (port))
+                print('INFO: using com port [%s].' % (port))
 
             else:
-                print('\nError: radio model mismatch. Exiting...')
+                print('ERROR: radio model mismatch. Exiting...')
                 sys.exit(1)
 
         except:
-            print('\nError: can\'t detect radio. Exiting...')
+            print('ERROR: can\'t detect radio. Exiting...')
             sys.exit(1)
 
     else:
-        port = get_serial_ports()[com_id-1]['dev']
-        hwid = get_serial_ports()[com_id-1]['hwid']
+        port = comports[com_id-1]['dev']
 
 #
     if (sound_id == 'auto'):
-        for i in range(len(mics)):
-            mic = mics[i]
-
-            if (mic.name == 'PCM2903B Audio CODEC Digital Stereo (IEC958)'):
-                print('\nInfo: using microphone %s' % (mic.name))
-
-                break
+        mic = soundcard.default_microphone()
+        print('INFO: using microphone [%s].' % (mic.name))
 
     else:
         mic = mics[sound_id-1]
@@ -3646,7 +3724,7 @@ if __name__ == "__main__":
     status = ft991a.open_serial()
 
     if (status != True):
-        print('\nError: can\'t open serial port. Exiting...')
+        print('ERROR: can\'t open serial port. Exiting...')
         sys.exit(1)
 
     ft991a.set_auto_info(0)
@@ -3656,14 +3734,19 @@ if __name__ == "__main__":
 
 #
     if (dump_ram):
-        print('\nDumping radio\'s NVRAM... This will take a few minutes.')
+        print('INFO: dumping radio\'s NVRAM... This will take a few minutes.')
 
         dump_memory()
 
         sys.exit(0)
 
 #
-    app = QtWidgets.QApplication(sys.argv)
+    Q_argv = sys.argv
+
+    if ('--style' not in Q_argv):
+        Q_argv = Q_argv+['--style', 'fusion']
+
+    app = QtWidgets.QApplication(Q_argv)
 
 #
     window = MainWindow()

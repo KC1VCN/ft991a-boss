@@ -1685,7 +1685,7 @@ QPushButton::checked {background-color: red;}</string>
        <rect>
         <x>1030</x>
         <y>10</y>
-        <width>271</width>
+        <width>261</width>
         <height>301</height>
        </rect>
       </property>
@@ -1704,7 +1704,7 @@ QPushButton::checked {background-color: red;}</string>
       <widget class="QSlider" name="RF_power_verticalSlider">
        <property name="geometry">
         <rect>
-         <x>30</x>
+         <x>25</x>
          <y>80</y>
          <width>31</width>
          <height>141</height>
@@ -1747,7 +1747,7 @@ QSlider::add-page:vertical {background: red;}</string>
       <widget class="QSlider" name="AF_gain_verticalSlider">
        <property name="geometry">
         <rect>
-         <x>90</x>
+         <x>85</x>
          <y>80</y>
          <width>31</width>
          <height>141</height>
@@ -1784,7 +1784,7 @@ QSlider::add-page:vertical {background: red;}</string>
       <widget class="QSlider" name="RF_gain_verticalSlider">
        <property name="geometry">
         <rect>
-         <x>150</x>
+         <x>145</x>
          <y>80</y>
          <width>31</width>
          <height>141</height>
@@ -1821,7 +1821,7 @@ QSlider::add-page:vertical {background: red;}</string>
       <widget class="QLCDNumber" name="RF_power_lcdNumber">
        <property name="geometry">
         <rect>
-         <x>20</x>
+         <x>15</x>
          <y>40</y>
          <width>51</width>
          <height>31</height>
@@ -1841,7 +1841,7 @@ QLCDNumber {color: yellow;}</string>
       <widget class="QLCDNumber" name="AF_gain_lcdNumber">
        <property name="geometry">
         <rect>
-         <x>80</x>
+         <x>75</x>
          <y>40</y>
          <width>51</width>
          <height>31</height>
@@ -1858,7 +1858,7 @@ QLCDNumber {color: yellow;}</string>
       <widget class="QLCDNumber" name="RF_gain_lcdNumber">
        <property name="geometry">
         <rect>
-         <x>140</x>
+         <x>135</x>
          <y>40</y>
          <width>51</width>
          <height>31</height>
@@ -1875,7 +1875,7 @@ QLCDNumber {color: yellow;}</string>
       <widget class="QLabel" name="RF_label_1">
        <property name="geometry">
         <rect>
-         <x>20</x>
+         <x>15</x>
          <y>230</y>
          <width>51</width>
          <height>41</height>
@@ -1900,7 +1900,7 @@ QLCDNumber {color: yellow;}</string>
       <widget class="QLabel" name="RF_label_2">
        <property name="geometry">
         <rect>
-         <x>85</x>
+         <x>80</x>
          <y>230</y>
          <width>41</width>
          <height>41</height>
@@ -1925,7 +1925,7 @@ QLCDNumber {color: yellow;}</string>
       <widget class="QLabel" name="RF_label_3">
        <property name="geometry">
         <rect>
-         <x>145</x>
+         <x>140</x>
          <y>230</y>
          <width>41</width>
          <height>41</height>
@@ -1950,7 +1950,7 @@ QLCDNumber {color: yellow;}</string>
       <widget class="QSlider" name="RF_squelch_verticalSlider">
        <property name="geometry">
         <rect>
-         <x>210</x>
+         <x>205</x>
          <y>80</y>
          <width>31</width>
          <height>141</height>
@@ -1987,7 +1987,7 @@ QSlider::add-page:vertical {background: red;}</string>
       <widget class="QLCDNumber" name="RF_squelch_lcdNumber">
        <property name="geometry">
         <rect>
-         <x>200</x>
+         <x>195</x>
          <y>40</y>
          <width>51</width>
          <height>31</height>
@@ -2004,7 +2004,7 @@ QLCDNumber {color: yellow;}</string>
       <widget class="QLabel" name="RF_label_4">
        <property name="geometry">
         <rect>
-         <x>190</x>
+         <x>185</x>
          <y>230</y>
          <width>71</width>
          <height>21</height>
@@ -2331,6 +2331,9 @@ QPushButton::pressed {background-color: red;}</string>
          <height>31</height>
         </rect>
        </property>
+       <property name="styleSheet">
+        <string notr="true">QComboBox{ font-family: &quot;Arial&quot;; font-size: 16px;}</string>
+       </property>
        <property name="editable">
         <bool>false</bool>
        </property>
@@ -2437,7 +2440,7 @@ QPushButton::pressed {background-color: red;}</string>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true"/>
+        <string notr="true">QComboBox{ font-family: &quot;Arial&quot;; font-size: 16px;}</string>
        </property>
       </widget>
       <widget class="QComboBox" name="Squelch_DCS_comboBox">
@@ -2448,6 +2451,9 @@ QPushButton::pressed {background-color: red;}</string>
          <width>101</width>
          <height>31</height>
         </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QComboBox{ font-family: &quot;Arial&quot;; font-size: 16px;}</string>
        </property>
       </widget>
       <widget class="QLabel" name="Squelch_label_3">
@@ -2483,6 +2489,9 @@ QPushButton::pressed {background-color: red;}</string>
          <width>141</width>
          <height>31</height>
         </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QComboBox{ font-family: &quot;Arial&quot;; font-size: 16px;}</string>
        </property>
        <item>
         <property name="text">
@@ -2533,6 +2542,9 @@ QPushButton::pressed {background-color: red;}</string>
          <width>141</width>
          <height>31</height>
         </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QComboBox{ font-family: &quot;Arial&quot;; font-size: 14px;}</string>
        </property>
        <item>
         <property name="text">
@@ -2664,9 +2676,9 @@ QPushButton::pressed {background-color: red;}</string>
      <widget class="QGroupBox" name="Memory_groupBox">
       <property name="geometry">
        <rect>
-        <x>1310</x>
+        <x>1300</x>
         <y>10</y>
-        <width>371</width>
+        <width>381</width>
         <height>301</height>
        </rect>
       </property>
@@ -2688,9 +2700,9 @@ QPushButton::pressed {background-color: red;}</string>
       <widget class="QTableWidget" name="Memory_tableWidget">
        <property name="geometry">
         <rect>
-         <x>10</x>
+         <x>15</x>
          <y>30</y>
-         <width>341</width>
+         <width>351</width>
          <height>201</height>
         </rect>
        </property>
@@ -2951,7 +2963,7 @@ QPushButton::pressed {background-color: red;}</string>
       <widget class="QPushButton" name="Memory_AM_pushButton">
        <property name="geometry">
         <rect>
-         <x>70</x>
+         <x>75</x>
          <y>240</y>
          <width>61</width>
          <height>41</height>
@@ -2980,7 +2992,7 @@ QPushButton::pressed {background-color: red;}</string>
       <widget class="QPushButton" name="Memory_VM_pushButton">
        <property name="geometry">
         <rect>
-         <x>10</x>
+         <x>15</x>
          <y>240</y>
          <width>61</width>
          <height>41</height>
@@ -3009,7 +3021,7 @@ QPushButton::checked {background-color: red;}</string>
       <widget class="QPushButton" name="Memory_scan_up_pushButton">
        <property name="geometry">
         <rect>
-         <x>170</x>
+         <x>175</x>
          <y>240</y>
          <width>61</width>
          <height>41</height>
@@ -3041,7 +3053,7 @@ QPushButton::pressed {background-color: red;}</string>
       <widget class="QPushButton" name="Memory_scan_down_pushButton">
        <property name="geometry">
         <rect>
-         <x>230</x>
+         <x>235</x>
          <y>240</y>
          <width>61</width>
          <height>41</height>
@@ -3073,7 +3085,7 @@ QPushButton::pressed {background-color: red;}</string>
       <widget class="QPushButton" name="Memory_scan_stop_pushButton">
        <property name="geometry">
         <rect>
-         <x>290</x>
+         <x>295</x>
          <y>240</y>
          <width>61</width>
          <height>41</height>
@@ -3260,6 +3272,64 @@ QLCDNumber {color: yellow;}</string>
        <property name="alignment">
         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
        </property>
+      </widget>
+      <widget class="QPushButton" name="Notch_BW_narrow_pushButton">
+       <property name="geometry">
+        <rect>
+         <x>150</x>
+         <y>95</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton{ background-color: lightblue; color: grey}
+QPushButton::checked{ background-color: red; color: black}</string>
+       </property>
+       <property name="text">
+        <string>Narrow</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">Notch_buttonGroup</string>
+       </attribute>
+      </widget>
+      <widget class="QPushButton" name="Notch_BW_wide_pushButton">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>95</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton{ background-color: lightblue; color: grey}
+QPushButton::checked{ background-color: red; color: black}</string>
+       </property>
+       <property name="text">
+        <string>Wide</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">Notch_buttonGroup</string>
+       </attribute>
       </widget>
      </widget>
      <widget class="QGroupBox" name="Contour_groupBox">
@@ -3899,9 +3969,12 @@ QPushButton::checked{ background-color: red; color: black}</string>
          <height>31</height>
         </rect>
        </property>
+       <property name="styleSheet">
+        <string notr="true">QComboBox{ font-family: &quot;Arial&quot;; font-size: 16px;}</string>
+       </property>
        <item>
         <property name="text">
-         <string>IPO</string>
+         <string>Bypass</string>
         </property>
        </item>
        <item>
@@ -4036,7 +4109,8 @@ QPushButton::checked{ background-color: red; color: black}</string>
          </rect>
         </property>
         <property name="styleSheet">
-         <string notr="true">QComboBox{combobox-popup: 0;}</string>
+         <string notr="true">QComboBox{ combobox-popup: 0;}
+QComboBox{ font-family: &quot;Arial&quot;; font-size: 16px;}</string>
         </property>
         <item>
          <property name="text">
@@ -4142,7 +4216,8 @@ QPushButton::checked{ background-color: red; color: black}</string>
          </rect>
         </property>
         <property name="styleSheet">
-         <string notr="true">QComboBox{combobox-popup: 0;}</string>
+         <string notr="true">QComboBox{ combobox-popup: 0;}
+QComboBox{ font-family: &quot;Arial&quot;; font-size: 16px;}</string>
         </property>
         <item>
          <property name="text">
@@ -4409,6 +4484,9 @@ QPushButton::checked {background-color: red;}</string>
           <height>31</height>
          </rect>
         </property>
+        <property name="styleSheet">
+         <string notr="true">QComboBox{ font-family: &quot;Arial&quot;; font-size: 14px;}</string>
+        </property>
         <property name="currentIndex">
          <number>2</number>
         </property>
@@ -4514,6 +4592,9 @@ QPushButton::checked {background-color: red;}</string>
           <height>31</height>
          </rect>
         </property>
+        <property name="styleSheet">
+         <string notr="true">QComboBox{ font-family: &quot;Arial&quot;; font-size: 14px;}</string>
+        </property>
         <property name="currentText">
          <string>0 dB</string>
         </property>
@@ -4576,6 +4657,9 @@ QPushButton::checked {background-color: red;}</string>
           <width>61</width>
           <height>31</height>
          </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QComboBox{ font-family: &quot;Arial&quot;; font-size: 14px;}</string>
         </property>
         <property name="currentText">
          <string>1024</string>
@@ -5564,6 +5648,9 @@ QSlider::add-page:vertical {background: white;}</string>
          <height>31</height>
         </rect>
        </property>
+       <property name="styleSheet">
+        <string notr="true">QComboBox{ font-family: &quot;Arial&quot;; font-size: 16px;}</string>
+       </property>
        <item>
         <property name="text">
          <string/>
@@ -5628,6 +5715,12 @@ QSlider::add-page:vertical {background: white;}</string>
          <width>111</width>
          <height>31</height>
         </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+         <bold>true</bold>
+        </font>
        </property>
        <property name="text">
         <string>Reset</string>
@@ -6216,6 +6309,9 @@ QSlider:handle:disabled{background-color: darkgrey;  color: darkgrey;}</string>
          <width>111</width>
          <height>31</height>
         </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QComboBox{ font-family: &quot;Arial&quot;; font-size: 16px;}</string>
        </property>
        <item>
         <property name="text">
@@ -6927,6 +7023,9 @@ QPushButton::checked{ background-color: red; color: black}</string>
          <height>31</height>
         </rect>
        </property>
+       <property name="styleSheet">
+        <string notr="true">QComboBox{ font-family: &quot;Arial&quot;; font-size: 16px;}</string>
+       </property>
        <item>
         <property name="text">
          <string>CH1</string>
@@ -7544,6 +7643,9 @@ QSlider::add-page:horizontal{background: white;}</string>
          <height>31</height>
         </rect>
        </property>
+       <property name="styleSheet">
+        <string notr="true">QComboBox{ font-family: &quot;Arial&quot;; font-size: 16px;}</string>
+       </property>
        <property name="side" stdset="0">
         <number>1</number>
        </property>
@@ -7713,6 +7815,9 @@ QSlider::add-page:horizontal{background: white;}</string>
          <width>91</width>
          <height>31</height>
         </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QComboBox{ font-family: &quot;Arial&quot;; font-size: 16px;}</string>
        </property>
        <property name="side" stdset="0">
         <number>2</number>
@@ -11628,9 +11733,9 @@ QScrollBar:vertical {width: 20px;}</string>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>255</y>
+      <y>10</y>
       <width>321</width>
-      <height>341</height>
+      <height>586</height>
      </rect>
     </property>
     <property name="font">
@@ -12011,12 +12116,13 @@ QStatusBar{ color: red;}</string>
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="Tx_buttonGroup"/>
-  <buttongroup name="Audio_buttonGroup"/>
-  <buttongroup name="IF_buttonGroup"/>
-  <buttongroup name="EQ_buttonGroup"/>
-  <buttongroup name="Mode_buttonGroup"/>
-  <buttongroup name="Rx_buttonGroup"/>
   <buttongroup name="FFT_buttonGroup"/>
+  <buttongroup name="EQ_buttonGroup"/>
+  <buttongroup name="Audio_buttonGroup"/>
+  <buttongroup name="Mode_buttonGroup"/>
+  <buttongroup name="IF_buttonGroup"/>
+  <buttongroup name="Rx_buttonGroup"/>
+  <buttongroup name="Tx_buttonGroup"/>
+  <buttongroup name="Notch_buttonGroup"/>
  </buttongroups>
 </ui>

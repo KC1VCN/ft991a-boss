@@ -12,14 +12,15 @@
 - IF filter settings
 - Notch and contour filters
 - Audio equalizer settings
+- VOX
+- Voice memory
 - Receiver audio filter
 
-The program was developed using **Python 3.9** under **Linux**. The reference platform was **RHEL 9.7**, although it should run on other Linux distributions with little or no modification, provided that all dependencies are satisfied.
+The program was developed using **Python 3.9** under **Linux**. The reference platform was **RHEL 9.7**, although it should run on other Linux distributions with little or no modification, provided that all dependencies are satisfied. The program was also tested on **Microsoft Windows 11 Pro**.
 
-The software has **not been tested** on Microsoft Windows or macOS.
 
-:information_source:
-**Information:** Following radio firmware was used during the development:
+Following radio firmware was used during the development:
+ 
 | Firmware    | Version |
 |-------------|---------|
 | Main        | V02-07  |
@@ -32,6 +33,19 @@ The software has **not been tested** on Microsoft Windows or macOS.
 
 ---
 
+## Bundled Software
+
+PyInstaller-generated bundles are provided as release assets both for **Linux** and **Windows**. These bundles contain everything required to run the program from a single directory. In most cases, these can be used without installing Python or any additional Python packages separately.
+
+> [!IMPORTANT]
+> The Linux bundle was built on a system using **glibc 2.34**. While compatibility cannot be guaranteed, it is expected to run on other Linux systems that provide **glibc 2.34 or newer**. Cross-distribution compatibility may still depend on the availability of other required system libraries.
+
+> [!IMPORTANT]
+> You need to download and install the USB drivers from YAESU web site for Windows. Linux does not need any additional drivers.
+>
+
+---
+
 ## Memory and Menu Support
 
 The program supports saving and loading:
@@ -39,16 +53,17 @@ The program supports saving and loading:
 - Radio menu settings  
 - Memory channels  
 
-While the radio menu settings are well documented, the official FT-991A memory-channel read/write commands do not support all settings that are saved when the **A→M** button on the front panel is pressed. To overcome this limitation, the software uses **raw memory read/write functions** for the memory-channel operations based on the work of **Gil Kloepfer**. For more background information and protocol details, please refer to https://www.kloepfer.org/ft991a/ 
+While the radio menu settings are well documented, the official FT-991A memory-channel read/write commands do not support all settings that are saved when the **A→M** button on the front panel is pressed. To overcome this limitation, the software uses **raw memory read/write functions** for the memory-channel operations based on the work of **Gil Kloepfer**. For more background information and protocol details, please refer to [Gil Kloepfer's FT-991A Notes](https://www.kloepfer.org/ft991a/) 
 
 Note that the raw read/write commands are only used during memory-channel operations. All other controls are performed using commands documented in FT-991A CAT Operation Reference Manual, YAESU, 2017.
 
-:warning:
-**Warning:** The raw write function must be used with extreme care. Writing to an incorrect NVRAM address may render your transceiver inoperable or seriously degrade its performance. By default, program's `spw` (raw write) function writes only to NVRAM addresses used by memory channels.
+> [!WARNING]
+> The raw write function must be used with extreme care. Writing to an incorrect NVRAM address may render your transceiver inoperable or seriously degrade its performance. By default, program's `spw` (raw write) function writes only to NVRAM addresses used by memory channels.
+>
 
-:bulb:
-**Tip:** If you are planning to experiment with the `spw` command, it is strongly recommended that the radio's NVRAM content is first saved using `--dumpram` command-line argument in case you need to verify it later.
-
+> [!TIP]
+> If you are planning to experiment with the `spw` command, it is strongly recommended that the radio's NVRAM content is first saved using `--dumpram` command-line argument in case you need to verify it later.
+> 
 ---
 
 ## Future Improvements
@@ -57,49 +72,70 @@ The following items are planned for future improvements:
 
 - Add controls for CW
 - Explore possibility of pandapter or SDR support
-- Add controls for QSO logging
-- Test the software on Microsoft Windows & macOS
 
 ---
 
-## Installation and Starting the Program
+## Installation and Running the Program
 
 ### Dependencies
 
-Following are the modules and their versions used by the software:
+Following are the Python modules and their versions used by the software:
 
 | Module      | Version |
 |-------------|---------|
 | numpy       | 2.0.2   |
+| matplotlib  | 3.9.4   |
 | PySide6     | 6.10.1  |
 | SoundCard   | 0.4.5   |
-| matplotlib  | 3.9.4   |
 | pyserial    | 3.5     |
 
 ---
 
 ### Setting up a Virtual Environment
 
-It is advisable to setup a virtual Python environment to use the program. This allows that the dependencies are isolated from rest of the user area. To setup a virtual environment, proceed as follows:
+It is advisable to set up a Python virtual environment if you plan to run the software from source code. This keeps the dependencies separate from the rest of the user environment. If you are going to run the bundled version, this step can be skipped.
+
+To set up a virtual environment, first be sure that a suitable Python interpreter is installed on the operating system. Then, proceed as follows in a terminal (or Command Prompt on Windows):
+
+#### Linux
 
 ```bash
-python -m venv <venv_name>
-source <venv_name>/bin/activate
+python -m venv .venv991
+source .venv991/bin/activate
 pip install --upgrade pip
-pip install numpy
+pip install "numpy==2.0.2"
+pip install matplotlib
 pip install PySide6
 pip install SoundCard
-pip install matplotlib
 pip install pyserial
 ```
 
-Replace `<venv_name>` with the desired environment name (typically a hidden directory such as `.venv01`).
+#### Microsoft Windows
+
+```shell
+python -m venv .venv991
+.venv991\Scripts\activate.bat
+pip install --upgrade pip
+pip install "numpy==2.0.2"
+pip install matplotlib
+pip install PySide6
+pip install SoundCard
+pip install pyserial
+```
+
+The above commands will create a Python virtual environment in directory `.venv991`, activate the environment, and place all the necessary Python modules in it. You may use a different directory name if you prefer. The virtual environment can be removed by just deleting the directory.
+
+> [!TIP]
+> Python can be downloaded for Windows from the Python web site ([python.org](https://www.python.org)).
+>
+
+> [!NOTE]
+> In most cases, Python modules can be installed on Windows with `pip` without any additional tools. However, if `pip` cannot find a compatible prebuilt `wheel` for a required module version, it may attempt to build the package from source. On Windows, this can require C/C++ build tools. If this occurs, you can install the free **Visual Studio Community** edition from Microsoft and select the **Desktop Development With C++** workload during installation.
+>
 
 ---
 
 ## Running the Program
-
-Be sure that the virtual Python environment is activated if you are using one.
 
 ### Step 1 – Connect the transceiver
 
@@ -110,17 +146,43 @@ Connect the FT-991A to your computer via USB and power it on.
 
 ---
 
-### Step 2 – Baud rate
+### Step 1a – Download USB drivers (Microsoft Windows only)
 
-The default baud rate is **38400**.  
-Ensure that the transceiver's baud rate is set to the same value (031 CAT RATE).
+From YAESU official web site ([yaesu.com](https://www.yaesu.com/product-detail.aspx?Model=FT-991A&CatName=HF%20Transceivers/Amplifiers)), download and install the USB drivers for FT-991A:
+
+`FT-991A USB Driver Virtual COM Port Driver (Windows 11/10)`
+
+You may need to reboot your computer after installing the USB drivers.
 
 ---
 
-### Step 3 – List available devices
+### Step 1b – Adjust sound settings (Microsoft Windows only)
+
+From `Settings`, go to `System` > `Sound` and click on the detected `Microphone` device for your radio to adjust the sound propoerties as follows:
+
+![Microsoft Windows microphone ](images/windows_microphone.png)
+
+Be sure that `audio enhancements` are turned <ins>off</ins> and `input volume` is set to <ins>maximum</ins>.
+
+---
+
+### Step 2 – Baud rate
+
+The default baud rate is **38400**.  
+Ensure that the transceiver's baud rate is set to the same value (MENU 031 CAT RATE).
+
+---
+
+### Step 3 – Activating the virtual environment
+
+Open a `terminal` window (or `Command Prompt` on Windows) and activate the Python virtual environment. If you are going to run the bundled version, this step can be skipped. Then, proceed to the directory where the program files were downloaded.
+
+---
+
+### Step 4 – List available devices
 
 ```bash
-ft991a_boss.py --listcom --listsound
+python ft991a_boss.py --listcom --listsound
 ```
 
 You should see output similar to the following:
@@ -136,16 +198,38 @@ The permissions for the serial ports should indicate `True`, meaning you have wr
 
 ---
 
-### Step 4 – Start the GUI
+### Step 5 – Start the GUI
 
 ```bash
-ft991a_boss.py -cid <control_id> -sid <sound_id>
+python ft991a_boss.py -cid <control_id> -sid <sound_id>
 ```
 
 Example:
 
 ```bash
-ft991a_boss.py -cid 3 -sid 1
+python ft991a_boss.py -cid 3 -sid 1
+```
+
+> [!IMPORTANT]
+> If you don't explicitly specify the com port and microphone as shown above, the program will attempt to detect them automatically. If there are mutiple microphone devices, make sure that the default device is the one that belongs to the radio.
+>
+
+---
+
+### Running the Bundled Version
+
+Running the bundled version simply requires starting the supplied executable. Open a `terminal` window (or `Command Prompt` on Windows) and go to the directory where the bundled files were downloaded. Then use the following syntax to start the program.
+
+#### Linux
+
+```bash
+./ft991a-boss
+```
+
+#### Microsoft Windows
+
+```shell
+.\ft991a-boss.exe
 ```
 
 ---
@@ -158,12 +242,12 @@ As an example, you can choose Windows or Fusion style widgets using the followin
 
 **Windows** style:
 ```bash
-ft991a_boss.py --style windows
+python ft991a_boss.py --style windows
 ```
 
 **Fusion** style:
 ```bash
-ft991a_boss.py --style fusion
+python ft991a_boss.py --style fusion
 ```
 
 ---
@@ -188,13 +272,14 @@ Most widgets provide additional information via tooltips. To view the tooltip fo
 
 All slider and knob controls support keyboard-based adjustment:
 
-- **Cursor Up / Down**: fine adjustment  
+- **Cursor Up / Down** or **Cursor Left / Right**: fine adjustment  
 - **Page Up / Down**: faster adjustment  
 
-To use the keyboard, first set focus on the desired widget by right-clicking on it.
+To use the keyboard for the controls, first set focus on the desired widget by right-clicking on it. Then use the keys as indicated above.
 
-:information_source:
-**Information:** Not all control widgets are available at all radio modes. 
+> [!NOTE]
+> Depending on the operating mode of the radio (e.g., FM vs. USB), some widgets may be disabled.
+> 
 
 ### Debug Message Window
 
@@ -224,15 +309,17 @@ These functions allow transceiver settings to be stored and restored at a later 
 
 All data files are saved in **XML text format** and may be edited using a text editor if needed.
 
-:bulb:
-**Tip:** Consider saving both radio menu and memory channels when you first start the program.
+> [!TIP]
+> Consider saving both radio menu and memory channels when you first start the program.
+>
 
 Each memory-channel entry includes a **checksum** to ensure data integrity, as memory data is written directly to the transceiver using raw memory write commands. Memory channels may be reordered or renumbered manually in the XML file, provided that each channel is moved as a complete block together with its checksum.
 
 Radio menu settings may also be edited directly in the XML file, as long as the values remain within the allowable range defined by the transceiver. Before sending any menu data to the transceiver, the software validates all values against the allowable set and ignores invalid entries.
 
-:information_source:
-**Information:** Loading memory channels from disk is a slow process due to the large number of bytes that need to be written to the radio.
+> [!NOTE]
+> Loading memory channels from disk is a slow process due to the large number of bytes that need to be written to the radio.
+>
 
 ---
 
@@ -242,7 +329,7 @@ The **Refresh** menu provides commands to synchronize the GUI with the current t
 
 Under normal operation, manual refresh is not required as long as all transceiver parameters are adjusted through the GUI. The program also performs automatic refresh operations when certain triggers occur. The program does not use `ai` (auto information) feature of the transceiver.
 
-If the transceiver is adjusted directly using the front panel, some GUI controls may become out of sync. In such cases, the commands in this menu can be used to force a refresh and restore consistency between the GUI and the transceiver.
+If the transceiver is adjusted directly using the front panel, some GUI controls may become out of sync. In such cases, the commands in this menu can be used to force a refresh and restore consistency between the GUI and the transceiver. Keyboard shortcuts are also provided for the refresh commands. 
 
 ---
 
@@ -290,8 +377,9 @@ To use memory functions:
 2. Press **A→M** to store the current VFO-A settings into the selected memory  
 3. Press **A/M** to toggle between VFO and memory mode
 
-:information_source:
-**Information:** Program won't be able to store memory channels if the radio is on the **M-LIST** screen (i.e., displaying the memory channels). In order to be able to store memory channels using the program, exit from the **M-LIST** screen using the **BACK** soft-button.
+> [!NOTE]
+> Program won't be able to store memory channels if the radio is on the **M-LIST** screen (i.e., displaying the memory channels). In order to be able to store memory channels using the program, exit from the **M-LIST** screen using **BACK** soft-button.
+>
 
 If memory channel data is modified directly from the transceiver front panel (e.g., changing a memory tag), the memory table can be refreshed using **Refresh → Memory Channel**.
 
@@ -304,14 +392,15 @@ Entering split-memory data (different Rx and Tx frequencies) requires simultaneo
 
 The program also supports memory scanning using the provided controls.
 
-:information_source:
-**Information:** In rare cases, the transceiver can get stuck on a memory channel while switching between memory and VFO modes. This is a temporary state. To revert to the normal operation, proceed as follows using the front panel of the transceiver:
-
-1. Press **V/M** to enter the memory mode
-2. Go to memory channel #1 using **F(M-LIST)**→**MCH**→**MULTI DIAL**
-3. Enter the memory-tune mode by moving the VFO dial
-4. Press **V/M** to leave the memory-tune mode
-5. Press **V/M** again to leave the memory mode
+> [!NOTE]
+> In rare cases, the transceiver can get stuck on a memory channel while switching between memory and VFO modes. This is a temporary state. To revert to the normal operation, proceed as follows using the front panel of the transceiver:
+>
+>1. Press **V/M** to enter the memory mode
+>2. Go to memory channel #1 using **F(M-LIST)**→**MCH**→**MULTI DIAL**
+>3. Enter the memory-tune mode by moving the VFO dial
+>4. Press **V/M** to leave the memory-tune mode
+>5. Press **V/M** again to leave the memory mode
+>
 
 ---
 
@@ -319,7 +408,7 @@ The program also supports memory scanning using the provided controls.
 
 The **Interference Rejection** tab contains widget groups for the following functions:
 
-- Notch filter frequency  
+- Notch filter (frequency and width)
 - Contour filter (frequency, bandwidth, level)  
 - IF filter (shift, bandwidth, type)  
 - RF front-end attenuation and amplification (IPO)  
@@ -338,8 +427,9 @@ For example:
 
 Most interference rejection functions apply to **SSB, CW, RTTY, DATA,** and **AM** modes. These features are generally not available in **FM** mode.
 
-:information_source:
-**Information:** The FFT parameters are used exclusively for visualization of the spectrum and do **not** affect signal demodulation.
+> [!NOTE]
+> The FFT parameters are used exclusively for visualization of the spectrum and do **not** affect signal demodulation.
+>
 
 ---
 
@@ -349,20 +439,21 @@ The **Speech Processing** tab contains widget groups for:
 
 - Two equalizer filter banks (frequency, gain, bandwidth per section)  
 - Speech processor (state and level)  
-- Transmit audio settings (Tx bandwidth and microphone gain)  
+- Transmit audio settings (Tx bandwidth and microphone gain)
+- VOX (Voice Operated Transmit)
+- VM (Voice Memory)
 
 ![Speech processing tab](images/speech_processing_tab.png)
 
-Each equalizer filter-bank is modeled by cascade connection of three peaking-filter sections. Each filter section provides adjustable center frequency, gain, and bandwidth, as defined in the FT-991A Operating Manual (page 67).
+Each equalizer filter-bank is modeled by cascade connection of three peaking-filter sections. Each filter section provides adjustable center frequency, gain, and bandwidth, as defined in the FT-991A Operating Manual (page 67). As parameters are adjusted, changes are applied to the transceiver in real time and the corresponding filter response is displayed graphically.
 
-As parameters are adjusted, changes are applied to the transceiver in real time and the corresponding filter response is displayed graphically.
+To evaluate the effect of speech processing and equalization, users may enable the transceiver’s internal monitor function (see FT-991A Operating Manual, pages 65 and 74). Several preset equalizer configurations are also provided for experimentation.
 
-To evaluate the effect of speech processing and equalization, users may enable the transceiver’s internal monitor function (see FT-991A Operating Manual, pages 65 and 74).
+> [!NOTE]
+> Microphone equalizer button must be turned on to see effect of the equalizer.
+>
 
-:information_source:
-**Information:** Microphone equalizer button must be turned on to see effect of the equalizer.
-
-Several preset equalizer configurations are also provided for experimentation.
+Voice memory is used to record voice messages (e.g., calling CQ) and play them back later. There are 5 memory blocks available for recording messages. To record a message, first select a channel. Then press the `Load` button. You should see the red recording indicator blinking on the radio's display. Next, momentarily press `PTT` and start speaking into the microphone. To stop recording, release the `Load` button. You can play back the recorded message using the `Playback` button. Note that the radio's transmitter will not be engaged during playback unless the `Break-in` button is also pressed. The recorded message is repeated after the set time expires. This process continues indefinitely until the operator stops the playback.
 
 ---
 
@@ -376,8 +467,9 @@ There are five different filter sets corresponding to each operating mode. Each 
 
 Filter parameter ranges depend on the selected operating mode, as documented in the FT-991A Operating Manual (page 60). Users can select the appropriate parameter set by pressing the corresponding mode buttons on the screen. Changes are applied in real time and the resulting filter response is displayed graphically.
 
-:information_source:
-**Information:** Selecting a mode on this tab **does not change the transceiver’s operating mode**. It only selects the correct audio filter parameter set from the transceiver menu. If the transceiver is switched to that mode later, the associated filter settings will automatically be used.
+> [!NOTE]
+> Selecting a mode on this tab **does not change the transceiver’s operating mode**. It only selects the correct audio filter parameter set from the transceiver menu. If the transceiver is switched to that mode later, the associated filter settings will automatically be used.
+> 
 
 ---
 

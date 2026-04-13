@@ -14,7 +14,7 @@
 # Copyright (c) 2026 Noyan Kinayman, KC1VCN
 #
 # spr, spw pseudocode: Copyright (c) 2025 Gil Kloepfer, KI5BPK
-# ft991a memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK
+# FT-991A memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK
 #
 
 import os
@@ -2581,7 +2581,7 @@ def get_RF_attenuator():
 # RF Pre-Amp (IPO)
 ##############################
 def set_IPO(value):
-    value = {'IPO': 0, 'AMP 1': 1, 'AMP 2': 2}[value.upper()]
+    value = {'BYPASS': 0, 'AMP 1': 1, 'AMP 2': 2}[value.upper()]
 
 #
     IPO = '%d' % (value)
@@ -2593,7 +2593,7 @@ def set_IPO(value):
 
 #
 def get_IPO():
-    value = {0: 'IPO', 1: 'AMP 1', 2: 'AMP 2'}
+    value = {0: 'BYPASS', 1: 'AMP 1', 2: 'AMP 2'}
 
 #
     command = 'PA0;'
@@ -3360,7 +3360,7 @@ def get_memory_direct(channel):
     memory['bw_am']   = {1: 'NARROW', 0: 'WIDE'}[(data[4] >> 1) & 1]
 
 # Offset 5
-    memory['ipo'] = {3: 'AMP2', 2: 'AMP1', 0: 'IPO'}[(data[5]) & 3]
+    memory['ipo'] = {3: 'AMP2', 2: 'AMP1', 0: 'BYPASS'}[(data[5]) & 3]
 
 # Offset 70
     memory['ctcss_tone'] = CTCSS_tone['%03d' % data[70]]
@@ -3426,7 +3426,7 @@ def set_memory_direct(channel, memory):
     data[4] = (bw_ssb << 6) | (bw_cw << 5) | (bw_fm << 4) | (bw_rtty << 3) | (bw_data << 2) | (bw_am << 1)
 
 # Offset 5
-    ipo      = {'AMP2': 3, 'AMP1': 2, 'IPO': 0}[memory['ipo']]
+    ipo      = {'AMP2': 3, 'AMP1': 2, 'BYPASS': 0}[memory['ipo']]
     data[5]  = ipo
 
 # Offset 70
