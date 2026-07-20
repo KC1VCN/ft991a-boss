@@ -11,13 +11,13 @@
 - RF output power
 - IF filter settings
 - Notch and contour filters
+- Memory channel
 - Audio equalizer settings
 - VOX
 - Voice memory
 - Receiver audio filter
 
 The program was developed using **Python 3.9** under **Linux**. The reference platform was **RHEL 9.7**, although it should run on other Linux distributions with little or no modification, provided that all dependencies are satisfied. The program was also tested on **Microsoft Windows 11 Pro**.
-
 
 Following radio firmware was used during the development:
  
@@ -28,14 +28,13 @@ Following radio firmware was used during the development:
 | TFT         | V02-00  |
 | C4FM        | V04-15  |
 
-
 'Radio' and 'Transceiver' words are used interchangeably throughout this README.md file.
 
 ---
 
 ## Bundled Software
 
-PyInstaller-generated bundles are provided as release assets both for **Linux** and **Windows**. These bundles contain everything required to run the program from a single directory. In most cases, these can be used without installing Python or any additional Python packages separately.
+Bundled versions that are generated using PyInstaller are provided as release assets both for **Linux** and **Windows**. These bundles contain everything required to run the program from a single directory. In most cases, these can be used without installing Python or any additional Python packages separately.
 
 > [!IMPORTANT]
 > The Linux bundle was built on a system using **glibc 2.34**. While compatibility cannot be guaranteed, it is expected to run on other Linux systems that provide **glibc 2.34 or newer**. Cross-distribution compatibility may still depend on the availability of other required system libraries.
@@ -158,7 +157,7 @@ You may need to reboot your computer after installing the USB drivers.
 
 ### Step 1b – Adjust sound settings (Microsoft Windows only)
 
-From `Settings`, go to `System` > `Sound` and click on the detected `Microphone` device for your radio to adjust the sound propoerties as follows:
+From `Settings`, go to `System`→`Sound` and click on the detected `Microphone` device for your radio to adjust the sound properties as follows:
 
 ![Microsoft Windows microphone ](images/windows_microphone.png)
 
@@ -175,7 +174,7 @@ Ensure that the transceiver's baud rate is set to the same value (MENU 031 CAT R
 
 ### Step 3 – Activating the virtual environment
 
-Open a `terminal` window (or `Command Prompt` on Windows) and activate the Python virtual environment. If you are going to run the bundled version, this step can be skipped. Then, proceed to the directory where the program files were downloaded.
+Open a `terminal` window (or `Command Prompt` on Windows) and activate the Python virtual environment. Then, proceed to the directory where the program files were downloaded. If you are going to run the bundled version, this step can be skipped.
 
 ---
 
@@ -201,14 +200,16 @@ The permissions for the serial ports should indicate `True`, meaning you have wr
 ### Step 5 – Start the GUI
 
 ```bash
-python ft991a_boss.py -cid <control_id> -sid <sound_id>
+python ft991a_boss.py --cid <control_id> --sid <sound_id>
 ```
 
 Example:
 
 ```bash
-python ft991a_boss.py -cid 3 -sid 1
+python ft991a_boss.py --cid 3 --sid 1
 ```
+
+The program comes with two different GUI layouts: portrait and landscape. Depending on the arrangement of other windows on your screen, you may use either orientation. The default is the portrait layout. You can choose the landscape layout by using the `--wide` command-line argument.
 
 > [!IMPORTANT]
 > If you don't explicitly specify the com port and microphone as shown above, the program will attempt to detect them automatically. If there are mutiple microphone devices, make sure that the default device is the one that belongs to the radio.
@@ -216,27 +217,9 @@ python ft991a_boss.py -cid 3 -sid 1
 
 ---
 
-### Running the Bundled Version
-
-Running the bundled version simply requires starting the supplied executable. Open a `terminal` window (or `Command Prompt` on Windows) and go to the directory where the bundled files were downloaded. Then use the following syntax to start the program.
-
-#### Linux
-
-```bash
-./ft991a-boss
-```
-
-#### Microsoft Windows
-
-```shell
-.\ft991a-boss.exe
-```
-
----
-
 ### QWidgets Application Arguments
 
-Program also supports passing QWidgets application arguments. These arguments are given in addition to the arguments that `ft991a_boss.py` is using. Please refer to QWidgets documentation for more details.
+The program also supports passing QWidgets application arguments. These arguments are given in addition to the arguments that `ft991a_boss.py` is using. Please refer to QWidgets documentation for more details.
 
 As an example, you can choose Windows or Fusion style widgets using the following arguments:
 
@@ -252,21 +235,27 @@ python ft991a_boss.py --style fusion
 
 ---
 
+### Running the Bundled Version
+
+Running the bundled version simply requires starting the supplied executable. Open a `terminal` window (or `Command Prompt` on Windows) and go to the directory where the bundled files were downloaded. Then use the following syntax to start the program with any additional command-line arguments as explained above.
+
+#### Linux
+
+```bash
+./ft991a-boss
+```
+
+#### Microsoft Windows
+
+```shell
+.\ft991a-boss.exe
+```
+
+---
+
 ## Graphical User Interface Overview
 
 The program provides a graphical user interface (GUI) in which transceiver control functions are grouped into tabs according to their functionality. This organization helps reduce visual clutter and makes related controls easier to locate.
-
-The program comes with two different GUI layouts: vertical and horizontal. You can choose between the two layouts by importing the correct module:
-
-**Normal** layout (default):
-```python
-from ft991a_ui import Ui_MainWindow
-```
-
-**Wide** layout:
-```python
-from ft991a_wide_ui import Ui_MainWindow
-```
 
 Most widgets provide additional information via tooltips. To view the tooltip for a widget, simply hover the mouse cursor over it and wait a few seconds.
 
@@ -343,15 +332,16 @@ The software divides transceiver control functions into multiple tabs, each corr
 
 The **RF** tab contains widget groups for the following functions:
 
-- Two frequency registers (VFO-A and VFO-B)  
-- Register swap operations (A/B, A=B, Split)  
-- RF settings (RF power, RF gain, manual squelch, AF gain)  
-- Clarifier (shift and mode)  
-- Meters (S-meter and PO meter)  
-- Auto squelch (CTCSS, DCS, offset)  
-- Band selection  
-- Operating mode selection  
-- Memory channel display and operations  
+- Two frequency registers (VFO-A and VFO-B)
+- Register swap operations (A/B, A=B, Split)
+- RF settings (RF power, RF gain, manual squelch, AF gain)
+- Clarifier (shift and mode)
+- Meters (S-meter, PO meter, SWR meter)
+- Auto squelch (CTCSS, DCS, offset)
+- Band selection
+- Operating mode selection
+- Memory channel table and operations
+- Quick memory table
 
 ![RF tab overview](images/rf_tab.png)
 
@@ -365,17 +355,18 @@ The keyboard input supports **relative frequency entry** when a sign is used. Fo
 - Entering `+0.003` shifts the frequency by +3 kHz  
 - Entering `28.3` sets the frequency to 28.3 MHz  
 
-All frequency entries are specified in **MHz**. You can also copy-and-paste a frequency text as shown in DXCluster&reg; in this field.
+All keyboard frequency entries should be given in **MHz**. You can also copy-and-paste frequencies from DXCluster&reg; to this field.
 
-The meter group displays signal strength (**S**) and output power (**PO**) meters. Both meters have red indicators that show peak values. Note that the signal strenth indicator can be inaccurate for very large RF input powers particularly on FM mode.
+The meter group displays signal strength (**S**), output power (**PO**), and standing-wave ratio (**SWR**) meters. The meters have red indicators that show peak values. Note that the signal strength indicator can be inaccurate for very large RF input powers particularly on FM mode.
 
-The memory group displays the currently active memory channels retrieved from the transceiver using raw memory read commands. Memory data is written back using raw memory write commands.
+The memory group displays the currently active memory channels which are retrieved from the transceiver using raw memory-read commands. Memory data is written back using raw memory-write commands.
 
 To use memory functions:
 
-1. Select a memory channel using the mouse  
-2. Press **A→M** to store the current VFO-A settings into the selected memory  
-3. Press **A/M** to toggle between VFO and memory mode
+1. Select a memory channel using the mouse
+2. Press **A/M** to recall the selected memory
+3. Press **A→M** to store the current settings into the selected memory
+4. Toggle **A/M** to switch between VFO and memory mode
 
 > [!NOTE]
 > Program won't be able to store memory channels if the radio is on the **M-LIST** screen (i.e., displaying the memory channels). In order to be able to store memory channels using the program, exit from the **M-LIST** screen using **BACK** soft-button.
@@ -391,6 +382,12 @@ Memory channels may be saved and loaded using:
 Entering split-memory data (different Rx and Tx frequencies) requires simultaneous operation of the **PTT** and **A→M** buttons while the transceiver is in memory mode (see FT-991A Operating Manual, page 109). This operation is currently supported only through the transceiver front panel.
 
 The program also supports memory scanning using the provided controls.
+
+The quick-memory group displays quick-memory of the radio which can be used to store 5 VFO-A contents independent from the regular memory channels. The VFO-A contents are stored and recalled successively. To use quick-memory functions:
+
+1. Press **Store** to store active VFO-A content to the memory shown by the index
+2. Press **Recall** to recall VFO-A content from the memory shown by the index
+3. Press **A/M** to exit from the quick-memory mode
 
 > [!NOTE]
 > In rare cases, the transceiver can get stuck on a memory channel while switching between memory and VFO modes. This is a temporary state. To revert to the normal operation, proceed as follows using the front panel of the transceiver:
@@ -422,13 +419,14 @@ This tab also includes a **real-time spectrum display** of the received signal. 
 
 For example:
 
-- Adjusting the notch filter frequency moves a vertical indicator line
+- Adjusting the notch filter frequency moves a red vertical indicator line
+- Adjusting the contour filter frequency moves a blue vertical indicator line
 - Changing IF filter bandwidth/shift modifies the simulated filter response
 
 Most interference rejection functions apply to **SSB, CW, RTTY, DATA,** and **AM** modes. These features are generally not available in **FM** mode.
 
 > [!NOTE]
-> The FFT parameters are used exclusively for visualization of the spectrum and do **not** affect signal demodulation.
+> The FFT parameters are used exclusively for visualization of the spectrum and do **not** have any effect on the radio.
 >
 
 ---
@@ -453,7 +451,7 @@ To evaluate the effect of speech processing and equalization, users may enable t
 > Microphone equalizer button must be turned on to see effect of the equalizer.
 >
 
-Voice memory is used to record voice messages (e.g., calling CQ) and play them back later. There are 5 memory blocks available for recording messages. To record a message, first select a channel. Then press the `Load` button. You should see the red recording indicator blinking on the radio's display. Next, momentarily press `PTT` and start speaking into the microphone. To stop recording, release the `Load` button. You can play back the recorded message using the `Playback` button. Note that the radio's transmitter will not be engaged during playback unless the `Break-in` button is also pressed. The recorded message is repeated after the set time expires. This process continues indefinitely until the operator stops the playback.
+Voice memory is used to record voice messages (e.g., calling CQ) and play them back later. There are 5 memory blocks available for recording messages. To record a message, first select a channel. Then press the `Load` button. You should see the red recording indicator blinking on the radio's display. Next, momentarily press `PTT` and start speaking into the microphone. To stop recording, release the `Load` button. You can play back the recorded message using the `Playback` button. Note that the radio's transmitter will not be engaged during playback unless the `Break-in` button is also pressed. The `Loop` button repeats the recorded message after the set time expires.
 
 ---
 

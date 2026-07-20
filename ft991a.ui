@@ -71,800 +71,13 @@
      <attribute name="title">
       <string>RF</string>
      </attribute>
-     <widget class="QGroupBox" name="VFO_A_groupBox">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>20</y>
-        <width>651</width>
-        <height>251</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QWidget{ border: 2px black; background-color: lightgray;border-radius: 20px;}</string>
-      </property>
-      <property name="title">
-       <string>   VFO-A Register</string>
-      </property>
-      <widget class="QLCDNumber" name="VFO_A_lcdNumber">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>40</y>
-         <width>401</width>
-         <height>91</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QWidget{ border: 2px black; background-color: black;}
-QLCDNumber {color: yellow;}
-</string>
-       </property>
-       <property name="smallDecimalPoint">
-        <bool>false</bool>
-       </property>
-       <property name="digitCount">
-        <number>9</number>
-       </property>
-       <property name="mode">
-        <enum>QLCDNumber::Mode::Dec</enum>
-       </property>
-       <property name="intValue" stdset="0">
-        <number>1800000</number>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="VFO_A_lineEdit">
-       <property name="geometry">
-        <rect>
-         <x>220</x>
-         <y>140</y>
-         <width>201</width>
-         <height>51</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>22</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QWidget{ border: 2px black; background-color: white;border-radius: 10px;}</string>
-       </property>
-       <property name="maxLength">
-        <number>9</number>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-       </property>
-      </widget>
-      <widget class="QDial" name="VFO_A_dial">
-       <property name="geometry">
-        <rect>
-         <x>480</x>
-         <y>30</y>
-         <width>151</width>
-         <height>151</height>
-        </rect>
-       </property>
-       <property name="toolTipDuration">
-        <number>-1</number>
-       </property>
-       <property name="whatsThis">
-        <string/>
-       </property>
-       <property name="tracking">
-        <bool>true</bool>
-       </property>
-       <property name="wrapping">
-        <bool>true</bool>
-       </property>
-       <property name="notchesVisible">
-        <bool>true</bool>
-       </property>
-       <property name="stored_value" stdset="0">
-        <number>0</number>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="VFO_A_Tx_radioButton">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>150</y>
-         <width>41</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>16</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QRadioButton::indicator:checked:checked{ background-color: red;}
-QRadioButton::indicator{ width: 10px; height: 10px; border-radius: 5px; border: 1px solid black; background-color: transparent;}</string>
-       </property>
-       <property name="text">
-        <string>Tx</string>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>32</width>
-         <height>32</height>
-        </size>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">Tx_buttonGroup</string>
-       </attribute>
-      </widget>
-      <widget class="QRadioButton" name="VFO_A_Rx_radioButton">
-       <property name="geometry">
-        <rect>
-         <x>70</x>
-         <y>150</y>
-         <width>41</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>16</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QRadioButton::indicator:checked:checked{ background-color: green;}
-QRadioButton::indicator{ width: 10px; height: 10px; border-radius: 5px; border: 1px solid black; background-color: transparent;}</string>
-       </property>
-       <property name="text">
-        <string>Rx</string>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>32</width>
-         <height>32</height>
-        </size>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">Rx_buttonGroup</string>
-       </attribute>
-      </widget>
-      <widget class="QLabel" name="VFO_A_label_1">
-       <property name="geometry">
-        <rect>
-         <x>430</x>
-         <y>100</y>
-         <width>21</width>
-         <height>18</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Hz</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="VFO_A_label_2">
-       <property name="geometry">
-        <rect>
-         <x>430</x>
-         <y>165</y>
-         <width>41</width>
-         <height>18</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>MHz</string>
-       </property>
-      </widget>
-      <widget class="QTextBrowser" name="VFO_A_textBrowser">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>200</y>
-         <width>501</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Monospace</family>
-         <pointsize>12</pointsize>
-         <hintingpreference>PreferDefaultHinting</hintingpreference>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QWidget{ background-color: white;border-radius: 8px;}
-QTextBrowser QScrollBar:horizontal{ background-color: lightgrey;}
-QTextBrowser QScrollBar::handle:horizontal{ background-color: grey;margin: 0px 12px;}</string>
-       </property>
-       <property name="verticalScrollBarPolicy">
-        <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
-       </property>
-       <property name="horizontalScrollBarPolicy">
-        <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
-       </property>
-       <property name="lineWrapMode">
-        <enum>QTextEdit::LineWrapMode::WidgetWidth</enum>
-       </property>
-       <property name="markdown">
-        <string/>
-       </property>
-       <property name="html">
-        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-hr { height: 1px; border-width: 0; }
-li.unchecked::marker { content: &quot;\2610&quot;; }
-li.checked::marker { content: &quot;\2612&quot;; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Monospace'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-      </widget>
-      <widget class="Line" name="VFO_A_line_1">
-       <property name="geometry">
-        <rect>
-         <x>145</x>
-         <y>200</y>
-         <width>3</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Orientation::Vertical</enum>
-       </property>
-      </widget>
-      <widget class="Line" name="VFO_A_line_2">
-       <property name="geometry">
-        <rect>
-         <x>280</x>
-         <y>200</y>
-         <width>3</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Orientation::Vertical</enum>
-       </property>
-      </widget>
-      <widget class="Line" name="VFO_A_line_3">
-       <property name="geometry">
-        <rect>
-         <x>415</x>
-         <y>200</y>
-         <width>3</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Orientation::Vertical</enum>
-       </property>
-      </widget>
-      <widget class="QLabel" name="VFO_A_label_3">
-       <property name="geometry">
-        <rect>
-         <x>140</x>
-         <y>145</y>
-         <width>71</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>11</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QWidget{ border-radius: 0px;}</string>
-       </property>
-       <property name="text">
-        <string>Keyboard Entry</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="VFO_A_label_4">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>205</y>
-         <width>41</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>11</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QWidget{ border-radius: 0px;}</string>
-       </property>
-       <property name="text">
-        <string>Info</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="Line" name="VFO_A_line_4">
-       <property name="geometry">
-        <rect>
-         <x>283</x>
-         <y>40</y>
-         <width>3</width>
-         <height>91</height>
-        </rect>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Orientation::Vertical</enum>
-       </property>
-      </widget>
-      <widget class="Line" name="VFO_A_line_5">
-       <property name="geometry">
-        <rect>
-         <x>154</x>
-         <y>40</y>
-         <width>3</width>
-         <height>91</height>
-        </rect>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Orientation::Vertical</enum>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="VFO_A_fast_radioButton">
-       <property name="geometry">
-        <rect>
-         <x>570</x>
-         <y>5</y>
-         <width>61</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <italic>true</italic>
-        </font>
-       </property>
-       <property name="layoutDirection">
-        <enum>Qt::LayoutDirection::RightToLeft</enum>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QRadioButton::indicator:checked:checked{ background-color: blue;}
-QRadioButton::indicator{ width: 10px; height: 10px; border-radius: 5px; border: 1px solid black; background-color: transparent;}</string>
-       </property>
-       <property name="text">
-        <string>FAST</string>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>32</width>
-         <height>32</height>
-        </size>
-       </property>
-       <property name="checked">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="VFO_B_groupBox">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>350</y>
-        <width>651</width>
-        <height>251</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QWidget{ border: 2px black; background-color: lightgray;border-radius: 20px;}</string>
-      </property>
-      <property name="title">
-       <string>   VFO-B Register</string>
-      </property>
-      <widget class="QLCDNumber" name="VFO_B_lcdNumber">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>40</y>
-         <width>401</width>
-         <height>91</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QWidget{ border: 2px black; background-color: black;}
-QLCDNumber {color: yellow;}
-</string>
-       </property>
-       <property name="digitCount">
-        <number>9</number>
-       </property>
-       <property name="intValue" stdset="0">
-        <number>1800000</number>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="VFO_B_lineEdit">
-       <property name="geometry">
-        <rect>
-         <x>220</x>
-         <y>140</y>
-         <width>201</width>
-         <height>51</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>22</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QWidget{ border: 2px black; background-color: white;border-radius: 10px;}</string>
-       </property>
-       <property name="maxLength">
-        <number>9</number>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-       </property>
-      </widget>
-      <widget class="QDial" name="VFO_B_dial">
-       <property name="geometry">
-        <rect>
-         <x>480</x>
-         <y>30</y>
-         <width>151</width>
-         <height>151</height>
-        </rect>
-       </property>
-       <property name="wrapping">
-        <bool>true</bool>
-       </property>
-       <property name="notchesVisible">
-        <bool>true</bool>
-       </property>
-       <property name="stored_value" stdset="0">
-        <number>0</number>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="VFO_B_Tx_radioButton">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>150</y>
-         <width>41</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>16</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QRadioButton::indicator:checked:checked{ background-color: red;}
-QRadioButton::indicator{ width: 10px; height: 10px; border-radius: 5px; border: 1px solid black; background-color: transparent;}</string>
-       </property>
-       <property name="text">
-        <string>Tx</string>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>32</width>
-         <height>32</height>
-        </size>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">Tx_buttonGroup</string>
-       </attribute>
-      </widget>
-      <widget class="QRadioButton" name="VFO_B_Rx_radioButton">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="geometry">
-        <rect>
-         <x>70</x>
-         <y>150</y>
-         <width>41</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>16</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QRadioButton::indicator:checked:checked{ background-color: green;}
-QRadioButton::indicator{ width: 10px; height: 10px; border-radius: 5px; border: 1px solid black; background-color: transparent;}</string>
-       </property>
-       <property name="text">
-        <string>Rx</string>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>32</width>
-         <height>32</height>
-        </size>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">Rx_buttonGroup</string>
-       </attribute>
-      </widget>
-      <widget class="QLabel" name="VFO_B_label_1">
-       <property name="geometry">
-        <rect>
-         <x>430</x>
-         <y>100</y>
-         <width>21</width>
-         <height>18</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Hz</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="VFO_B_label_2">
-       <property name="geometry">
-        <rect>
-         <x>430</x>
-         <y>165</y>
-         <width>41</width>
-         <height>18</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>MHz</string>
-       </property>
-      </widget>
-      <widget class="QTextBrowser" name="VFO_B_textBrowser">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>200</y>
-         <width>501</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Monospace</family>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QWidget{ background-color: white;border-radius: 8px;}
-QTextBrowser QScrollBar:horizontal{ background-color: lightgrey;}
-QTextBrowser QScrollBar::handle:horizontal{ background-color: grey;margin: 0px 12px;}</string>
-       </property>
-       <property name="verticalScrollBarPolicy">
-        <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
-       </property>
-       <property name="horizontalScrollBarPolicy">
-        <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
-       </property>
-       <property name="lineWrapMode">
-        <enum>QTextEdit::LineWrapMode::WidgetWidth</enum>
-       </property>
-       <property name="markdown">
-        <string/>
-       </property>
-       <property name="html">
-        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-hr { height: 1px; border-width: 0; }
-li.unchecked::marker { content: &quot;\2610&quot;; }
-li.checked::marker { content: &quot;\2612&quot;; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Monospace'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-      </widget>
-      <widget class="Line" name="VFO_B_line_2">
-       <property name="geometry">
-        <rect>
-         <x>280</x>
-         <y>200</y>
-         <width>3</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Orientation::Vertical</enum>
-       </property>
-      </widget>
-      <widget class="Line" name="VFO_B_line_3">
-       <property name="geometry">
-        <rect>
-         <x>415</x>
-         <y>200</y>
-         <width>3</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Orientation::Vertical</enum>
-       </property>
-      </widget>
-      <widget class="Line" name="VFO_B_line_1">
-       <property name="geometry">
-        <rect>
-         <x>145</x>
-         <y>200</y>
-         <width>3</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Orientation::Vertical</enum>
-       </property>
-      </widget>
-      <widget class="QLabel" name="VFO_B_label_3">
-       <property name="geometry">
-        <rect>
-         <x>140</x>
-         <y>145</y>
-         <width>71</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>11</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QWidget{ border-radius: 0px;}</string>
-       </property>
-       <property name="text">
-        <string>Keyboard Entry</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="VFO_B_label_4">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>205</y>
-         <width>41</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>11</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QWidget{ border-radius: 0px;}</string>
-       </property>
-       <property name="text">
-        <string>Info</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="Line" name="VFO_B_line_5">
-       <property name="geometry">
-        <rect>
-         <x>154</x>
-         <y>40</y>
-         <width>3</width>
-         <height>91</height>
-        </rect>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Orientation::Vertical</enum>
-       </property>
-      </widget>
-      <widget class="Line" name="VFO_B_line_4">
-       <property name="geometry">
-        <rect>
-         <x>283</x>
-         <y>40</y>
-         <width>3</width>
-         <height>91</height>
-        </rect>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Orientation::Vertical</enum>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="VFO_B_fast_radioButton">
-       <property name="geometry">
-        <rect>
-         <x>570</x>
-         <y>5</y>
-         <width>61</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <italic>true</italic>
-        </font>
-       </property>
-       <property name="layoutDirection">
-        <enum>Qt::LayoutDirection::RightToLeft</enum>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QRadioButton::indicator:checked:checked {background-color: blue;}
-QRadioButton::indicator {width: 10px; height: 10px; border-radius: 5px; border: 1px solid black; background-color: transparent;}</string>
-       </property>
-       <property name="text">
-        <string>FAST</string>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>32</width>
-         <height>32</height>
-        </size>
-       </property>
-       <property name="checked">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </widget>
      <widget class="QGroupBox" name="Band_groupBox">
       <property name="geometry">
        <rect>
-        <x>920</x>
-        <y>20</y>
+        <x>925</x>
+        <y>10</y>
         <width>261</width>
-        <height>301</height>
+        <height>316</height>
        </rect>
       </property>
       <property name="font">
@@ -1314,10 +527,10 @@ QRadioButton::indicator{ width: 10px; height: 10px; border-radius: 5px; border: 
      <widget class="QGroupBox" name="Mode_groupBox">
       <property name="geometry">
        <rect>
-        <x>690</x>
-        <y>20</y>
+        <x>700</x>
+        <y>10</y>
         <width>201</width>
-        <height>301</height>
+        <height>296</height>
        </rect>
       </property>
       <property name="font">
@@ -1348,8 +561,8 @@ QRadioButton::indicator{ width: 10px; height: 10px; border-radius: 5px; border: 
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">QPushButton {background-color: lightblue;}
-QPushButton::checked {background-color: red;}</string>
+        <string notr="true">QPushButton{ background-color: lightblue;}
+QPushButton::checked{ background-color: red;}</string>
        </property>
        <property name="text">
         <string>LSB</string>
@@ -1377,8 +590,8 @@ QPushButton::checked {background-color: red;}</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">QPushButton {background-color: lightblue;}
-QPushButton::checked {background-color: red;}</string>
+        <string notr="true">QPushButton{ background-color: lightblue;}
+QPushButton::checked{ background-color: red;}</string>
        </property>
        <property name="text">
         <string>USB</string>
@@ -1406,8 +619,8 @@ QPushButton::checked {background-color: red;}</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">QPushButton {background-color: lightblue;}
-QPushButton::checked {background-color: red;}</string>
+        <string notr="true">QPushButton{ background-color: lightblue;}
+QPushButton::checked{ background-color: red;}</string>
        </property>
        <property name="text">
         <string>CW-LSB</string>
@@ -1435,8 +648,8 @@ QPushButton::checked {background-color: red;}</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">QPushButton {background-color: lightblue;}
-QPushButton::checked {background-color: red;}</string>
+        <string notr="true">QPushButton{ background-color: lightblue;}
+QPushButton::checked{ background-color: red;}</string>
        </property>
        <property name="text">
         <string>CW-USB</string>
@@ -1464,8 +677,8 @@ QPushButton::checked {background-color: red;}</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">QPushButton {background-color: lightblue;}
-QPushButton::checked {background-color: red;}</string>
+        <string notr="true">QPushButton{ background-color: lightblue;}
+QPushButton::checked{ background-color: red;}</string>
        </property>
        <property name="text">
         <string>RTTY-LSB</string>
@@ -1493,8 +706,8 @@ QPushButton::checked {background-color: red;}</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">QPushButton {background-color: lightblue;}
-QPushButton::checked {background-color: red;}</string>
+        <string notr="true">QPushButton{ background-color: lightblue;}
+QPushButton::checked{ background-color: red;}</string>
        </property>
        <property name="text">
         <string>RTTY-USB</string>
@@ -1522,8 +735,8 @@ QPushButton::checked {background-color: red;}</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">QPushButton {background-color: lightblue;}
-QPushButton::checked {background-color: red;}</string>
+        <string notr="true">QPushButton{ background-color: lightblue;}
+QPushButton::checked{ background-color: red;}</string>
        </property>
        <property name="text">
         <string>DATA-LSB</string>
@@ -1551,8 +764,8 @@ QPushButton::checked {background-color: red;}</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">QPushButton {background-color: lightblue;}
-QPushButton::checked {background-color: red;}</string>
+        <string notr="true">QPushButton{ background-color: lightblue;}
+QPushButton::checked{ background-color: red;}</string>
        </property>
        <property name="text">
         <string>DATA-USB</string>
@@ -1580,8 +793,8 @@ QPushButton::checked {background-color: red;}</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">QPushButton {background-color: lightblue;}
-QPushButton::checked {background-color: red;}</string>
+        <string notr="true">QPushButton{ background-color: lightblue;}
+QPushButton::checked{ background-color: red;}</string>
        </property>
        <property name="text">
         <string>AM</string>
@@ -1609,8 +822,8 @@ QPushButton::checked {background-color: red;}</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">QPushButton {background-color: lightblue;}
-QPushButton::checked {background-color: red;}</string>
+        <string notr="true">QPushButton{ background-color: lightblue;}
+QPushButton::checked{ background-color: red;}</string>
        </property>
        <property name="text">
         <string>FM</string>
@@ -1638,8 +851,8 @@ QPushButton::checked {background-color: red;}</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">QPushButton {background-color: lightblue;}
-QPushButton::checked {background-color: red;}</string>
+        <string notr="true">QPushButton{ background-color: lightblue;}
+QPushButton::checked{ background-color: red;}</string>
        </property>
        <property name="text">
         <string>C4FM</string>
@@ -1667,8 +880,8 @@ QPushButton::checked {background-color: red;}</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">QPushButton {background-color: lightblue;}
-QPushButton::checked {background-color: red;}</string>
+        <string notr="true">QPushButton{ background-color: lightblue;}
+QPushButton::checked{ background-color: red;}</string>
        </property>
        <property name="text">
         <string>DATA-FM</string>
@@ -1684,10 +897,10 @@ QPushButton::checked {background-color: red;}</string>
      <widget class="QGroupBox" name="RF_groupBox">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>610</y>
-        <width>311</width>
-        <height>271</height>
+        <x>10</x>
+        <y>600</y>
+        <width>261</width>
+        <height>281</height>
        </rect>
       </property>
       <property name="font">
@@ -1705,7 +918,7 @@ QPushButton::checked {background-color: red;}</string>
       <widget class="QSlider" name="RF_power_verticalSlider">
        <property name="geometry">
         <rect>
-         <x>40</x>
+         <x>25</x>
          <y>80</y>
          <width>31</width>
          <height>141</height>
@@ -1748,7 +961,7 @@ QSlider::add-page:vertical {background: red;}</string>
       <widget class="QSlider" name="AF_gain_verticalSlider">
        <property name="geometry">
         <rect>
-         <x>110</x>
+         <x>85</x>
          <y>80</y>
          <width>31</width>
          <height>141</height>
@@ -1785,7 +998,7 @@ QSlider::add-page:vertical {background: red;}</string>
       <widget class="QSlider" name="RF_gain_verticalSlider">
        <property name="geometry">
         <rect>
-         <x>180</x>
+         <x>145</x>
          <y>80</y>
          <width>31</width>
          <height>141</height>
@@ -1822,7 +1035,7 @@ QSlider::add-page:vertical {background: red;}</string>
       <widget class="QLCDNumber" name="RF_power_lcdNumber">
        <property name="geometry">
         <rect>
-         <x>30</x>
+         <x>15</x>
          <y>40</y>
          <width>51</width>
          <height>31</height>
@@ -1842,7 +1055,7 @@ QLCDNumber {color: yellow;}</string>
       <widget class="QLCDNumber" name="AF_gain_lcdNumber">
        <property name="geometry">
         <rect>
-         <x>100</x>
+         <x>75</x>
          <y>40</y>
          <width>51</width>
          <height>31</height>
@@ -1859,7 +1072,7 @@ QLCDNumber {color: yellow;}</string>
       <widget class="QLCDNumber" name="RF_gain_lcdNumber">
        <property name="geometry">
         <rect>
-         <x>170</x>
+         <x>135</x>
          <y>40</y>
          <width>51</width>
          <height>31</height>
@@ -1876,10 +1089,10 @@ QLCDNumber {color: yellow;}</string>
       <widget class="QLabel" name="RF_label_1">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>230</y>
-         <width>71</width>
-         <height>21</height>
+         <x>15</x>
+         <y>225</y>
+         <width>51</width>
+         <height>41</height>
         </rect>
        </property>
        <property name="font">
@@ -1901,10 +1114,10 @@ QLCDNumber {color: yellow;}</string>
       <widget class="QLabel" name="RF_label_2">
        <property name="geometry">
         <rect>
-         <x>95</x>
-         <y>230</y>
-         <width>61</width>
-         <height>21</height>
+         <x>80</x>
+         <y>225</y>
+         <width>41</width>
+         <height>41</height>
         </rect>
        </property>
        <property name="font">
@@ -1926,10 +1139,10 @@ QLCDNumber {color: yellow;}</string>
       <widget class="QLabel" name="RF_label_3">
        <property name="geometry">
         <rect>
-         <x>165</x>
-         <y>230</y>
-         <width>61</width>
-         <height>21</height>
+         <x>140</x>
+         <y>225</y>
+         <width>41</width>
+         <height>41</height>
         </rect>
        </property>
        <property name="font">
@@ -1951,7 +1164,7 @@ QLCDNumber {color: yellow;}</string>
       <widget class="QSlider" name="RF_squelch_verticalSlider">
        <property name="geometry">
         <rect>
-         <x>250</x>
+         <x>205</x>
          <y>80</y>
          <width>31</width>
          <height>141</height>
@@ -1988,7 +1201,7 @@ QSlider::add-page:vertical {background: red;}</string>
       <widget class="QLCDNumber" name="RF_squelch_lcdNumber">
        <property name="geometry">
         <rect>
-         <x>240</x>
+         <x>195</x>
          <y>40</y>
          <width>51</width>
          <height>31</height>
@@ -2005,10 +1218,10 @@ QLCDNumber {color: yellow;}</string>
       <widget class="QLabel" name="RF_label_4">
        <property name="geometry">
         <rect>
-         <x>230</x>
-         <y>230</y>
-         <width>71</width>
-         <height>21</height>
+         <x>190</x>
+         <y>225</y>
+         <width>61</width>
+         <height>26</height>
         </rect>
        </property>
        <property name="font">
@@ -2031,10 +1244,10 @@ QLCDNumber {color: yellow;}</string>
      <widget class="QGroupBox" name="Meter_groupBox">
       <property name="geometry">
        <rect>
-        <x>350</x>
-        <y>610</y>
-        <width>321</width>
-        <height>271</height>
+        <x>280</x>
+        <y>600</y>
+        <width>331</width>
+        <height>281</height>
        </rect>
       </property>
       <property name="font">
@@ -2052,7 +1265,7 @@ QLCDNumber {color: yellow;}</string>
       <widget class="QProgressBar" name="S_meter_progressBar">
        <property name="geometry">
         <rect>
-         <x>41</x>
+         <x>51</x>
          <y>35</y>
          <width>261</width>
          <height>41</height>
@@ -2103,10 +1316,10 @@ QProgressBar::chunk {background: green; border-radius: 0px; margin: 0px;}</strin
       <widget class="QLabel" name="S_meter_label_1">
        <property name="geometry">
         <rect>
-         <x>40</x>
+         <x>50</x>
          <y>70</y>
          <width>274</width>
-         <height>41</height>
+         <height>36</height>
         </rect>
        </property>
        <property name="text">
@@ -2124,13 +1337,13 @@ QProgressBar::chunk {background: green; border-radius: 0px; margin: 0px;}</strin
         <rect>
          <x>5</x>
          <y>40</y>
-         <width>31</width>
+         <width>41</width>
          <height>31</height>
         </rect>
        </property>
        <property name="font">
         <font>
-         <pointsize>18</pointsize>
+         <pointsize>16</pointsize>
          <bold>true</bold>
         </font>
        </property>
@@ -2138,7 +1351,7 @@ QProgressBar::chunk {background: green; border-radius: 0px; margin: 0px;}</strin
         <string>S</string>
        </property>
        <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTop|Qt::AlignmentFlag::AlignTrailing</set>
+        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
        </property>
        <property name="wordWrap">
         <bool>true</bool>
@@ -2147,8 +1360,8 @@ QProgressBar::chunk {background: green; border-radius: 0px; margin: 0px;}</strin
       <widget class="QProgressBar" name="PO_meter_progressBar">
        <property name="geometry">
         <rect>
-         <x>40</x>
-         <y>125</y>
+         <x>50</x>
+         <y>115</y>
          <width>261</width>
          <height>41</height>
         </rect>
@@ -2196,14 +1409,14 @@ QProgressBar::chunk {background: green; border-radius: 0px; margin: 0px;}</strin
        <property name="geometry">
         <rect>
          <x>5</x>
-         <y>130</y>
-         <width>31</width>
+         <y>120</y>
+         <width>41</width>
          <height>31</height>
         </rect>
        </property>
        <property name="font">
         <font>
-         <pointsize>18</pointsize>
+         <pointsize>16</pointsize>
          <bold>true</bold>
         </font>
        </property>
@@ -2211,7 +1424,7 @@ QProgressBar::chunk {background: green; border-radius: 0px; margin: 0px;}</strin
         <string>PO</string>
        </property>
        <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTop|Qt::AlignmentFlag::AlignTrailing</set>
+        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
        </property>
        <property name="wordWrap">
         <bool>true</bool>
@@ -2220,10 +1433,10 @@ QProgressBar::chunk {background: green; border-radius: 0px; margin: 0px;}</strin
       <widget class="QLabel" name="PO_meter_label_1">
        <property name="geometry">
         <rect>
-         <x>34</x>
-         <y>160</y>
+         <x>44</x>
+         <y>150</y>
          <width>282</width>
-         <height>41</height>
+         <height>36</height>
         </rect>
        </property>
        <property name="text">
@@ -2236,20 +1449,115 @@ QProgressBar::chunk {background: green; border-radius: 0px; margin: 0px;}</strin
         <bool>true</bool>
        </property>
       </widget>
+      <widget class="QLabel" name="SWR_meter_label_2">
+       <property name="geometry">
+        <rect>
+         <x>5</x>
+         <y>200</y>
+         <width>41</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>SWR</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QProgressBar" name="SWR_meter_progressBar">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>195</y>
+         <width>261</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Liberation Mono</family>
+         <pointsize>18</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QProgressBar {border: 2px solid black; border-radius: 2px; text-align: center; background: white;}
+QProgressBar::chunk {background: green; border-radius: 0px; margin: 0px;}</string>
+       </property>
+       <property name="maximum">
+        <number>255</number>
+       </property>
+       <property name="value">
+        <number>0</number>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+       </property>
+       <property name="textVisible">
+        <bool>true</bool>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="format">
+        <string/>
+       </property>
+       <property name="peak" stdset="0">
+        <number>0</number>
+       </property>
+       <property name="average" stdset="0">
+        <number>0</number>
+       </property>
+       <property name="hold" stdset="0">
+        <number>0</number>
+       </property>
+      </widget>
+      <widget class="QLabel" name="SWR_meter_label_1">
+       <property name="geometry">
+        <rect>
+         <x>44</x>
+         <y>230</y>
+         <width>275</width>
+         <height>36</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="resources.qrc">:/data/resources/meter_SWR_grid.png</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
       <zorder>PO_meter_label_1</zorder>
       <zorder>S_meter_label_1</zorder>
       <zorder>S_meter_progressBar</zorder>
       <zorder>S_meter_label_2</zorder>
       <zorder>PO_meter_progressBar</zorder>
       <zorder>PO_meter_label_2</zorder>
+      <zorder>SWR_meter_label_2</zorder>
+      <zorder>SWR_meter_label_1</zorder>
+      <zorder>SWR_meter_progressBar</zorder>
      </widget>
      <widget class="QGroupBox" name="Clar_groupBox">
       <property name="geometry">
        <rect>
-        <x>690</x>
-        <y>350</y>
+        <x>700</x>
+        <y>410</y>
         <width>201</width>
-        <height>251</height>
+        <height>176</height>
        </rect>
       </property>
       <property name="font">
@@ -2274,7 +1582,7 @@ QProgressBar::chunk {background: green; border-radius: 0px; margin: 0px;}</strin
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">QWidget{ border: 2px black; background-color: black;border-radius: 4px;}
+        <string notr="true">QWidget{ border: 2px black; background-color: black;border-radius: 6px;}
 QLCDNumber {color: yellow;}</string>
        </property>
        <property name="digitCount">
@@ -2285,7 +1593,7 @@ QLCDNumber {color: yellow;}</string>
        <property name="geometry">
         <rect>
          <x>110</x>
-         <y>30</y>
+         <y>50</y>
          <width>81</width>
          <height>81</height>
         </rect>
@@ -2303,8 +1611,8 @@ QLCDNumber {color: yellow;}</string>
       <widget class="QPushButton" name="Clar_clear_pushButton">
        <property name="geometry">
         <rect>
-         <x>115</x>
-         <y>120</y>
+         <x>20</x>
+         <y>100</y>
          <width>71</width>
          <height>31</height>
         </rect>
@@ -2327,7 +1635,7 @@ QPushButton::pressed {background-color: red;}</string>
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>120</y>
+         <y>135</y>
          <width>71</width>
          <height>31</height>
         </rect>
@@ -2365,12 +1673,52 @@ QPushButton::pressed {background-color: red;}</string>
         </property>
        </item>
       </widget>
+      <widget class="QRadioButton" name="Clar_fast_radioButton">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>30</y>
+         <width>61</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LayoutDirection::RightToLeft</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QRadioButton::indicator:checked:checked{ background-color: blue;}
+QRadioButton::indicator{ width: 10px; height: 10px; border-radius: 5px; border: 1px solid black; background-color: transparent;}</string>
+       </property>
+       <property name="text">
+        <string>FAST</string>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>32</width>
+         <height>32</height>
+        </size>
+       </property>
+       <property name="checked">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <zorder>Clar_fast_radioButton</zorder>
+      <zorder>Clar_lcdNumber</zorder>
+      <zorder>Clar_dial</zorder>
+      <zorder>Clar_clear_pushButton</zorder>
+      <zorder>Clar_comboBox</zorder>
      </widget>
      <widget class="QGroupBox" name="Squelch_groupBox">
       <property name="geometry">
        <rect>
-        <x>920</x>
-        <y>350</y>
+        <x>925</x>
+        <y>335</y>
         <width>261</width>
         <height>251</height>
        </rect>
@@ -2580,30 +1928,33 @@ QPushButton::pressed {background-color: red;}</string>
        </item>
       </widget>
      </widget>
-     <widget class="QFrame" name="VFO_frame">
+     <widget class="QGroupBox" name="VFO_groupBox">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>280</y>
-        <width>281</width>
-        <height>61</height>
+        <x>700</x>
+        <y>315</y>
+        <width>201</width>
+        <height>86</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+        <bold>true</bold>
+       </font>
       </property>
       <property name="styleSheet">
        <string notr="true">QWidget{ background-color: lightgray;}</string>
       </property>
-      <property name="frameShape">
-       <enum>QFrame::Shape::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Shadow::Raised</enum>
+      <property name="title">
+       <string>  VFO</string>
       </property>
       <widget class="QPushButton" name="A_B_pushButton_3">
        <property name="geometry">
         <rect>
-         <x>180</x>
-         <y>10</y>
-         <width>81</width>
+         <x>130</x>
+         <y>35</y>
+         <width>61</width>
          <height>41</height>
         </rect>
        </property>
@@ -2630,9 +1981,9 @@ QPushButton::checked {background-color: red;}</string>
       <widget class="QPushButton" name="A_B_pushButton_2">
        <property name="geometry">
         <rect>
-         <x>100</x>
-         <y>10</y>
-         <width>81</width>
+         <x>70</x>
+         <y>35</y>
+         <width>61</width>
          <height>41</height>
         </rect>
        </property>
@@ -2656,9 +2007,9 @@ QPushButton::pressed {background-color: red;}</string>
       <widget class="QPushButton" name="A_B_pushButton_1">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>10</y>
-         <width>81</width>
+         <x>10</x>
+         <y>35</y>
+         <width>61</width>
          <height>41</height>
         </rect>
        </property>
@@ -2683,10 +2034,10 @@ QPushButton::pressed {background-color: red;}</string>
      <widget class="QGroupBox" name="Memory_groupBox">
       <property name="geometry">
        <rect>
-        <x>689</x>
-        <y>610</y>
-        <width>491</width>
-        <height>271</height>
+        <x>619</x>
+        <y>600</y>
+        <width>566</width>
+        <height>281</height>
        </rect>
       </property>
       <property name="font">
@@ -2709,8 +2060,8 @@ QPushButton::pressed {background-color: red;}</string>
         <rect>
          <x>10</x>
          <y>30</y>
-         <width>471</width>
-         <height>181</height>
+         <width>546</width>
+         <height>190</height>
         </rect>
        </property>
        <property name="font">
@@ -2719,7 +2070,18 @@ QPushButton::pressed {background-color: red;}</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">QHeaderView::section{ font-family: 'Monospace'; font-size: 12pt; font-weight: normal;}</string>
+        <string notr="true">QHeaderView::section{ font-family: 'Monospace'; font-size: 12pt; font-weight: normal;}
+QTableWidget::item{ background-color: lightgreen; color: black;}
+QTableWidget::item:selected{ background-color: skyblue;}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Shape::Panel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Shadow::Raised</enum>
+       </property>
+       <property name="lineWidth">
+        <number>2</number>
        </property>
        <property name="verticalScrollBarPolicy">
         <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOn</enum>
@@ -2729,6 +2091,12 @@ QPushButton::pressed {background-color: red;}</string>
        </property>
        <property name="autoScroll">
         <bool>false</bool>
+       </property>
+       <property name="selectionMode">
+        <enum>QAbstractItemView::SelectionMode::SingleSelection</enum>
+       </property>
+       <property name="selectionBehavior">
+        <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
        </property>
        <property name="verticalScrollMode">
         <enum>QAbstractItemView::ScrollMode::ScrollPerPixel</enum>
@@ -2750,6 +2118,9 @@ QPushButton::pressed {background-color: red;}</string>
        </attribute>
        <attribute name="verticalHeaderCascadingSectionResizes">
         <bool>false</bool>
+       </attribute>
+       <attribute name="verticalHeaderMinimumSectionSize">
+        <number>30</number>
        </attribute>
        <row/>
        <row/>
@@ -2875,6 +2246,7 @@ QPushButton::pressed {background-color: red;}</string>
         <property name="font">
          <font>
           <family>Monospace</family>
+          <pointsize>12</pointsize>
          </font>
         </property>
         <property name="textAlignment">
@@ -2888,6 +2260,7 @@ QPushButton::pressed {background-color: red;}</string>
         <property name="font">
          <font>
           <family>Monospace</family>
+          <pointsize>12</pointsize>
          </font>
         </property>
         <property name="textAlignment">
@@ -2901,6 +2274,7 @@ QPushButton::pressed {background-color: red;}</string>
         <property name="font">
          <font>
           <family>Monospace</family>
+          <pointsize>12</pointsize>
          </font>
         </property>
         <property name="textAlignment">
@@ -2914,6 +2288,7 @@ QPushButton::pressed {background-color: red;}</string>
         <property name="font">
          <font>
           <family>Monospace</family>
+          <pointsize>12</pointsize>
          </font>
         </property>
         <property name="textAlignment">
@@ -2927,6 +2302,7 @@ QPushButton::pressed {background-color: red;}</string>
         <property name="font">
          <font>
           <family>Monospace</family>
+          <pointsize>12</pointsize>
          </font>
         </property>
         <property name="textAlignment">
@@ -2940,6 +2316,7 @@ QPushButton::pressed {background-color: red;}</string>
         <property name="font">
          <font>
           <family>Monospace</family>
+          <pointsize>12</pointsize>
          </font>
         </property>
         <property name="textAlignment">
@@ -2953,6 +2330,7 @@ QPushButton::pressed {background-color: red;}</string>
         <property name="font">
          <font>
           <family>Monospace</family>
+          <pointsize>12</pointsize>
          </font>
         </property>
         <property name="textAlignment">
@@ -2966,6 +2344,7 @@ QPushButton::pressed {background-color: red;}</string>
         <property name="font">
          <font>
           <family>Monospace</family>
+          <pointsize>12</pointsize>
          </font>
         </property>
         <property name="textAlignment">
@@ -2987,7 +2366,7 @@ QPushButton::pressed {background-color: red;}</string>
        <property name="geometry">
         <rect>
          <x>70</x>
-         <y>220</y>
+         <y>230</y>
          <width>61</width>
          <height>41</height>
         </rect>
@@ -3016,7 +2395,7 @@ QPushButton::pressed {background-color: red;}</string>
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>220</y>
+         <y>230</y>
          <width>61</width>
          <height>41</height>
         </rect>
@@ -3045,7 +2424,7 @@ QPushButton::checked {background-color: red;}</string>
        <property name="geometry">
         <rect>
          <x>290</x>
-         <y>220</y>
+         <y>230</y>
          <width>61</width>
          <height>41</height>
         </rect>
@@ -3077,7 +2456,7 @@ QPushButton::pressed {background-color: red;}</string>
        <property name="geometry">
         <rect>
          <x>350</x>
-         <y>220</y>
+         <y>230</y>
          <width>61</width>
          <height>41</height>
         </rect>
@@ -3109,7 +2488,7 @@ QPushButton::pressed {background-color: red;}</string>
        <property name="geometry">
         <rect>
          <x>410</x>
-         <y>220</y>
+         <y>230</y>
          <width>61</width>
          <height>41</height>
         </rect>
@@ -3136,6 +2515,1331 @@ QPushButton::pressed {background-color: red;}</string>
        <property name="scan" stdset="0">
         <string>OFF</string>
        </property>
+      </widget>
+     </widget>
+     <widget class="QToolBox" name="VFO_toolBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>666</width>
+        <height>316</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QWidget{ background-color: darkgrey; border-radius: 0px;}</string>
+      </property>
+      <property name="lineWidth">
+       <number>1</number>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <property name="tabSpacing">
+       <number>2</number>
+      </property>
+      <widget class="QWidget" name="page_1">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>666</width>
+         <height>250</height>
+        </rect>
+       </property>
+       <attribute name="label">
+        <string>  VFO-A</string>
+       </attribute>
+       <widget class="QGroupBox" name="VFO_A_groupBox">
+        <property name="geometry">
+         <rect>
+          <x>5</x>
+          <y>0</y>
+          <width>631</width>
+          <height>241</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QWidget{ border: 2px black; background-color: lightgray; border-radius: 20px;}</string>
+        </property>
+        <property name="title">
+         <string/>
+        </property>
+        <widget class="QLCDNumber" name="VFO_A_lcdNumber">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>30</y>
+           <width>401</width>
+           <height>91</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QWidget{ border: 2px black; background-color: black;}
+QLCDNumber {color: yellow;}
+</string>
+         </property>
+         <property name="smallDecimalPoint">
+          <bool>false</bool>
+         </property>
+         <property name="digitCount">
+          <number>9</number>
+         </property>
+         <property name="mode">
+          <enum>QLCDNumber::Mode::Dec</enum>
+         </property>
+         <property name="intValue" stdset="0">
+          <number>1800000</number>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="VFO_A_lineEdit">
+         <property name="geometry">
+          <rect>
+           <x>220</x>
+           <y>130</y>
+           <width>201</width>
+           <height>51</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>22</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QWidget{ border: 2px black; background-color: white;border-radius: 10px;}</string>
+         </property>
+         <property name="maxLength">
+          <number>9</number>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QDial" name="VFO_A_dial">
+         <property name="geometry">
+          <rect>
+           <x>465</x>
+           <y>25</y>
+           <width>151</width>
+           <height>151</height>
+          </rect>
+         </property>
+         <property name="toolTipDuration">
+          <number>-1</number>
+         </property>
+         <property name="whatsThis">
+          <string/>
+         </property>
+         <property name="tracking">
+          <bool>true</bool>
+         </property>
+         <property name="wrapping">
+          <bool>true</bool>
+         </property>
+         <property name="notchesVisible">
+          <bool>true</bool>
+         </property>
+         <property name="stored_value" stdset="0">
+          <number>0</number>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="VFO_A_Tx_radioButton">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>140</y>
+           <width>41</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QRadioButton::indicator:checked:checked{ background-color: red;}
+QRadioButton::indicator{ width: 10px; height: 10px; border-radius: 5px; border: 1px solid black; background-color: transparent;}</string>
+         </property>
+         <property name="text">
+          <string>Tx</string>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">Tx_buttonGroup</string>
+         </attribute>
+        </widget>
+        <widget class="QRadioButton" name="VFO_A_Rx_radioButton">
+         <property name="geometry">
+          <rect>
+           <x>70</x>
+           <y>140</y>
+           <width>41</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QRadioButton::indicator:checked:checked{ background-color: green;}
+QRadioButton::indicator{ width: 10px; height: 10px; border-radius: 5px; border: 1px solid black; background-color: transparent;}</string>
+         </property>
+         <property name="text">
+          <string>Rx</string>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">Rx_buttonGroup</string>
+         </attribute>
+        </widget>
+        <widget class="QLabel" name="VFO_A_label_1">
+         <property name="geometry">
+          <rect>
+           <x>430</x>
+           <y>95</y>
+           <width>21</width>
+           <height>18</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Hz</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="VFO_A_label_2">
+         <property name="geometry">
+          <rect>
+           <x>430</x>
+           <y>155</y>
+           <width>41</width>
+           <height>18</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>MHz</string>
+         </property>
+        </widget>
+        <widget class="QTextBrowser" name="VFO_A_textBrowser">
+         <property name="geometry">
+          <rect>
+           <x>60</x>
+           <y>190</y>
+           <width>501</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Monospace</family>
+           <pointsize>12</pointsize>
+           <hintingpreference>PreferDefaultHinting</hintingpreference>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QWidget{ background-color: white;border-radius: 8px;}
+QTextBrowser QScrollBar:horizontal{ background-color: lightgrey;}
+QTextBrowser QScrollBar::handle:horizontal{ background-color: grey;margin: 0px 12px;}</string>
+         </property>
+         <property name="verticalScrollBarPolicy">
+          <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+         </property>
+         <property name="horizontalScrollBarPolicy">
+          <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+         </property>
+         <property name="lineWrapMode">
+          <enum>QTextEdit::LineWrapMode::WidgetWidth</enum>
+         </property>
+         <property name="markdown">
+          <string/>
+         </property>
+         <property name="html">
+          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Monospace'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+        <widget class="Line" name="VFO_A_line_1">
+         <property name="geometry">
+          <rect>
+           <x>145</x>
+           <y>190</y>
+           <width>3</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
+         </property>
+        </widget>
+        <widget class="Line" name="VFO_A_line_2">
+         <property name="geometry">
+          <rect>
+           <x>280</x>
+           <y>190</y>
+           <width>3</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
+         </property>
+        </widget>
+        <widget class="Line" name="VFO_A_line_3">
+         <property name="geometry">
+          <rect>
+           <x>415</x>
+           <y>190</y>
+           <width>3</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
+         </property>
+        </widget>
+        <widget class="QLabel" name="VFO_A_label_3">
+         <property name="geometry">
+          <rect>
+           <x>140</x>
+           <y>135</y>
+           <width>71</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QWidget{ border-radius: 0px;}</string>
+         </property>
+         <property name="text">
+          <string>Keyboard Entry</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QLabel" name="VFO_A_label_4">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>195</y>
+           <width>41</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QWidget{ border-radius: 0px;}</string>
+         </property>
+         <property name="text">
+          <string>Info</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="Line" name="VFO_A_line_4">
+         <property name="geometry">
+          <rect>
+           <x>283</x>
+           <y>30</y>
+           <width>3</width>
+           <height>91</height>
+          </rect>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
+         </property>
+        </widget>
+        <widget class="Line" name="VFO_A_line_5">
+         <property name="geometry">
+          <rect>
+           <x>154</x>
+           <y>30</y>
+           <width>3</width>
+           <height>91</height>
+          </rect>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="VFO_A_fast_radioButton">
+         <property name="geometry">
+          <rect>
+           <x>555</x>
+           <y>5</y>
+           <width>61</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+           <italic>true</italic>
+          </font>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LayoutDirection::RightToLeft</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QRadioButton::indicator:checked:checked{ background-color: blue;}
+QRadioButton::indicator{ width: 10px; height: 10px; border-radius: 5px; border: 1px solid black; background-color: transparent;}</string>
+         </property>
+         <property name="text">
+          <string>FAST</string>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="page_2">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>666</width>
+         <height>250</height>
+        </rect>
+       </property>
+       <attribute name="label">
+        <string>  VFO-B</string>
+       </attribute>
+       <widget class="QGroupBox" name="VFO_B_groupBox">
+        <property name="geometry">
+         <rect>
+          <x>5</x>
+          <y>0</y>
+          <width>631</width>
+          <height>241</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QWidget{ border: 2px black; background-color: lightgray; border-radius: 20px;}</string>
+        </property>
+        <property name="title">
+         <string/>
+        </property>
+        <widget class="QLCDNumber" name="VFO_B_lcdNumber">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>30</y>
+           <width>401</width>
+           <height>91</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QWidget{ border: 2px black; background-color: black;}
+QLCDNumber {color: yellow;}
+</string>
+         </property>
+         <property name="digitCount">
+          <number>9</number>
+         </property>
+         <property name="intValue" stdset="0">
+          <number>1800000</number>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="VFO_B_lineEdit">
+         <property name="geometry">
+          <rect>
+           <x>220</x>
+           <y>130</y>
+           <width>201</width>
+           <height>51</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>22</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QWidget{ border: 2px black; background-color: white;border-radius: 10px;}</string>
+         </property>
+         <property name="maxLength">
+          <number>9</number>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QDial" name="VFO_B_dial">
+         <property name="geometry">
+          <rect>
+           <x>465</x>
+           <y>25</y>
+           <width>151</width>
+           <height>151</height>
+          </rect>
+         </property>
+         <property name="wrapping">
+          <bool>true</bool>
+         </property>
+         <property name="notchesVisible">
+          <bool>true</bool>
+         </property>
+         <property name="stored_value" stdset="0">
+          <number>0</number>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="VFO_B_Tx_radioButton">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>140</y>
+           <width>41</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QRadioButton::indicator:checked:checked{ background-color: red;}
+QRadioButton::indicator{ width: 10px; height: 10px; border-radius: 5px; border: 1px solid black; background-color: transparent;}</string>
+         </property>
+         <property name="text">
+          <string>Tx</string>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">Tx_buttonGroup</string>
+         </attribute>
+        </widget>
+        <widget class="QRadioButton" name="VFO_B_Rx_radioButton">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>70</x>
+           <y>140</y>
+           <width>41</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QRadioButton::indicator:checked:checked{ background-color: green;}
+QRadioButton::indicator{ width: 10px; height: 10px; border-radius: 5px; border: 1px solid black; background-color: transparent;}</string>
+         </property>
+         <property name="text">
+          <string>Rx</string>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">Rx_buttonGroup</string>
+         </attribute>
+        </widget>
+        <widget class="QLabel" name="VFO_B_label_1">
+         <property name="geometry">
+          <rect>
+           <x>430</x>
+           <y>95</y>
+           <width>21</width>
+           <height>18</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Hz</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="VFO_B_label_2">
+         <property name="geometry">
+          <rect>
+           <x>430</x>
+           <y>155</y>
+           <width>41</width>
+           <height>18</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>MHz</string>
+         </property>
+        </widget>
+        <widget class="QTextBrowser" name="VFO_B_textBrowser">
+         <property name="geometry">
+          <rect>
+           <x>60</x>
+           <y>190</y>
+           <width>501</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Monospace</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QWidget{ background-color: white;border-radius: 8px;}
+QTextBrowser QScrollBar:horizontal{ background-color: lightgrey;}
+QTextBrowser QScrollBar::handle:horizontal{ background-color: grey;margin: 0px 12px;}</string>
+         </property>
+         <property name="verticalScrollBarPolicy">
+          <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+         </property>
+         <property name="horizontalScrollBarPolicy">
+          <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+         </property>
+         <property name="lineWrapMode">
+          <enum>QTextEdit::LineWrapMode::WidgetWidth</enum>
+         </property>
+         <property name="markdown">
+          <string/>
+         </property>
+         <property name="html">
+          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Monospace'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+        <widget class="Line" name="VFO_B_line_2">
+         <property name="geometry">
+          <rect>
+           <x>280</x>
+           <y>190</y>
+           <width>3</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
+         </property>
+        </widget>
+        <widget class="Line" name="VFO_B_line_3">
+         <property name="geometry">
+          <rect>
+           <x>415</x>
+           <y>190</y>
+           <width>3</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
+         </property>
+        </widget>
+        <widget class="Line" name="VFO_B_line_1">
+         <property name="geometry">
+          <rect>
+           <x>145</x>
+           <y>190</y>
+           <width>3</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
+         </property>
+        </widget>
+        <widget class="QLabel" name="VFO_B_label_3">
+         <property name="geometry">
+          <rect>
+           <x>140</x>
+           <y>135</y>
+           <width>71</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QWidget{ border-radius: 0px;}</string>
+         </property>
+         <property name="text">
+          <string>Keyboard Entry</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QLabel" name="VFO_B_label_4">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>195</y>
+           <width>41</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QWidget{ border-radius: 0px;}</string>
+         </property>
+         <property name="text">
+          <string>Info</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="Line" name="VFO_B_line_5">
+         <property name="geometry">
+          <rect>
+           <x>154</x>
+           <y>30</y>
+           <width>3</width>
+           <height>91</height>
+          </rect>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
+         </property>
+        </widget>
+        <widget class="Line" name="VFO_B_line_4">
+         <property name="geometry">
+          <rect>
+           <x>283</x>
+           <y>30</y>
+           <width>3</width>
+           <height>91</height>
+          </rect>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="VFO_B_fast_radioButton">
+         <property name="geometry">
+          <rect>
+           <x>555</x>
+           <y>5</y>
+           <width>61</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+           <italic>true</italic>
+          </font>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LayoutDirection::RightToLeft</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QRadioButton::indicator:checked:checked {background-color: blue;}
+QRadioButton::indicator {width: 10px; height: 10px; border-radius: 5px; border: 1px solid black; background-color: transparent;}</string>
+         </property>
+         <property name="text">
+          <string>FAST</string>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="QMB_groupBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>340</y>
+        <width>666</width>
+        <height>246</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QWidget{ background-color: lightgray;}</string>
+      </property>
+      <property name="title">
+       <string>  Quick Memory Bank</string>
+      </property>
+      <widget class="QTableWidget" name="QuickMemory_tableWidget">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>34</y>
+         <width>478</width>
+         <height>175</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Monospace</family>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QHeaderView::section{ font-family: 'Monospace'; font-size: 12pt; font-weight: normal;}
+QTableWidget::item{ background-color: lightgreen; color: black;}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Shape::Panel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Shadow::Raised</enum>
+       </property>
+       <property name="lineWidth">
+        <number>2</number>
+       </property>
+       <property name="verticalScrollBarPolicy">
+        <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+       </property>
+       <property name="horizontalScrollBarPolicy">
+        <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+       </property>
+       <property name="alternatingRowColors">
+        <bool>false</bool>
+       </property>
+       <property name="selectionMode">
+        <enum>QAbstractItemView::SelectionMode::NoSelection</enum>
+       </property>
+       <property name="selectionBehavior">
+        <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
+       </property>
+       <property name="verticalScrollMode">
+        <enum>QAbstractItemView::ScrollMode::ScrollPerPixel</enum>
+       </property>
+       <property name="horizontalScrollMode">
+        <enum>QAbstractItemView::ScrollMode::ScrollPerPixel</enum>
+       </property>
+       <property name="rowCount">
+        <number>5</number>
+       </property>
+       <attribute name="horizontalHeaderDefaultSectionSize">
+        <number>75</number>
+       </attribute>
+       <attribute name="verticalHeaderMinimumSectionSize">
+        <number>30</number>
+       </attribute>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <column>
+        <property name="text">
+         <string>Freq</string>
+        </property>
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+          <pointsize>12</pointsize>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="textAlignment">
+         <set>AlignLeading|AlignVCenter</set>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Mode</string>
+        </property>
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+          <pointsize>12</pointsize>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="textAlignment">
+         <set>AlignLeading|AlignVCenter</set>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>CLAR Offset</string>
+        </property>
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="textAlignment">
+         <set>AlignLeading|AlignVCenter</set>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Tx CLAR</string>
+        </property>
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="textAlignment">
+         <set>AlignLeading|AlignVCenter</set>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Rx CLAR</string>
+        </property>
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="textAlignment">
+         <set>AlignLeading|AlignVCenter</set>
+        </property>
+       </column>
+       <item row="0" column="0">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
+        <property name="flags">
+         <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+        </property>
+       </item>
+       <item row="0" column="1">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="font">
+         <font>
+          <family>Liberation Mono</family>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="flags">
+         <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+        </property>
+       </item>
+       <item row="1" column="0">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
+        <property name="flags">
+         <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+        </property>
+       </item>
+       <item row="1" column="1">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="font">
+         <font>
+          <family>Liberation Mono</family>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="flags">
+         <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+        </property>
+       </item>
+       <item row="2" column="0">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
+        <property name="flags">
+         <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+        </property>
+       </item>
+       <item row="2" column="1">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="font">
+         <font>
+          <family>Liberation Mono</family>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="flags">
+         <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+        </property>
+       </item>
+       <item row="3" column="0">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
+        <property name="flags">
+         <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+        </property>
+       </item>
+       <item row="3" column="1">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="font">
+         <font>
+          <family>Liberation Mono</family>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="flags">
+         <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+        </property>
+       </item>
+       <item row="4" column="0">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
+        <property name="flags">
+         <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+        </property>
+       </item>
+       <item row="4" column="1">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="font">
+         <font>
+          <family>Liberation Mono</family>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="flags">
+         <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+        </property>
+       </item>
+      </widget>
+      <widget class="QPushButton" name="QuickMemory_VM_pushButton">
+       <property name="geometry">
+        <rect>
+         <x>515</x>
+         <y>165</y>
+         <width>76</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {background-color: lightblue;}
+QPushButton::pressed {background-color: red;}</string>
+       </property>
+       <property name="text">
+        <string>V/M</string>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QFrame" name="QuickMemory_frame_1">
+       <property name="geometry">
+        <rect>
+         <x>510</x>
+         <y>35</y>
+         <width>121</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Shape::Panel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Shadow::Sunken</enum>
+       </property>
+       <property name="lineWidth">
+        <number>2</number>
+       </property>
+       <widget class="QPushButton" name="QuickMemory_Recall_pushButton">
+        <property name="geometry">
+         <rect>
+          <x>5</x>
+          <y>5</y>
+          <width>76</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {background-color: lightblue;}
+QPushButton::checked {background-color: red;}</string>
+        </property>
+        <property name="text">
+         <string>Recall</string>
+        </property>
+        <property name="checkable">
+         <bool>false</bool>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="QuickMemory_Recall_label">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>15</y>
+          <width>21</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+          <pointsize>14</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>--</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::TextFormat::PlainText</enum>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QFrame" name="QuickMemory_frame_2">
+       <property name="geometry">
+        <rect>
+         <x>510</x>
+         <y>95</y>
+         <width>121</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Shape::Panel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Shadow::Sunken</enum>
+       </property>
+       <property name="lineWidth">
+        <number>2</number>
+       </property>
+       <widget class="QLabel" name="QuickMemory_Store_label">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>15</y>
+          <width>21</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+          <pointsize>14</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>--</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::TextFormat::PlainText</enum>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="QuickMemory_Store_pushButton">
+        <property name="geometry">
+         <rect>
+          <x>5</x>
+          <y>5</y>
+          <width>76</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {background-color: lightblue;}
+QPushButton::checked {background-color: red;}</string>
+        </property>
+        <property name="text">
+         <string>Store</string>
+        </property>
+        <property name="checkable">
+         <bool>false</bool>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
+        </property>
+       </widget>
       </widget>
      </widget>
     </widget>
@@ -4091,10 +4795,13 @@ QPushButton::checked{ background-color: red; color: black}</string>
         </rect>
        </property>
        <property name="frameShape">
-        <enum>QFrame::Shape::StyledPanel</enum>
+        <enum>QFrame::Shape::Panel</enum>
        </property>
        <property name="frameShadow">
-        <enum>QFrame::Shadow::Raised</enum>
+        <enum>QFrame::Shadow::Sunken</enum>
+       </property>
+       <property name="lineWidth">
+        <number>2</number>
        </property>
        <widget class="QPushButton" name="Noise_NB_pushButton">
         <property name="geometry">
@@ -4224,10 +4931,13 @@ QComboBox{ font-family: &quot;Arial&quot;; font-size: 16px;}</string>
         </rect>
        </property>
        <property name="frameShape">
-        <enum>QFrame::Shape::StyledPanel</enum>
+        <enum>QFrame::Shape::Panel</enum>
        </property>
        <property name="frameShadow">
-        <enum>QFrame::Shadow::Raised</enum>
+        <enum>QFrame::Shadow::Sunken</enum>
+       </property>
+       <property name="lineWidth">
+        <number>2</number>
        </property>
        <widget class="QComboBox" name="Noise_DNR_comboBox">
         <property name="geometry">
@@ -4422,10 +5132,13 @@ QPushButton::checked{ background-color: red; color: black}</string>
         </rect>
        </property>
        <property name="frameShape">
-        <enum>QFrame::Shape::StyledPanel</enum>
+        <enum>QFrame::Shape::Panel</enum>
        </property>
        <property name="frameShadow">
-        <enum>QFrame::Shadow::Raised</enum>
+        <enum>QFrame::Shadow::Sunken</enum>
+       </property>
+       <property name="lineWidth">
+        <number>2</number>
        </property>
        <widget class="QPushButton" name="FFT_pushButton_3">
         <property name="geometry">
@@ -4737,219 +5450,6 @@ QPushButton::checked {background-color: red;}</string>
       <property name="title">
        <string>  EQ Filter Response</string>
       </property>
-      <widget class="QSlider" name="EQ_1_center_verticalSlider">
-       <property name="geometry">
-        <rect>
-         <x>55</x>
-         <y>310</y>
-         <width>31</width>
-         <height>101</height>
-        </rect>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QSlider::groove:vertical {background: lightgray; width: 10px; border-radius: 3px;}
-QSlider::handle:vertical {background: lightblue; border: 1px solid black; height: 10px; width: 30px; margin-left: -10px; margin-right: -10px; border-radius: 5px;}
-QSlider::sub-page:vertical {background: white;}
-QSlider::add-page:vertical {background: white;}</string>
-       </property>
-       <property name="minimum">
-        <number>0</number>
-       </property>
-       <property name="maximum">
-        <number>7</number>
-       </property>
-       <property name="pageStep">
-        <number>1</number>
-       </property>
-       <property name="value">
-        <number>0</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Orientation::Vertical</enum>
-       </property>
-       <property name="invertedAppearance">
-        <bool>false</bool>
-       </property>
-       <property name="invertedControls">
-        <bool>false</bool>
-       </property>
-       <property name="tickPosition">
-        <enum>QSlider::TickPosition::TicksBothSides</enum>
-       </property>
-       <property name="tickInterval">
-        <number>5</number>
-       </property>
-      </widget>
-      <widget class="QLabel" name="EQ_1_label_1">
-       <property name="geometry">
-        <rect>
-         <x>40</x>
-         <y>420</y>
-         <width>61</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Center</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="EQ_1_label_2">
-       <property name="geometry">
-        <rect>
-         <x>95</x>
-         <y>420</y>
-         <width>51</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Gain</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QSlider" name="EQ_1_gain_verticalSlider">
-       <property name="geometry">
-        <rect>
-         <x>105</x>
-         <y>310</y>
-         <width>31</width>
-         <height>101</height>
-        </rect>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QSlider::groove:vertical {background: lightgray; width: 10px; border-radius: 3px;}
-QSlider::handle:vertical {background: lightblue; border: 1px solid black; height: 10px; width: 30px; margin-left: -10px; margin-right: -10px; border-radius: 5px;}
-QSlider::sub-page:vertical {background: white;}
-QSlider::add-page:vertical {background: white;}</string>
-       </property>
-       <property name="minimum">
-        <number>-20</number>
-       </property>
-       <property name="maximum">
-        <number>10</number>
-       </property>
-       <property name="pageStep">
-        <number>1</number>
-       </property>
-       <property name="value">
-        <number>5</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Orientation::Vertical</enum>
-       </property>
-       <property name="invertedAppearance">
-        <bool>false</bool>
-       </property>
-       <property name="invertedControls">
-        <bool>false</bool>
-       </property>
-       <property name="tickPosition">
-        <enum>QSlider::TickPosition::TicksBothSides</enum>
-       </property>
-       <property name="tickInterval">
-        <number>5</number>
-       </property>
-      </widget>
-      <widget class="QLabel" name="EQ_1_label_3">
-       <property name="geometry">
-        <rect>
-         <x>150</x>
-         <y>420</y>
-         <width>41</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Q</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QSlider" name="EQ_1_BW_verticalSlider">
-       <property name="geometry">
-        <rect>
-         <x>155</x>
-         <y>310</y>
-         <width>31</width>
-         <height>101</height>
-        </rect>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QSlider::groove:vertical {background: lightgray; width: 10px; border-radius: 3px;}
-QSlider::handle:vertical {background: lightblue; border: 1px solid black; height: 10px; width: 30px; margin-left: -10px; margin-right: -10px; border-radius: 5px;}
-QSlider::sub-page:vertical {background: white;}
-QSlider::add-page:vertical {background: white;}</string>
-       </property>
-       <property name="minimum">
-        <number>1</number>
-       </property>
-       <property name="maximum">
-        <number>10</number>
-       </property>
-       <property name="pageStep">
-        <number>1</number>
-       </property>
-       <property name="value">
-        <number>10</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Orientation::Vertical</enum>
-       </property>
-       <property name="invertedAppearance">
-        <bool>false</bool>
-       </property>
-       <property name="invertedControls">
-        <bool>false</bool>
-       </property>
-       <property name="tickPosition">
-        <enum>QSlider::TickPosition::TicksBothSides</enum>
-       </property>
-       <property name="tickInterval">
-        <number>5</number>
-       </property>
-      </widget>
       <widget class="QFrame" name="EQ_filter_frame">
        <property name="geometry">
         <rect>
@@ -4969,437 +5469,11 @@ QSlider::add-page:vertical {background: white;}</string>
         <enum>QFrame::Shadow::Raised</enum>
        </property>
       </widget>
-      <widget class="QSlider" name="EQ_2_center_verticalSlider">
-       <property name="geometry">
-        <rect>
-         <x>235</x>
-         <y>310</y>
-         <width>31</width>
-         <height>101</height>
-        </rect>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QSlider::groove:vertical {background: lightgray; width: 10px; border-radius: 3px;}
-QSlider::handle:vertical {background: lightblue; border: 1px solid black; height: 10px; width: 30px; margin-left: -10px; margin-right: -10px; border-radius: 5px;}
-QSlider::sub-page:vertical {background: white;}
-QSlider::add-page:vertical {background: white;}</string>
-       </property>
-       <property name="minimum">
-        <number>0</number>
-       </property>
-       <property name="maximum">
-        <number>9</number>
-       </property>
-       <property name="pageStep">
-        <number>1</number>
-       </property>
-       <property name="value">
-        <number>0</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Orientation::Vertical</enum>
-       </property>
-       <property name="invertedAppearance">
-        <bool>false</bool>
-       </property>
-       <property name="invertedControls">
-        <bool>false</bool>
-       </property>
-       <property name="tickPosition">
-        <enum>QSlider::TickPosition::TicksBothSides</enum>
-       </property>
-       <property name="tickInterval">
-        <number>5</number>
-       </property>
-      </widget>
-      <widget class="QSlider" name="EQ_2_gain_verticalSlider">
-       <property name="geometry">
-        <rect>
-         <x>285</x>
-         <y>310</y>
-         <width>31</width>
-         <height>101</height>
-        </rect>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QSlider::groove:vertical {background: lightgray; width: 10px; border-radius: 3px;}
-QSlider::handle:vertical {background: lightblue; border: 1px solid black; height: 10px; width: 30px; margin-left: -10px; margin-right: -10px; border-radius: 5px;}
-QSlider::sub-page:vertical {background: white;}
-QSlider::add-page:vertical {background: white;}</string>
-       </property>
-       <property name="minimum">
-        <number>-20</number>
-       </property>
-       <property name="maximum">
-        <number>10</number>
-       </property>
-       <property name="pageStep">
-        <number>1</number>
-       </property>
-       <property name="value">
-        <number>5</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Orientation::Vertical</enum>
-       </property>
-       <property name="invertedAppearance">
-        <bool>false</bool>
-       </property>
-       <property name="invertedControls">
-        <bool>false</bool>
-       </property>
-       <property name="tickPosition">
-        <enum>QSlider::TickPosition::TicksBothSides</enum>
-       </property>
-       <property name="tickInterval">
-        <number>5</number>
-       </property>
-      </widget>
-      <widget class="QLabel" name="EQ_2_label_3">
-       <property name="geometry">
-        <rect>
-         <x>330</x>
-         <y>420</y>
-         <width>41</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Q</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="EQ_2_label_1">
-       <property name="geometry">
-        <rect>
-         <x>220</x>
-         <y>420</y>
-         <width>61</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Center</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="EQ_2_label_2">
-       <property name="geometry">
-        <rect>
-         <x>275</x>
-         <y>420</y>
-         <width>51</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Gain</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QSlider" name="EQ_2_BW_verticalSlider">
-       <property name="geometry">
-        <rect>
-         <x>335</x>
-         <y>310</y>
-         <width>31</width>
-         <height>101</height>
-        </rect>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QSlider::groove:vertical {background: lightgray; width: 10px; border-radius: 3px;}
-QSlider::handle:vertical {background: lightblue; border: 1px solid black; height: 10px; width: 30px; margin-left: -10px; margin-right: -10px; border-radius: 5px;}
-QSlider::sub-page:vertical {background: white;}
-QSlider::add-page:vertical {background: white;}</string>
-       </property>
-       <property name="minimum">
-        <number>1</number>
-       </property>
-       <property name="maximum">
-        <number>10</number>
-       </property>
-       <property name="pageStep">
-        <number>1</number>
-       </property>
-       <property name="value">
-        <number>10</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Orientation::Vertical</enum>
-       </property>
-       <property name="invertedAppearance">
-        <bool>false</bool>
-       </property>
-       <property name="invertedControls">
-        <bool>false</bool>
-       </property>
-       <property name="tickPosition">
-        <enum>QSlider::TickPosition::TicksBothSides</enum>
-       </property>
-       <property name="tickInterval">
-        <number>5</number>
-       </property>
-      </widget>
-      <widget class="QSlider" name="EQ_3_BW_verticalSlider">
-       <property name="geometry">
-        <rect>
-         <x>515</x>
-         <y>310</y>
-         <width>31</width>
-         <height>101</height>
-        </rect>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QSlider::groove:vertical {background: lightgray; width: 10px; border-radius: 3px;}
-QSlider::handle:vertical {background: lightblue; border: 1px solid black; height: 10px; width: 30px; margin-left: -10px; margin-right: -10px; border-radius: 5px;}
-QSlider::sub-page:vertical {background: white;}
-QSlider::add-page:vertical {background: white;}</string>
-       </property>
-       <property name="minimum">
-        <number>1</number>
-       </property>
-       <property name="maximum">
-        <number>10</number>
-       </property>
-       <property name="pageStep">
-        <number>1</number>
-       </property>
-       <property name="value">
-        <number>10</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Orientation::Vertical</enum>
-       </property>
-       <property name="invertedAppearance">
-        <bool>false</bool>
-       </property>
-       <property name="invertedControls">
-        <bool>false</bool>
-       </property>
-       <property name="tickPosition">
-        <enum>QSlider::TickPosition::TicksBothSides</enum>
-       </property>
-       <property name="tickInterval">
-        <number>5</number>
-       </property>
-      </widget>
-      <widget class="QLabel" name="EQ_3_label_2">
-       <property name="geometry">
-        <rect>
-         <x>455</x>
-         <y>420</y>
-         <width>51</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Gain</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="EQ_3_label_1">
-       <property name="geometry">
-        <rect>
-         <x>400</x>
-         <y>420</y>
-         <width>61</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Center</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="EQ_3_label_3">
-       <property name="geometry">
-        <rect>
-         <x>510</x>
-         <y>420</y>
-         <width>41</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Q</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QSlider" name="EQ_3_center_verticalSlider">
-       <property name="geometry">
-        <rect>
-         <x>415</x>
-         <y>310</y>
-         <width>31</width>
-         <height>101</height>
-        </rect>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QSlider::groove:vertical {background: lightgray; width: 10px; border-radius: 3px;}
-QSlider::handle:vertical {background: lightblue; border: 1px solid black; height: 10px; width: 30px; margin-left: -10px; margin-right: -10px; border-radius: 5px;}
-QSlider::sub-page:vertical {background: white;}
-QSlider::add-page:vertical {background: white;}</string>
-       </property>
-       <property name="minimum">
-        <number>0</number>
-       </property>
-       <property name="maximum">
-        <number>18</number>
-       </property>
-       <property name="pageStep">
-        <number>1</number>
-       </property>
-       <property name="value">
-        <number>0</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Orientation::Vertical</enum>
-       </property>
-       <property name="invertedAppearance">
-        <bool>false</bool>
-       </property>
-       <property name="invertedControls">
-        <bool>false</bool>
-       </property>
-       <property name="tickPosition">
-        <enum>QSlider::TickPosition::TicksBothSides</enum>
-       </property>
-       <property name="tickInterval">
-        <number>5</number>
-       </property>
-      </widget>
-      <widget class="QSlider" name="EQ_3_gain_verticalSlider">
-       <property name="geometry">
-        <rect>
-         <x>465</x>
-         <y>310</y>
-         <width>31</width>
-         <height>101</height>
-        </rect>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QSlider::groove:vertical {background: lightgray; width: 10px; border-radius: 3px;}
-QSlider::handle:vertical {background: lightblue; border: 1px solid black; height: 10px; width: 30px; margin-left: -10px; margin-right: -10px; border-radius: 5px;}
-QSlider::sub-page:vertical {background: white;}
-QSlider::add-page:vertical {background: white;}</string>
-       </property>
-       <property name="minimum">
-        <number>-20</number>
-       </property>
-       <property name="maximum">
-        <number>10</number>
-       </property>
-       <property name="pageStep">
-        <number>1</number>
-       </property>
-       <property name="value">
-        <number>5</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Orientation::Vertical</enum>
-       </property>
-       <property name="invertedAppearance">
-        <bool>false</bool>
-       </property>
-       <property name="invertedControls">
-        <bool>false</bool>
-       </property>
-       <property name="tickPosition">
-        <enum>QSlider::TickPosition::TicksBothSides</enum>
-       </property>
-       <property name="tickInterval">
-        <number>5</number>
-       </property>
-      </widget>
       <widget class="QLabel" name="EQ_1_label_4">
        <property name="geometry">
         <rect>
-         <x>95</x>
-         <y>450</y>
+         <x>90</x>
+         <y>465</y>
          <width>51</width>
          <height>21</height>
         </rect>
@@ -5424,7 +5498,7 @@ QSlider::add-page:vertical {background: white;}</string>
        <property name="geometry">
         <rect>
          <x>275</x>
-         <y>450</y>
+         <y>465</y>
          <width>51</width>
          <height>21</height>
         </rect>
@@ -5448,8 +5522,8 @@ QSlider::add-page:vertical {background: white;}</string>
       <widget class="QLabel" name="EQ_3_label_4">
        <property name="geometry">
         <rect>
-         <x>455</x>
-         <y>450</y>
+         <x>460</x>
+         <y>465</y>
          <width>51</width>
          <height>21</height>
         </rect>
@@ -5473,8 +5547,8 @@ QSlider::add-page:vertical {background: white;}</string>
       <widget class="Line" name="EQ_1_line_1">
        <property name="geometry">
         <rect>
-         <x>65</x>
-         <y>460</y>
+         <x>60</x>
+         <y>475</y>
          <width>31</width>
          <height>2</height>
         </rect>
@@ -5489,8 +5563,8 @@ QSlider::add-page:vertical {background: white;}</string>
       <widget class="Line" name="EQ_1_line_3">
        <property name="geometry">
         <rect>
-         <x>65</x>
-         <y>445</y>
+         <x>60</x>
+         <y>460</y>
          <width>2</width>
          <height>17</height>
         </rect>
@@ -5505,8 +5579,8 @@ QSlider::add-page:vertical {background: white;}</string>
       <widget class="Line" name="EQ_1_line_2">
        <property name="geometry">
         <rect>
-         <x>145</x>
-         <y>460</y>
+         <x>140</x>
+         <y>475</y>
          <width>31</width>
          <height>2</height>
         </rect>
@@ -5521,8 +5595,8 @@ QSlider::add-page:vertical {background: white;}</string>
       <widget class="Line" name="EQ_1_line_4">
        <property name="geometry">
         <rect>
-         <x>175</x>
-         <y>445</y>
+         <x>170</x>
+         <y>460</y>
          <width>2</width>
          <height>17</height>
         </rect>
@@ -5538,7 +5612,7 @@ QSlider::add-page:vertical {background: white;}</string>
        <property name="geometry">
         <rect>
          <x>325</x>
-         <y>460</y>
+         <y>475</y>
          <width>31</width>
          <height>2</height>
         </rect>
@@ -5554,7 +5628,7 @@ QSlider::add-page:vertical {background: white;}</string>
        <property name="geometry">
         <rect>
          <x>245</x>
-         <y>445</y>
+         <y>460</y>
          <width>2</width>
          <height>17</height>
         </rect>
@@ -5570,7 +5644,7 @@ QSlider::add-page:vertical {background: white;}</string>
        <property name="geometry">
         <rect>
          <x>245</x>
-         <y>460</y>
+         <y>475</y>
          <width>31</width>
          <height>2</height>
         </rect>
@@ -5586,7 +5660,7 @@ QSlider::add-page:vertical {background: white;}</string>
        <property name="geometry">
         <rect>
          <x>355</x>
-         <y>445</y>
+         <y>460</y>
          <width>2</width>
          <height>17</height>
         </rect>
@@ -5601,8 +5675,8 @@ QSlider::add-page:vertical {background: white;}</string>
       <widget class="Line" name="EQ_3_line_2">
        <property name="geometry">
         <rect>
-         <x>505</x>
-         <y>460</y>
+         <x>510</x>
+         <y>475</y>
          <width>31</width>
          <height>2</height>
         </rect>
@@ -5617,8 +5691,8 @@ QSlider::add-page:vertical {background: white;}</string>
       <widget class="Line" name="EQ_3_line_3">
        <property name="geometry">
         <rect>
-         <x>425</x>
-         <y>445</y>
+         <x>430</x>
+         <y>460</y>
          <width>2</width>
          <height>17</height>
         </rect>
@@ -5633,8 +5707,8 @@ QSlider::add-page:vertical {background: white;}</string>
       <widget class="Line" name="EQ_3_line_1">
        <property name="geometry">
         <rect>
-         <x>425</x>
-         <y>460</y>
+         <x>430</x>
+         <y>475</y>
          <width>31</width>
          <height>2</height>
         </rect>
@@ -5649,8 +5723,8 @@ QSlider::add-page:vertical {background: white;}</string>
       <widget class="Line" name="EQ_3_line_4">
        <property name="geometry">
         <rect>
-         <x>535</x>
-         <y>445</y>
+         <x>540</x>
+         <y>460</y>
          <width>2</width>
          <height>17</height>
         </rect>
@@ -5810,267 +5884,6 @@ QPushButton::checked {background-color: red;}</string>
         <string notr="true">EQ_buttonGroup</string>
        </attribute>
       </widget>
-      <widget class="QLabel" name="EQ_1_center_label">
-       <property name="geometry">
-        <rect>
-         <x>55</x>
-         <y>285</y>
-         <width>31</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Monospace</family>
-         <pointsize>12</pointsize>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>---</string>
-       </property>
-       <property name="textFormat">
-        <enum>Qt::TextFormat::PlainText</enum>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="EQ_1_gain_label">
-       <property name="geometry">
-        <rect>
-         <x>105</x>
-         <y>285</y>
-         <width>31</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Monospace</family>
-         <pointsize>12</pointsize>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>---</string>
-       </property>
-       <property name="textFormat">
-        <enum>Qt::TextFormat::PlainText</enum>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="EQ_1_BW_label">
-       <property name="geometry">
-        <rect>
-         <x>155</x>
-         <y>285</y>
-         <width>31</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Monospace</family>
-         <pointsize>12</pointsize>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>---</string>
-       </property>
-       <property name="textFormat">
-        <enum>Qt::TextFormat::PlainText</enum>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="EQ_2_gain_label">
-       <property name="geometry">
-        <rect>
-         <x>285</x>
-         <y>285</y>
-         <width>31</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Monospace</family>
-         <pointsize>12</pointsize>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>---</string>
-       </property>
-       <property name="textFormat">
-        <enum>Qt::TextFormat::PlainText</enum>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="EQ_2_center_label">
-       <property name="geometry">
-        <rect>
-         <x>235</x>
-         <y>285</y>
-         <width>31</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Monospace</family>
-         <pointsize>12</pointsize>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>---</string>
-       </property>
-       <property name="textFormat">
-        <enum>Qt::TextFormat::PlainText</enum>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="EQ_2_BW_label">
-       <property name="geometry">
-        <rect>
-         <x>335</x>
-         <y>285</y>
-         <width>31</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Monospace</family>
-         <pointsize>12</pointsize>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>---</string>
-       </property>
-       <property name="textFormat">
-        <enum>Qt::TextFormat::PlainText</enum>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="EQ_3_BW_label">
-       <property name="geometry">
-        <rect>
-         <x>515</x>
-         <y>285</y>
-         <width>31</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Monospace</family>
-         <pointsize>12</pointsize>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>---</string>
-       </property>
-       <property name="textFormat">
-        <enum>Qt::TextFormat::PlainText</enum>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="EQ_3_gain_label">
-       <property name="geometry">
-        <rect>
-         <x>465</x>
-         <y>285</y>
-         <width>31</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Monospace</family>
-         <pointsize>12</pointsize>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>---</string>
-       </property>
-       <property name="textFormat">
-        <enum>Qt::TextFormat::PlainText</enum>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="EQ_3_center_label">
-       <property name="geometry">
-        <rect>
-         <x>415</x>
-         <y>285</y>
-         <width>31</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Monospace</family>
-         <pointsize>12</pointsize>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>---</string>
-       </property>
-       <property name="textFormat">
-        <enum>Qt::TextFormat::PlainText</enum>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
       <widget class="QLabel" name="EQ_label_2">
        <property name="geometry">
         <rect>
@@ -6099,9 +5912,9 @@ QPushButton::checked {background-color: red;}</string>
       <widget class="QLabel" name="EQ_label_3">
        <property name="geometry">
         <rect>
-         <x>600</x>
+         <x>595</x>
          <y>85</y>
-         <width>111</width>
+         <width>121</width>
          <height>21</height>
         </rect>
        </property>
@@ -6120,6 +5933,963 @@ QPushButton::checked {background-color: red;}</string>
        <property name="wordWrap">
         <bool>true</bool>
        </property>
+      </widget>
+      <widget class="QFrame" name="EQ_frame_1">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>285</y>
+         <width>171</width>
+         <height>171</height>
+        </rect>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Shape::Panel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Shadow::Sunken</enum>
+       </property>
+       <property name="lineWidth">
+        <number>2</number>
+       </property>
+       <widget class="QLabel" name="EQ_1_label_3">
+        <property name="geometry">
+         <rect>
+          <x>115</x>
+          <y>140</y>
+          <width>41</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Q</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QSlider" name="EQ_1_BW_verticalSlider">
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>30</y>
+          <width>31</width>
+          <height>101</height>
+         </rect>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QSlider::groove:vertical {background: lightgray; width: 10px; border-radius: 3px;}
+QSlider::handle:vertical {background: lightblue; border: 1px solid black; height: 10px; width: 30px; margin-left: -10px; margin-right: -10px; border-radius: 5px;}
+QSlider::sub-page:vertical {background: white;}
+QSlider::add-page:vertical {background: white;}</string>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>10</number>
+        </property>
+        <property name="pageStep">
+         <number>1</number>
+        </property>
+        <property name="value">
+         <number>10</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Orientation::Vertical</enum>
+        </property>
+        <property name="invertedAppearance">
+         <bool>false</bool>
+        </property>
+        <property name="invertedControls">
+         <bool>false</bool>
+        </property>
+        <property name="tickPosition">
+         <enum>QSlider::TickPosition::TicksBothSides</enum>
+        </property>
+        <property name="tickInterval">
+         <number>5</number>
+        </property>
+       </widget>
+       <widget class="QLabel" name="EQ_1_BW_label">
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>5</y>
+          <width>31</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+          <pointsize>12</pointsize>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>---</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::TextFormat::PlainText</enum>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="EQ_1_label_2">
+        <property name="geometry">
+         <rect>
+          <x>60</x>
+          <y>140</y>
+          <width>51</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Gain</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QSlider" name="EQ_1_gain_verticalSlider">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>30</y>
+          <width>31</width>
+          <height>101</height>
+         </rect>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QSlider::groove:vertical {background: lightgray; width: 10px; border-radius: 3px;}
+QSlider::handle:vertical {background: lightblue; border: 1px solid black; height: 10px; width: 30px; margin-left: -10px; margin-right: -10px; border-radius: 5px;}
+QSlider::sub-page:vertical {background: white;}
+QSlider::add-page:vertical {background: white;}</string>
+        </property>
+        <property name="minimum">
+         <number>-20</number>
+        </property>
+        <property name="maximum">
+         <number>10</number>
+        </property>
+        <property name="pageStep">
+         <number>1</number>
+        </property>
+        <property name="value">
+         <number>5</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Orientation::Vertical</enum>
+        </property>
+        <property name="invertedAppearance">
+         <bool>false</bool>
+        </property>
+        <property name="invertedControls">
+         <bool>false</bool>
+        </property>
+        <property name="tickPosition">
+         <enum>QSlider::TickPosition::TicksBothSides</enum>
+        </property>
+        <property name="tickInterval">
+         <number>5</number>
+        </property>
+       </widget>
+       <widget class="QLabel" name="EQ_1_gain_label">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>5</y>
+          <width>31</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+          <pointsize>12</pointsize>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>---</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::TextFormat::PlainText</enum>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QSlider" name="EQ_1_center_verticalSlider">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>30</y>
+          <width>31</width>
+          <height>101</height>
+         </rect>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QSlider::groove:vertical {background: lightgray; width: 10px; border-radius: 3px;}
+QSlider::handle:vertical {background: lightblue; border: 1px solid black; height: 10px; width: 30px; margin-left: -10px; margin-right: -10px; border-radius: 5px;}
+QSlider::sub-page:vertical {background: white;}
+QSlider::add-page:vertical {background: white;}</string>
+        </property>
+        <property name="minimum">
+         <number>0</number>
+        </property>
+        <property name="maximum">
+         <number>7</number>
+        </property>
+        <property name="pageStep">
+         <number>1</number>
+        </property>
+        <property name="value">
+         <number>0</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Orientation::Vertical</enum>
+        </property>
+        <property name="invertedAppearance">
+         <bool>false</bool>
+        </property>
+        <property name="invertedControls">
+         <bool>false</bool>
+        </property>
+        <property name="tickPosition">
+         <enum>QSlider::TickPosition::TicksBothSides</enum>
+        </property>
+        <property name="tickInterval">
+         <number>5</number>
+        </property>
+       </widget>
+       <widget class="QLabel" name="EQ_1_center_label">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>5</y>
+          <width>31</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+          <pointsize>12</pointsize>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>---</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::TextFormat::PlainText</enum>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="EQ_1_label_1">
+        <property name="geometry">
+         <rect>
+          <x>5</x>
+          <y>140</y>
+          <width>61</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Center</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QFrame" name="EQ_frame_2">
+       <property name="geometry">
+        <rect>
+         <x>215</x>
+         <y>285</y>
+         <width>171</width>
+         <height>171</height>
+        </rect>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Shape::Panel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Shadow::Sunken</enum>
+       </property>
+       <property name="lineWidth">
+        <number>2</number>
+       </property>
+       <widget class="QLabel" name="EQ_2_label_3">
+        <property name="geometry">
+         <rect>
+          <x>115</x>
+          <y>140</y>
+          <width>41</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Q</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QSlider" name="EQ_2_center_verticalSlider">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>30</y>
+          <width>31</width>
+          <height>101</height>
+         </rect>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QSlider::groove:vertical {background: lightgray; width: 10px; border-radius: 3px;}
+QSlider::handle:vertical {background: lightblue; border: 1px solid black; height: 10px; width: 30px; margin-left: -10px; margin-right: -10px; border-radius: 5px;}
+QSlider::sub-page:vertical {background: white;}
+QSlider::add-page:vertical {background: white;}</string>
+        </property>
+        <property name="minimum">
+         <number>0</number>
+        </property>
+        <property name="maximum">
+         <number>9</number>
+        </property>
+        <property name="pageStep">
+         <number>1</number>
+        </property>
+        <property name="value">
+         <number>0</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Orientation::Vertical</enum>
+        </property>
+        <property name="invertedAppearance">
+         <bool>false</bool>
+        </property>
+        <property name="invertedControls">
+         <bool>false</bool>
+        </property>
+        <property name="tickPosition">
+         <enum>QSlider::TickPosition::TicksBothSides</enum>
+        </property>
+        <property name="tickInterval">
+         <number>5</number>
+        </property>
+       </widget>
+       <widget class="QLabel" name="EQ_2_label_2">
+        <property name="geometry">
+         <rect>
+          <x>60</x>
+          <y>140</y>
+          <width>51</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Gain</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="EQ_2_gain_label">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>5</y>
+          <width>31</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+          <pointsize>12</pointsize>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>---</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::TextFormat::PlainText</enum>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="EQ_2_label_1">
+        <property name="geometry">
+         <rect>
+          <x>5</x>
+          <y>140</y>
+          <width>61</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Center</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QSlider" name="EQ_2_BW_verticalSlider">
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>30</y>
+          <width>31</width>
+          <height>101</height>
+         </rect>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QSlider::groove:vertical {background: lightgray; width: 10px; border-radius: 3px;}
+QSlider::handle:vertical {background: lightblue; border: 1px solid black; height: 10px; width: 30px; margin-left: -10px; margin-right: -10px; border-radius: 5px;}
+QSlider::sub-page:vertical {background: white;}
+QSlider::add-page:vertical {background: white;}</string>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>10</number>
+        </property>
+        <property name="pageStep">
+         <number>1</number>
+        </property>
+        <property name="value">
+         <number>10</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Orientation::Vertical</enum>
+        </property>
+        <property name="invertedAppearance">
+         <bool>false</bool>
+        </property>
+        <property name="invertedControls">
+         <bool>false</bool>
+        </property>
+        <property name="tickPosition">
+         <enum>QSlider::TickPosition::TicksBothSides</enum>
+        </property>
+        <property name="tickInterval">
+         <number>5</number>
+        </property>
+       </widget>
+       <widget class="QLabel" name="EQ_2_center_label">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>5</y>
+          <width>31</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+          <pointsize>12</pointsize>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>---</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::TextFormat::PlainText</enum>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="EQ_2_BW_label">
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>5</y>
+          <width>31</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+          <pointsize>12</pointsize>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>---</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::TextFormat::PlainText</enum>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QSlider" name="EQ_2_gain_verticalSlider">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>30</y>
+          <width>31</width>
+          <height>101</height>
+         </rect>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QSlider::groove:vertical {background: lightgray; width: 10px; border-radius: 3px;}
+QSlider::handle:vertical {background: lightblue; border: 1px solid black; height: 10px; width: 30px; margin-left: -10px; margin-right: -10px; border-radius: 5px;}
+QSlider::sub-page:vertical {background: white;}
+QSlider::add-page:vertical {background: white;}</string>
+        </property>
+        <property name="minimum">
+         <number>-20</number>
+        </property>
+        <property name="maximum">
+         <number>10</number>
+        </property>
+        <property name="pageStep">
+         <number>1</number>
+        </property>
+        <property name="value">
+         <number>5</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Orientation::Vertical</enum>
+        </property>
+        <property name="invertedAppearance">
+         <bool>false</bool>
+        </property>
+        <property name="invertedControls">
+         <bool>false</bool>
+        </property>
+        <property name="tickPosition">
+         <enum>QSlider::TickPosition::TicksBothSides</enum>
+        </property>
+        <property name="tickInterval">
+         <number>5</number>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QFrame" name="EQ_frame_3">
+       <property name="geometry">
+        <rect>
+         <x>400</x>
+         <y>285</y>
+         <width>171</width>
+         <height>171</height>
+        </rect>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Shape::Panel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Shadow::Sunken</enum>
+       </property>
+       <property name="lineWidth">
+        <number>2</number>
+       </property>
+       <widget class="QLabel" name="EQ_3_label_3">
+        <property name="geometry">
+         <rect>
+          <x>115</x>
+          <y>145</y>
+          <width>41</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Q</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="EQ_3_gain_label">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>10</y>
+          <width>31</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+          <pointsize>12</pointsize>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>---</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::TextFormat::PlainText</enum>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="EQ_3_BW_label">
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>10</y>
+          <width>31</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+          <pointsize>12</pointsize>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>---</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::TextFormat::PlainText</enum>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="EQ_3_label_2">
+        <property name="geometry">
+         <rect>
+          <x>60</x>
+          <y>145</y>
+          <width>51</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Gain</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QSlider" name="EQ_3_BW_verticalSlider">
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>35</y>
+          <width>31</width>
+          <height>101</height>
+         </rect>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QSlider::groove:vertical {background: lightgray; width: 10px; border-radius: 3px;}
+QSlider::handle:vertical {background: lightblue; border: 1px solid black; height: 10px; width: 30px; margin-left: -10px; margin-right: -10px; border-radius: 5px;}
+QSlider::sub-page:vertical {background: white;}
+QSlider::add-page:vertical {background: white;}</string>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>10</number>
+        </property>
+        <property name="pageStep">
+         <number>1</number>
+        </property>
+        <property name="value">
+         <number>10</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Orientation::Vertical</enum>
+        </property>
+        <property name="invertedAppearance">
+         <bool>false</bool>
+        </property>
+        <property name="invertedControls">
+         <bool>false</bool>
+        </property>
+        <property name="tickPosition">
+         <enum>QSlider::TickPosition::TicksBothSides</enum>
+        </property>
+        <property name="tickInterval">
+         <number>5</number>
+        </property>
+       </widget>
+       <widget class="QSlider" name="EQ_3_gain_verticalSlider">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>35</y>
+          <width>31</width>
+          <height>101</height>
+         </rect>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QSlider::groove:vertical {background: lightgray; width: 10px; border-radius: 3px;}
+QSlider::handle:vertical {background: lightblue; border: 1px solid black; height: 10px; width: 30px; margin-left: -10px; margin-right: -10px; border-radius: 5px;}
+QSlider::sub-page:vertical {background: white;}
+QSlider::add-page:vertical {background: white;}</string>
+        </property>
+        <property name="minimum">
+         <number>-20</number>
+        </property>
+        <property name="maximum">
+         <number>10</number>
+        </property>
+        <property name="pageStep">
+         <number>1</number>
+        </property>
+        <property name="value">
+         <number>5</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Orientation::Vertical</enum>
+        </property>
+        <property name="invertedAppearance">
+         <bool>false</bool>
+        </property>
+        <property name="invertedControls">
+         <bool>false</bool>
+        </property>
+        <property name="tickPosition">
+         <enum>QSlider::TickPosition::TicksBothSides</enum>
+        </property>
+        <property name="tickInterval">
+         <number>5</number>
+        </property>
+       </widget>
+       <widget class="QSlider" name="EQ_3_center_verticalSlider">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>35</y>
+          <width>31</width>
+          <height>101</height>
+         </rect>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QSlider::groove:vertical {background: lightgray; width: 10px; border-radius: 3px;}
+QSlider::handle:vertical {background: lightblue; border: 1px solid black; height: 10px; width: 30px; margin-left: -10px; margin-right: -10px; border-radius: 5px;}
+QSlider::sub-page:vertical {background: white;}
+QSlider::add-page:vertical {background: white;}</string>
+        </property>
+        <property name="minimum">
+         <number>0</number>
+        </property>
+        <property name="maximum">
+         <number>18</number>
+        </property>
+        <property name="pageStep">
+         <number>1</number>
+        </property>
+        <property name="value">
+         <number>0</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Orientation::Vertical</enum>
+        </property>
+        <property name="invertedAppearance">
+         <bool>false</bool>
+        </property>
+        <property name="invertedControls">
+         <bool>false</bool>
+        </property>
+        <property name="tickPosition">
+         <enum>QSlider::TickPosition::TicksBothSides</enum>
+        </property>
+        <property name="tickInterval">
+         <number>5</number>
+        </property>
+       </widget>
+       <widget class="QLabel" name="EQ_3_label_1">
+        <property name="geometry">
+         <rect>
+          <x>5</x>
+          <y>145</y>
+          <width>61</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Center</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="EQ_3_center_label">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>10</y>
+          <width>31</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+          <pointsize>12</pointsize>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>---</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::TextFormat::PlainText</enum>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
       </widget>
      </widget>
      <widget class="QGroupBox" name="Speech_Proc_groupBox">
@@ -6204,10 +6974,13 @@ QPushButton::checked{ background-color: red; color: black}</string>
         </rect>
        </property>
        <property name="frameShape">
-        <enum>QFrame::Shape::StyledPanel</enum>
+        <enum>QFrame::Shape::Panel</enum>
        </property>
        <property name="frameShadow">
-        <enum>QFrame::Shadow::Raised</enum>
+        <enum>QFrame::Shadow::Sunken</enum>
+       </property>
+       <property name="lineWidth">
+        <number>2</number>
        </property>
        <widget class="QLCDNumber" name="Speech_Proc_lcdNumber">
         <property name="geometry">
@@ -6397,10 +7170,13 @@ QSlider:handle:disabled{background-color: darkgrey;  color: darkgrey;}</string>
         </rect>
        </property>
        <property name="frameShape">
-        <enum>QFrame::Shape::StyledPanel</enum>
+        <enum>QFrame::Shape::Panel</enum>
        </property>
        <property name="frameShadow">
-        <enum>QFrame::Shadow::Raised</enum>
+        <enum>QFrame::Shadow::Sunken</enum>
+       </property>
+       <property name="lineWidth">
+        <number>2</number>
        </property>
        <widget class="QLabel" name="Tx_Audio_label_2">
         <property name="geometry">
@@ -6476,10 +7252,13 @@ QSlider:handle:disabled{background-color: darkgrey;  color: darkgrey;}</string>
         </rect>
        </property>
        <property name="frameShape">
-        <enum>QFrame::Shape::StyledPanel</enum>
+        <enum>QFrame::Shape::Panel</enum>
        </property>
        <property name="frameShadow">
-        <enum>QFrame::Shadow::Raised</enum>
+        <enum>QFrame::Shadow::Sunken</enum>
+       </property>
+       <property name="lineWidth">
+        <number>2</number>
        </property>
        <widget class="QLabel" name="Tx_Audio_label_3">
         <property name="geometry">
@@ -6603,10 +7382,13 @@ QPushButton::checked{ background-color: red; color: black}</string>
         </rect>
        </property>
        <property name="frameShape">
-        <enum>QFrame::Shape::StyledPanel</enum>
+        <enum>QFrame::Shape::Panel</enum>
        </property>
        <property name="frameShadow">
-        <enum>QFrame::Shadow::Raised</enum>
+        <enum>QFrame::Shadow::Sunken</enum>
+       </property>
+       <property name="lineWidth">
+        <number>2</number>
        </property>
        <widget class="QLabel" name="VOX_label_1">
         <property name="geometry">
@@ -6688,10 +7470,13 @@ QSlider:handle:disabled{background-color: darkgrey;  color: darkgrey;}</string>
         </rect>
        </property>
        <property name="frameShape">
-        <enum>QFrame::Shape::StyledPanel</enum>
+        <enum>QFrame::Shape::Panel</enum>
        </property>
        <property name="frameShadow">
-        <enum>QFrame::Shadow::Raised</enum>
+        <enum>QFrame::Shadow::Sunken</enum>
+       </property>
+       <property name="lineWidth">
+        <number>2</number>
        </property>
        <widget class="QLabel" name="VOX_label_2">
         <property name="geometry">
@@ -6836,10 +7621,13 @@ QPushButton::checked{ background-color: red; color: black}</string>
         </rect>
        </property>
        <property name="frameShape">
-        <enum>QFrame::Shape::StyledPanel</enum>
+        <enum>QFrame::Shape::Panel</enum>
        </property>
        <property name="frameShadow">
-        <enum>QFrame::Shadow::Raised</enum>
+        <enum>QFrame::Shadow::Sunken</enum>
+       </property>
+       <property name="lineWidth">
+        <number>2</number>
        </property>
        <widget class="QLabel" name="VM_label_1">
         <property name="geometry">
@@ -6921,10 +7709,13 @@ QSlider:handle:disabled{background-color: darkgrey;  color: darkgrey;}</string>
         </rect>
        </property>
        <property name="frameShape">
-        <enum>QFrame::Shape::StyledPanel</enum>
+        <enum>QFrame::Shape::Panel</enum>
        </property>
        <property name="frameShadow">
-        <enum>QFrame::Shadow::Raised</enum>
+        <enum>QFrame::Shadow::Sunken</enum>
+       </property>
+       <property name="lineWidth">
+        <number>2</number>
        </property>
        <widget class="QLabel" name="VM_label_2">
         <property name="geometry">
@@ -7092,13 +7883,13 @@ QPushButton::checked{ background-color: red; color: black}</string>
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton{ background-color: lightblue; color: grey}
-QPushButton::checked{ background-color: red; color: black}</string>
+QPushButton::pressed{ background-color: red; color: black}</string>
        </property>
        <property name="text">
         <string>Playback</string>
        </property>
        <property name="checkable">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
        <property name="checked">
         <bool>false</bool>
@@ -7149,10 +7940,13 @@ QPushButton::checked{ background-color: red; color: black}</string>
         </rect>
        </property>
        <property name="frameShape">
-        <enum>QFrame::Shape::StyledPanel</enum>
+        <enum>QFrame::Shape::Panel</enum>
        </property>
        <property name="frameShadow">
-        <enum>QFrame::Shadow::Raised</enum>
+        <enum>QFrame::Shadow::Sunken</enum>
+       </property>
+       <property name="lineWidth">
+        <number>2</number>
        </property>
        <widget class="QSpinBox" name="VM_delay_spinBox">
         <property name="geometry">
@@ -7244,6 +8038,41 @@ QPushButton::checked{ background-color: red; color: black}</string>
          <bool>true</bool>
         </property>
        </widget>
+      </widget>
+      <widget class="QPushButton" name="VM_loop_pushButton">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>230</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton{ background-color: lightblue; color: grey}
+QPushButton::checked{ background-color: red; color: black}</string>
+       </property>
+       <property name="text">
+        <string>Loop</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="checked">
+        <bool>false</bool>
+       </property>
+       <property name="autoRepeat">
+        <bool>false</bool>
+       </property>
+       <property name="autoRepeatInterval">
+        <number>100</number>
+       </property>
       </widget>
      </widget>
     </widget>
@@ -7469,105 +8298,6 @@ QPushButton::checked {background-color: red;}</string>
         <string notr="true">Audio_buttonGroup</string>
        </attribute>
       </widget>
-      <widget class="QLabel" name="Audio_filter_label_12">
-       <property name="geometry">
-        <rect>
-         <x>30</x>
-         <y>315</y>
-         <width>41</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Freq</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTop|Qt::AlignmentFlag::AlignTrailing</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QSlider" name="Audio_filter_horizontalSlider_1">
-       <property name="geometry">
-        <rect>
-         <x>80</x>
-         <y>300</y>
-         <width>161</width>
-         <height>51</height>
-        </rect>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QSlider::groove:horizontal{background: lightgray; height: 10px; border-radius: 3px;}
-QSlider::handle:horizontal{background: lightblue; border: 1px solid black; width: 10px; height: 30px; margin-top: -10px; margin-bottom: -10px; border-radius: 5px;}
-QSlider::sub-page:horizontal{background: white;}
-QSlider::add-page:horizontal{background: white;}</string>
-       </property>
-       <property name="minimum">
-        <number>0</number>
-       </property>
-       <property name="maximum">
-        <number>19</number>
-       </property>
-       <property name="pageStep">
-        <number>1</number>
-       </property>
-       <property name="value">
-        <number>0</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Orientation::Horizontal</enum>
-       </property>
-       <property name="invertedAppearance">
-        <bool>false</bool>
-       </property>
-       <property name="invertedControls">
-        <bool>false</bool>
-       </property>
-       <property name="tickPosition">
-        <enum>QSlider::TickPosition::TicksBothSides</enum>
-       </property>
-       <property name="tickInterval">
-        <number>5</number>
-       </property>
-       <property name="side" stdset="0">
-        <number>1</number>
-       </property>
-      </widget>
-      <widget class="QLabel" name="Audio_filter_label_13">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>370</y>
-         <width>51</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Slope</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTop|Qt::AlignmentFlag::AlignTrailing</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
       <widget class="Line" name="Audio_filter_line_13">
        <property name="geometry">
         <rect>
@@ -7657,36 +8387,10 @@ QSlider::add-page:horizontal{background: white;}</string>
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QComboBox" name="Audio_filter_comboBox_1">
-       <property name="geometry">
-        <rect>
-         <x>80</x>
-         <y>365</y>
-         <width>91</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QComboBox{ font-family: &quot;Arial&quot;; font-size: 16px;}</string>
-       </property>
-       <property name="side" stdset="0">
-        <number>1</number>
-       </property>
-       <item>
-        <property name="text">
-         <string>6dB/oct</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>18dB/oct</string>
-        </property>
-       </item>
-      </widget>
       <widget class="Line" name="Audio_filter_line_21">
        <property name="geometry">
         <rect>
-         <x>365</x>
+         <x>345</x>
          <y>435</y>
          <width>61</width>
          <height>2</height>
@@ -7702,7 +8406,7 @@ QSlider::add-page:horizontal{background: white;}</string>
       <widget class="Line" name="Audio_filter_line_23">
        <property name="geometry">
         <rect>
-         <x>365</x>
+         <x>345</x>
          <y>420</y>
          <width>2</width>
          <height>17</height>
@@ -7715,109 +8419,10 @@ QSlider::add-page:horizontal{background: white;}</string>
         <enum>Qt::Orientation::Vertical</enum>
        </property>
       </widget>
-      <widget class="QLabel" name="Audio_filter_label_22">
-       <property name="geometry">
-        <rect>
-         <x>330</x>
-         <y>315</y>
-         <width>41</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Freq</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTop|Qt::AlignmentFlag::AlignTrailing</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QSlider" name="Audio_filter_horizontalSlider_2">
-       <property name="geometry">
-        <rect>
-         <x>380</x>
-         <y>300</y>
-         <width>161</width>
-         <height>51</height>
-        </rect>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QSlider::groove:horizontal{background: lightgray; height: 10px; border-radius: 3px;}
-QSlider::handle:horizontal{background: lightblue; border: 1px solid black; width: 10px; height: 30px; margin-top: -10px; margin-bottom: -10px; border-radius: 5px;}
-QSlider::sub-page:horizontal{background: white;}
-QSlider::add-page:horizontal{background: white;}</string>
-       </property>
-       <property name="minimum">
-        <number>0</number>
-       </property>
-       <property name="maximum">
-        <number>67</number>
-       </property>
-       <property name="pageStep">
-        <number>1</number>
-       </property>
-       <property name="value">
-        <number>0</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Orientation::Horizontal</enum>
-       </property>
-       <property name="invertedAppearance">
-        <bool>false</bool>
-       </property>
-       <property name="invertedControls">
-        <bool>false</bool>
-       </property>
-       <property name="tickPosition">
-        <enum>QSlider::TickPosition::TicksBothSides</enum>
-       </property>
-       <property name="tickInterval">
-        <number>5</number>
-       </property>
-       <property name="side" stdset="0">
-        <number>2</number>
-       </property>
-      </widget>
-      <widget class="QLabel" name="Audio_filter_label_23">
-       <property name="geometry">
-        <rect>
-         <x>320</x>
-         <y>370</y>
-         <width>51</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Slope</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTop|Qt::AlignmentFlag::AlignTrailing</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
       <widget class="Line" name="Audio_filter_line_22">
        <property name="geometry">
         <rect>
-         <x>485</x>
+         <x>465</x>
          <y>435</y>
          <width>61</width>
          <height>2</height>
@@ -7830,36 +8435,10 @@ QSlider::add-page:horizontal{background: white;}</string>
         <enum>Qt::Orientation::Horizontal</enum>
        </property>
       </widget>
-      <widget class="QComboBox" name="Audio_filter_comboBox_2">
-       <property name="geometry">
-        <rect>
-         <x>380</x>
-         <y>365</y>
-         <width>91</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QComboBox{ font-family: &quot;Arial&quot;; font-size: 16px;}</string>
-       </property>
-       <property name="side" stdset="0">
-        <number>2</number>
-       </property>
-       <item>
-        <property name="text">
-         <string>6dB/oct</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>18dB/oct</string>
-        </property>
-       </item>
-      </widget>
       <widget class="Line" name="Audio_filter_line_24">
        <property name="geometry">
         <rect>
-         <x>545</x>
+         <x>525</x>
          <y>420</y>
          <width>2</width>
          <height>17</height>
@@ -7875,7 +8454,7 @@ QSlider::add-page:horizontal{background: white;}</string>
       <widget class="QLabel" name="Audio_filter_label_21">
        <property name="geometry">
         <rect>
-         <x>410</x>
+         <x>390</x>
          <y>425</y>
          <width>91</width>
          <height>21</height>
@@ -7897,63 +8476,351 @@ QSlider::add-page:horizontal{background: white;}</string>
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QLabel" name="Audio_filter_freq_label_1">
+      <widget class="QFrame" name="Audio_filter_frame_1">
        <property name="geometry">
         <rect>
-         <x>250</x>
-         <y>315</y>
-         <width>31</width>
-         <height>21</height>
+         <x>25</x>
+         <y>290</y>
+         <width>271</width>
+         <height>121</height>
         </rect>
        </property>
-       <property name="font">
-        <font>
-         <family>Monospace</family>
-         <pointsize>12</pointsize>
-         <bold>false</bold>
-        </font>
+       <property name="frameShape">
+        <enum>QFrame::Shape::Panel</enum>
        </property>
-       <property name="text">
-        <string>---</string>
+       <property name="frameShadow">
+        <enum>QFrame::Shadow::Sunken</enum>
        </property>
-       <property name="textFormat">
-        <enum>Qt::TextFormat::PlainText</enum>
+       <property name="lineWidth">
+        <number>2</number>
        </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
+       <widget class="QComboBox" name="Audio_filter_comboBox_1">
+        <property name="geometry">
+         <rect>
+          <x>65</x>
+          <y>70</y>
+          <width>91</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QComboBox{ font-family: &quot;Arial&quot;; font-size: 16px;}</string>
+        </property>
+        <property name="side" stdset="0">
+         <number>1</number>
+        </property>
+        <item>
+         <property name="text">
+          <string>6dB/oct</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>18dB/oct</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QLabel" name="Audio_filter_freq_label_1">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>20</y>
+          <width>31</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+          <pointsize>12</pointsize>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>---</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::TextFormat::PlainText</enum>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="Audio_filter_label_13">
+        <property name="geometry">
+         <rect>
+          <x>5</x>
+          <y>75</y>
+          <width>51</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Slope</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTop|Qt::AlignmentFlag::AlignTrailing</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="Audio_filter_label_12">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>20</y>
+          <width>41</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Freq</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTop|Qt::AlignmentFlag::AlignTrailing</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QSlider" name="Audio_filter_horizontalSlider_1">
+        <property name="geometry">
+         <rect>
+          <x>65</x>
+          <y>5</y>
+          <width>151</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QSlider::groove:horizontal{background: lightgray; height: 10px; border-radius: 3px;}
+QSlider::handle:horizontal{background: lightblue; border: 1px solid black; width: 10px; height: 30px; margin-top: -10px; margin-bottom: -10px; border-radius: 5px;}
+QSlider::sub-page:horizontal{background: white;}
+QSlider::add-page:horizontal{background: white;}</string>
+        </property>
+        <property name="minimum">
+         <number>0</number>
+        </property>
+        <property name="maximum">
+         <number>19</number>
+        </property>
+        <property name="pageStep">
+         <number>1</number>
+        </property>
+        <property name="value">
+         <number>0</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="invertedAppearance">
+         <bool>false</bool>
+        </property>
+        <property name="invertedControls">
+         <bool>false</bool>
+        </property>
+        <property name="tickPosition">
+         <enum>QSlider::TickPosition::TicksBothSides</enum>
+        </property>
+        <property name="tickInterval">
+         <number>5</number>
+        </property>
+        <property name="side" stdset="0">
+         <number>1</number>
+        </property>
+       </widget>
       </widget>
-      <widget class="QLabel" name="Audio_filter_freq_label_2">
+      <widget class="QFrame" name="Audio_filter_frame_2">
        <property name="geometry">
         <rect>
-         <x>550</x>
-         <y>315</y>
-         <width>31</width>
-         <height>21</height>
+         <x>305</x>
+         <y>290</y>
+         <width>271</width>
+         <height>121</height>
         </rect>
        </property>
-       <property name="font">
-        <font>
-         <family>Monospace</family>
-         <pointsize>12</pointsize>
-         <bold>false</bold>
-        </font>
+       <property name="frameShape">
+        <enum>QFrame::Shape::Panel</enum>
        </property>
-       <property name="text">
-        <string>---</string>
+       <property name="frameShadow">
+        <enum>QFrame::Shadow::Sunken</enum>
        </property>
-       <property name="textFormat">
-        <enum>Qt::TextFormat::PlainText</enum>
+       <property name="lineWidth">
+        <number>2</number>
        </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
+       <widget class="QLabel" name="Audio_filter_freq_label_2">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>20</y>
+          <width>31</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+          <pointsize>12</pointsize>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>---</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::TextFormat::PlainText</enum>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="Audio_filter_comboBox_2">
+        <property name="geometry">
+         <rect>
+          <x>65</x>
+          <y>70</y>
+          <width>91</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QComboBox{ font-family: &quot;Arial&quot;; font-size: 16px;}</string>
+        </property>
+        <property name="side" stdset="0">
+         <number>2</number>
+        </property>
+        <item>
+         <property name="text">
+          <string>6dB/oct</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>18dB/oct</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QLabel" name="Audio_filter_label_22">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>20</y>
+          <width>41</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Freq</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTop|Qt::AlignmentFlag::AlignTrailing</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QSlider" name="Audio_filter_horizontalSlider_2">
+        <property name="geometry">
+         <rect>
+          <x>65</x>
+          <y>5</y>
+          <width>151</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QSlider::groove:horizontal{background: lightgray; height: 10px; border-radius: 3px;}
+QSlider::handle:horizontal{background: lightblue; border: 1px solid black; width: 10px; height: 30px; margin-top: -10px; margin-bottom: -10px; border-radius: 5px;}
+QSlider::sub-page:horizontal{background: white;}
+QSlider::add-page:horizontal{background: white;}</string>
+        </property>
+        <property name="minimum">
+         <number>0</number>
+        </property>
+        <property name="maximum">
+         <number>67</number>
+        </property>
+        <property name="pageStep">
+         <number>1</number>
+        </property>
+        <property name="value">
+         <number>0</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="invertedAppearance">
+         <bool>false</bool>
+        </property>
+        <property name="invertedControls">
+         <bool>false</bool>
+        </property>
+        <property name="tickPosition">
+         <enum>QSlider::TickPosition::TicksBothSides</enum>
+        </property>
+        <property name="tickInterval">
+         <number>5</number>
+        </property>
+        <property name="side" stdset="0">
+         <number>2</number>
+        </property>
+       </widget>
+       <widget class="QLabel" name="Audio_filter_label_23">
+        <property name="geometry">
+         <rect>
+          <x>5</x>
+          <y>75</y>
+          <width>51</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Slope</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTop|Qt::AlignmentFlag::AlignTrailing</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
       </widget>
      </widget>
     </widget>
@@ -8004,6 +8871,15 @@ QSlider::add-page:horizontal{background: white;}</string>
         <string notr="true">QWidget{ background-color: lightgray}
 QScrollArea{ padding: 20px;border-radius: 5px}
 QScrollBar:vertical {width: 20px;}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Shape::Panel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Shadow::Raised</enum>
+       </property>
+       <property name="lineWidth">
+        <number>2</number>
        </property>
        <property name="verticalScrollBarPolicy">
         <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOn</enum>
@@ -11842,6 +12718,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <addaction name="actionRefresh_Settings"/>
     <addaction name="actionRefresh_Equalizer"/>
     <addaction name="actionRefresh_Audio_Filter"/>
+    <addaction name="actionRefresh_Quick_Memory"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="font">
@@ -11906,7 +12783,7 @@ QStatusBar{ color: red;}</string>
     </font>
    </property>
    <property name="shortcut">
-    <string>Alt+M</string>
+    <string>Alt+R</string>
    </property>
   </action>
   <action name="actionRefresh_Memory_Channel">
@@ -11919,7 +12796,7 @@ QStatusBar{ color: red;}</string>
     </font>
    </property>
    <property name="shortcut">
-    <string>Alt+C</string>
+    <string>Alt+M</string>
    </property>
   </action>
   <action name="actionRefresh_Settings">
@@ -11954,6 +12831,14 @@ QStatusBar{ color: red;}</string>
    </property>
    <property name="shortcut">
     <string>Alt+A</string>
+   </property>
+  </action>
+  <action name="actionRefresh_Quick_Memory">
+   <property name="text">
+    <string>Quick Memory</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+Q</string>
    </property>
   </action>
  </widget>
@@ -12139,13 +13024,13 @@ QStatusBar{ color: red;}</string>
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="FFT_buttonGroup"/>
-  <buttongroup name="EQ_buttonGroup"/>
-  <buttongroup name="Audio_buttonGroup"/>
-  <buttongroup name="Mode_buttonGroup"/>
   <buttongroup name="IF_buttonGroup"/>
-  <buttongroup name="Rx_buttonGroup"/>
-  <buttongroup name="Tx_buttonGroup"/>
+  <buttongroup name="Mode_buttonGroup"/>
+  <buttongroup name="Audio_buttonGroup"/>
   <buttongroup name="Notch_buttonGroup"/>
+  <buttongroup name="EQ_buttonGroup"/>
+  <buttongroup name="Tx_buttonGroup"/>
+  <buttongroup name="Rx_buttonGroup"/>
+  <buttongroup name="FFT_buttonGroup"/>
  </buttongroups>
 </ui>

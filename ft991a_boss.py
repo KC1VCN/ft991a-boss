@@ -18,7 +18,7 @@
 # FT-991A memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK
 #
 
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 __author__  = "Noyan Kinayman"
 
 import sys
@@ -78,6 +78,7 @@ from PySide6.QtWidgets import QTableWidget
 from PySide6.QtWidgets import QTableWidgetItem
 from PySide6.QtWidgets import QPlainTextEdit
 from PySide6.QtWidgets import QAbstractButton
+from PySide6.QtWidgets import QAbstractItemView
 from PySide6.QtWidgets import QDialog
 from PySide6.QtWidgets import QDialogButtonBox
 from PySide6.QtWidgets import QToolTip
@@ -98,6 +99,7 @@ from PySide6.QtCore import QMetaObject
 from PySide6.QtGui import QDoubleValidator
 from PySide6.QtGui import QPainter
 from PySide6.QtGui import QColor
+from PySide6.QtGui import QBrush
 from PySide6.QtGui import QFont
 from PySide6.QtGui import QPen
 
@@ -110,8 +112,6 @@ from matplotlib.ticker import FormatStrFormatter
 from matplotlib.patches import Rectangle, Polygon
 
 matplotlib.use('QtAgg')
-
-from ft991a_ui import Ui_MainWindow
 
 import ft991a
 
@@ -140,7 +140,7 @@ def pause_GUI_update(func):
     return wrapper
 
 #
-class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
+class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
 
@@ -244,7 +244,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 #        self.Memory_tableWidget.cellClicked.connect(self.on_Memory_cell_changed)
         self.Memory_tableWidget.currentCellChanged.connect(self.on_Memory_cell_changed)
 
+        self.Memory_AM_pushButton.clicked.connect(self.on_Memory_AM_button_clicked)
+        self.Memory_VM_pushButton.clicked.connect(self.on_Memory_VM_button_clicked)
+        self.Memory_scan_up_pushButton.clicked.connect(self.on_Memory_scan_button_clicked)
+        self.Memory_scan_down_pushButton.clicked.connect(self.on_Memory_scan_button_clicked)
+        self.Memory_scan_stop_pushButton.clicked.connect(self.on_Memory_scan_button_clicked)
+
+#
         header_labels = []
+
         for i in range(99):
             header_labels.append('%02dch' % (i+1))
 
@@ -253,12 +261,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             header_labels.append('P-%dU' % (i+1))
 
         self.Memory_tableWidget.setVerticalHeaderLabels(header_labels)
-
-        self.Memory_AM_pushButton.clicked.connect(self.on_Memory_AM_button_clicked)
-        self.Memory_VM_pushButton.clicked.connect(self.on_Memory_VM_button_clicked)
-        self.Memory_scan_up_pushButton.clicked.connect(self.on_Memory_scan_button_clicked)
-        self.Memory_scan_down_pushButton.clicked.connect(self.on_Memory_scan_button_clicked)
-        self.Memory_scan_stop_pushButton.clicked.connect(self.on_Memory_scan_button_clicked)
 
         self.Memory_tableWidget.setColumnWidth(0, 125)
         self.Memory_tableWidget.setColumnWidth(1, 50)
@@ -316,6 +318,32 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.VFO_B_textBrowser.setFont(text_font)
 
 #
+        self.QuickMemory_Recall_pushButton.clicked.connect(self.on_QuickMemory_Recall_button_clicked)
+        self.QuickMemory_Store_pushButton.clicked.connect(self.on_QuickMemory_Store_button_clicked)
+        self.QuickMemory_VM_pushButton.clicked.connect(self.on_QuickMemory_VM_button_clicked)
+
+#
+        header_labels = []
+
+        for i in range(5):
+            header_labels.append('%02d' % (i+1))
+
+        self.QuickMemory_tableWidget.setVerticalHeaderLabels(header_labels)
+
+        self.QuickMemory_tableWidget.setColumnWidth(0, 125)
+        self.QuickMemory_tableWidget.setColumnWidth(1, 50)
+        self.QuickMemory_tableWidget.setColumnWidth(2, 127)
+        self.QuickMemory_tableWidget.setColumnWidth(3, 75)
+        self.QuickMemory_tableWidget.setColumnWidth(4, 75)
+
+        table_font = QFont('Monospace', 12)
+        table_font.setStyleHint(QFont.StyleHint.Monospace) 
+        self.QuickMemory_tableWidget.setFont(table_font)
+
+        self.QuickMemory_tableWidget.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
+        self.QuickMemory_tableWidget.setEditTriggers(QAbstractItemView.EditTriggers.NoEditTriggers)
+
+#
         self.RF_power_verticalSlider.valueChanged.connect(self.set_RF_power)
         self.AF_gain_verticalSlider.valueChanged.connect(self.set_AF_gain)
         self.RF_gain_verticalSlider.valueChanged.connect(self.set_RF_gain)
@@ -324,9 +352,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.Clar_dial.valueChanged.connect(self.set_RF_clar)
         self.Clar_clear_pushButton.clicked.connect(self.clear_RF_clar)
         self.Clar_comboBox.currentIndexChanged.connect(self.on_clar_mode_changed)
+        self.Clar_fast_radioButton.toggled.connect(self.clar_set_fast)
+        self.clar_fast = 1
 
         self.S_meter_progressBar.setRange(0, 255)
         self.PO_meter_progressBar.setRange(0, 255)
+        self.SWR_meter_progressBar.setRange(0, 255)
 
         self.Squelch_CTCSS_comboBox.currentIndexChanged.connect(self.on_Squelch_CTCSS_changed)
         self.Squelch_DCS_comboBox.currentIndexChanged.connect(self.on_Squelch_DCS_changed)
@@ -428,6 +459,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 #
         self.VM_load_pushButton.clicked.connect(self.on_VM_load)
         self.VM_playback_pushButton.clicked.connect(self.on_VM_playback)
+        self.VM_loop_pushButton.clicked.connect(self.on_VM_loop)
         self.VM_breakin_pushButton.clicked.connect(self.on_VM_break_in)
         self.VM_rx_out_horizontalSlider.valueChanged.connect(self.set_VM_rx_out)
         self.VM_tx_out_horizontalSlider.valueChanged.connect(self.set_VM_tx_out)
@@ -528,6 +560,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.actionRefresh_Radio_Menu.triggered.connect(self.update_Radio_menu)
         self.actionRefresh_Memory_Channel.triggered.connect(self.update_Memory)
+        self.actionRefresh_Quick_Memory.triggered.connect(self.update_QuickMemory)
         self.actionRefresh_Settings.triggered.connect(lambda: self.update_RF_settings(control=-1))
         self.actionRefresh_Equalizer.triggered.connect(self.EQ_get_parameters)
         self.actionRefresh_Audio_Filter.triggered.connect(self.Audio_filter_get_cutoff)
@@ -543,8 +576,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.Message_textBrowser.setFont(message_font)
 
 # Radio meter events for custom painting
-        self.PO_meter_progressBar.installEventFilter(self)
         self.S_meter_progressBar.installEventFilter(self)
+        self.PO_meter_progressBar.installEventFilter(self)
+        self.SWR_meter_progressBar.installEventFilter(self)
 
 # Timers to update GUI
         self.timer_1 = QTimer(self)
@@ -619,9 +653,7 @@ FT-991A memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
     def on_tab_changed(self):
         self.update_RF_settings(control=0)
 
-##############################
-# Event Filters
-##############################
+#
     def eventFilter(self, obj, event):
         if (obj is self.S_meter_progressBar) and (event.type() == QtCore.QEvent.Paint):
             obj.paintEvent(event)
@@ -667,6 +699,25 @@ FT-991A memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 
 #
         if (obj is self.PO_meter_progressBar) and (event.type() == QtCore.QEvent.Paint):
+            obj.paintEvent(event)
+
+            painter = QPainter(obj)
+
+#
+            pen = QPen(QColor('red'), 3)
+            painter.setPen(pen)
+
+            peak = obj.property('peak')
+
+            peak_ratio = (peak-obj.minimum())/float(obj.maximum()-obj.minimum())
+            peak_x = int(peak_ratio*obj.width())
+
+            painter.drawLine(peak_x, 0, peak_x, obj.height())
+
+            return True
+
+#
+        if (obj is self.SWR_meter_progressBar) and (event.type() == QtCore.QEvent.Paint):
             obj.paintEvent(event)
 
             painter = QPainter(obj)
@@ -843,7 +894,11 @@ FT-991A memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
             if (Tx_mode is not None):
                 split = {'VFO_B': True, 'VFO_A': False}[Tx_mode]
                 self.A_B_pushButton_3.setChecked(split)
-                self.VFO_B_Tx_radioButton.setChecked(split)
+                if (split):
+                    self.VFO_B_Tx_radioButton.setChecked(True)
+
+                else:
+                    self.VFO_A_Tx_radioButton.setChecked(True)
 
 # Control 9, Clarifier Control
         if (control & (1 << 9)):
@@ -1134,41 +1189,41 @@ FT-991A memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
             self.PLL_lock_radioButton.setChecked(PLL_state)
 
 #
-        info_A, _ = ft991a.get_band_info()
+        band_info_A, _ = ft991a.get_band_info()
 
-        if (info_A is not None):
-            freq_A = '%d' % (int(info_A[1]))
+        if (band_info_A is not None):
+            freq_A = '%d' % (int(band_info_A[1]))
             self.VFO_A_lcdNumber.display(freq_A)
 
-            clar = '%d' % (int(info_A[2]))
+            clar = '%d' % (int(band_info_A[2]))
             self.Clar_lcdNumber.display(clar)
 
-            operating_mode = info_A[5]
+            operating_mode = band_info_A[5]
 
-            info = '%s %s %s\n%s %s %s %s' % (info_A[2].ljust(8, ' '), \
-                                              info_A[3].ljust(13, ' '), \
-                                              info_A[4].ljust(11, ' '), \
-                                              info_A[5].ljust(8, ' '), \
-                                              info_A[6].ljust(13, ' '), \
-                                              info_A[7].ljust(13, ' '), \
-                                              info_A[8].ljust(11, ' '))
+            info = '%s %s %s\n%s %s %s %s' % (band_info_A[2].ljust(8, ' '), \
+                                              band_info_A[3].ljust(13, ' '), \
+                                              band_info_A[4].ljust(11, ' '), \
+                                              band_info_A[5].ljust(8, ' '), \
+                                              band_info_A[6].ljust(13, ' '), \
+                                              band_info_A[7].ljust(13, ' '), \
+                                              band_info_A[8].ljust(11, ' '))
 
             self.VFO_A_textBrowser.setPlainText(str(info).replace('_', ' '))
 
 #
-        info_B, _ = ft991a.get_opposite_band_info()
+        band_info_B, _ = ft991a.get_opposite_band_info()
 
-        if (info_B is not None):
-            freq_B = '%d' % (int(info_B[1]))
+        if (band_info_B is not None):
+            freq_B = '%d' % (int(band_info_B[1]))
             self.VFO_B_lcdNumber.display(freq_B)
 
-            info = '%s %s %s\n%s %s %s %s' % (info_B[2].ljust(8, ' '), \
-                                              info_B[3].ljust(13, ' '), \
-                                              info_B[4].ljust(11, ' '), \
-                                              info_B[5].ljust(8, ' '), \
-                                              info_B[6].ljust(13, ' '), \
-                                              info_B[7].ljust(13, ' '), \
-                                              info_B[8].ljust(11, ' '))
+            info = '%s %s %s\n%s %s %s %s' % (band_info_B[2].ljust(8, ' '), \
+                                              band_info_B[3].ljust(13, ' '), \
+                                              band_info_B[4].ljust(11, ' '), \
+                                              band_info_B[5].ljust(8, ' '), \
+                                              band_info_B[6].ljust(13, ' '), \
+                                              band_info_B[7].ljust(13, ' '), \
+                                              band_info_B[8].ljust(11, ' '))
 
             self.VFO_B_textBrowser.setPlainText(str(info).replace('_', ' '))
 
@@ -1239,6 +1294,22 @@ FT-991A memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
             else:
                 hold = self.PO_meter_progressBar.property('hold')+1
                 self.PO_meter_progressBar.setProperty('hold', hold)
+
+#
+        value = ft991a.get_meter('SWR')
+        if (value is not None):
+            self.SWR_meter_progressBar.setValue(int(value))
+
+            if (int(value) > self.SWR_meter_progressBar.property('peak')):
+                self.SWR_meter_progressBar.setProperty('peak', int(value))
+
+            if (self.SWR_meter_progressBar.property('hold') > 200):
+                self.SWR_meter_progressBar.setProperty('peak', int(value))
+                self.SWR_meter_progressBar.setProperty('hold', 0)
+
+            else:
+                hold = self.SWR_meter_progressBar.property('hold')+1
+                self.SWR_meter_progressBar.setProperty('hold', hold)
 
 #
         ft991a.MESSAGE_FLAG = True
@@ -1867,6 +1938,12 @@ FT-991A memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
     def on_VM_playback(self):
         self.vm_channel = self.VM_channel_comboBox.currentIndex()+1
 
+        ft991a.set_playback(self.vm_channel)
+
+#
+    def on_VM_loop(self):
+        self.vm_channel = self.VM_channel_comboBox.currentIndex()+1
+
         sender_object = self.sender()
         button_state = sender_object.isChecked()
 
@@ -2064,6 +2141,119 @@ FT-991A memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
             self.VFO_A_Tx_radioButton.setChecked(True)
 
 ##############################
+# Quick Memory
+##############################
+    def on_QuickMemory_Recall_button_clicked(self):
+        ft991a.QMB_recall()
+
+#
+        quick_memory_index = ft991a.spr(0x2F86)
+
+        quick_memory_store = quick_memory_index[0]
+        quick_memory_recall = quick_memory_index[1]
+
+        store_table_index =  {0:1, 4:2, 3:3, 2:4, 1:5}[quick_memory_store]
+        recall_table_index = {0:5, 4:1, 3:2, 2:3, 1:4}[quick_memory_recall]
+
+        self.QuickMemory_Recall_label.setText('%d' % (recall_table_index))
+        self.QuickMemory_Store_label.setText('%d' % (store_table_index))
+
+#
+    def on_QuickMemory_Store_button_clicked(self):
+        quick_memory_index = ft991a.spr(0x2F86)
+
+        quick_memory_store = quick_memory_index[0]
+        quick_memory_recall = quick_memory_index[1]
+
+        store_table_index =  {0:0, 4:1, 3:2, 2:3, 1:4}[quick_memory_store]
+        recall_table_index = {0:5, 4:1, 3:2, 2:3, 1:4}[quick_memory_recall]
+
+#
+        ft991a.QMB_store()
+
+#
+        ft991a.MESSAGE_FLAG = False
+        memory, _ = ft991a.get_memory_direct(quick_memory_store, start=0x2F88)
+        ft991a.MESSAGE_FLAG = True
+
+        freq = '{:011,.0f}'.format(float(memory['freq']))
+        mode = memory['mode']
+        clar_offset = '%+05d' % (memory['clar_offset'])
+        clar_tx = memory['clar_tx']
+        clar_rx = memory['clar_rx']
+
+#
+        self.QuickMemory_tableWidget.setItem(store_table_index, 0, QTableWidgetItem(freq))
+        self.QuickMemory_tableWidget.setItem(store_table_index, 1, QTableWidgetItem(mode))
+        self.QuickMemory_tableWidget.setItem(store_table_index, 2, QTableWidgetItem(clar_offset))
+        self.QuickMemory_tableWidget.setItem(store_table_index, 3, QTableWidgetItem(clar_tx))
+        self.QuickMemory_tableWidget.setItem(store_table_index, 4, QTableWidgetItem(clar_rx))
+
+#
+        quick_memory_index = ft991a.spr(0x2F86)
+
+        quick_memory_store = quick_memory_index[0]
+        quick_memory_recall = quick_memory_index[1]
+
+        store_table_index =  {0:1, 4:2, 3:3, 2:4, 1:5}[quick_memory_store]
+        recall_table_index = {0:5, 4:1, 3:2, 2:3, 1:4}[quick_memory_recall]
+
+        self.QuickMemory_Recall_label.setText('%d' % (recall_table_index))
+        self.QuickMemory_Store_label.setText('%d' % (store_table_index))
+
+#
+    def on_QuickMemory_VM_button_clicked(self):
+        band_info_A, _ = ft991a.get_band_info()
+
+        vfo_mode = band_info_A[6]
+
+        if (vfo_mode == 'QMB' or vfo_mode == 'QMB_MT'):
+            ft991a.memory_vm()
+
+#
+    @pause_GUI_update
+    def update_QuickMemory(self):
+        was_blocked = self.QuickMemory_tableWidget.blockSignals(True)
+
+        for i in range(5):
+            ft991a.MESSAGE_FLAG = False
+            memory, _ = ft991a.get_memory_direct(i, start=0x2F88)
+            ft991a.MESSAGE_FLAG = True
+
+            store_table_index =  {0:0, 4:1, 3:2, 2:3, 1:4}[i]
+
+            freq = '{:011,.0f}'.format(float(memory['freq']))
+            mode = memory['mode']
+            clar_offset = '%+05d' % (memory['clar_offset'])
+            clar_tx = memory['clar_tx']
+            clar_rx = memory['clar_rx']
+
+#
+            self.QuickMemory_tableWidget.setItem(store_table_index, 0, QTableWidgetItem(freq))
+            self.QuickMemory_tableWidget.setItem(store_table_index, 1, QTableWidgetItem(mode))
+            self.QuickMemory_tableWidget.setItem(store_table_index, 2, QTableWidgetItem(clar_offset))
+            self.QuickMemory_tableWidget.setItem(store_table_index, 3, QTableWidgetItem(clar_tx))
+            self.QuickMemory_tableWidget.setItem(store_table_index, 4, QTableWidgetItem(clar_rx))
+
+            self.statusbar.showMessage('Quick Memory %d is updated...' % (i+1), 2000)
+            QApplication.processEvents()
+
+#
+        quick_memory_index = ft991a.spr(0x2F86)
+
+        quick_memory_store = quick_memory_index[0]
+        quick_memory_recall = quick_memory_index[1]
+
+        store_table_index =  {0:1, 4:2, 3:3, 2:4, 1:5}[quick_memory_store]
+        recall_table_index = {0:5, 4:1, 3:2, 2:3, 1:4}[quick_memory_recall]
+
+        self.QuickMemory_Recall_label.setText('%d' % (recall_table_index))
+        self.QuickMemory_Store_label.setText('%d' % (store_table_index))
+
+#
+        self.QuickMemory_tableWidget.blockSignals(was_blocked)
+
+##############################
 # Memory
 ##############################
     def on_Memory_scan_button_clicked(self):
@@ -2220,7 +2410,7 @@ FT-991A memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
                     item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
 
 #
-            self.statusbar.showMessage('Channel %d is updated...' % (i+1), 2000)
+            self.statusbar.showMessage('Memory %d is updated...' % (i+1), 2000)
             QApplication.processEvents()
 
         self.Memory_tableWidget.blockSignals(was_blocked)
@@ -2704,6 +2894,16 @@ FT-991A memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
 ##############################
 # RF CLAR - Set
 ##############################
+    def clar_set_fast(self):
+        button = self.sender()
+
+        if button.isChecked():
+            self.clar_fast = 10
+
+        else:
+            self.clar_fast = 1
+
+#
     def set_RF_clar(self, value):
         dial_value = self.Clar_dial.value()
 
@@ -2717,18 +2917,18 @@ FT-991A memory map: Copyright (c) 2023 Gil Kloepfer, KI5BPK\n', None))
         self.Clar_dial.setProperty('stored_value', dial_value)
 
 #
-        clar = int(self.Clar_lcdNumber.value())+step
+        clar = int(self.Clar_lcdNumber.value())+step*self.clar_fast
 
-#
-        clar = '%d' % (clar)
-        self.Clar_lcdNumber.display(clar)
+        if (clar <= 9999) and (clar >= -9999):
+            clar = '%d' % (clar)
+            self.Clar_lcdNumber.display(clar)
 
-#
-        if (step > 0):
-            ft991a.RF_clar_up(step)
+    #
+            if (step > 0):
+                ft991a.RF_clar_up(step*self.clar_fast)
 
-        else:
-            ft991a.RF_clar_down(abs(step))
+            else:
+                ft991a.RF_clar_down(abs(step)*self.clar_fast)
 
 ##############################
 # RF CLAR - Mode
@@ -3596,7 +3796,11 @@ def auto_detect_port(baudrate):
 
 #
 def dump_memory():
-    data = ft991a.dump_memory()
+    data = []
+
+    for address in range(0x000, 0x8000, 2):
+        data.extend(ft991a.spr(address))
+#
     data_hex = bytearray(data).hex()
 
     utc_time = datetime.now(timezone.utc)
@@ -3617,6 +3821,26 @@ def dump_memory():
     fp.close()
 
 #
+def display_memory(begin, end):
+    data = []
+
+    for address in range(begin, end, 2):
+        data.extend(ft991a.spr(address))
+
+#
+    data_hex = bytearray(data).hex()
+
+    hex2ascii = lambda data: ''.join(chr(b) if (32 <= b <= 126) else '.' for b in data)
+
+    print()
+
+    for i in range(len(data_hex)//32):
+        mem = ' '.join(re.findall(f'.{{1,{2}}}', data_hex[i*32:i*32+32])).upper()
+        mem_ascii = hex2ascii(data[i*16:i*16+16])
+
+        print('%04X  %s  %s' % (16*i+begin, mem, mem_ascii))
+
+#
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(prog='ft991a_boss.py',
                     description='A computer program for controlling the Yaesu FT-991A transceiver.',
@@ -3624,26 +3848,38 @@ if __name__ == "__main__":
 
     parser.add_argument('-v', '--version', action='version', version=f'%(prog)s {__version__}')
 
-    parser.add_argument('-baud', metavar='<baudrate>', dest='baudrate', default='38400',
+    parser.add_argument('--baud', metavar='<baudrate>', dest='baudrate', default='38400',
                         help='data rate of the radio serial port.')
-    parser.add_argument('-cid', metavar='<com_id>', dest='com_id',  default='auto',
+    parser.add_argument('--cid', metavar='<com_id>', dest='com_id',  default='auto',
                         help='serial communication interface ID. Use --listcom to list the available interfaces.')
-    parser.add_argument('-sid', metavar='<sound_id>', dest='sound_id',  default='auto',
+    parser.add_argument('--sid', metavar='<sound_id>', dest='sound_id',  default='auto',
                         help='sound interface ID. Use --listsound to list the available sound interfaces.')
     parser.add_argument('--listcom', action='store_true',  
                         help='list available serial ports.')
     parser.add_argument('--listsound', action='store_true', 
                         help='list available sound interfaces.')
+    parser.add_argument('--wide', action='store_true', 
+                        help='wide (landscape) GUI.')
     parser.add_argument('--exop', action='store_true', 
                         help='extended operating Rx frequency range.')
+    parser.add_argument('--settime', action='store_true', 
+                        help='set radio\'s date and time to UTC.')
+    parser.add_argument('--info', action='store_true', 
+                        help='print radio info.')
     parser.add_argument('--dumpram', action='store_true', 
                         help='dump radio\'s NVRAM to a file.')
+    parser.add_argument('--dispram', nargs=2, metavar=('<M>', '<N>'), 
+                        help='print radio\'s NVRAM in the address range of [M, M+N*16].')
     
     args, unknown = parser.parse_known_args()
 
     list_com = args.listcom
     list_sound = args.listsound
+    wide_gui = args.wide
     dump_ram = args.dumpram
+    disp_ram = args.dispram
+    set_time = args.settime
+    radio_info = args.info
     freq_range = args.exop
     baudrate = int(args.baudrate)
     com_id = 'auto' if (args.com_id == 'auto') else int(args.com_id)
@@ -3701,6 +3937,7 @@ if __name__ == "__main__":
 
         except:
             print('ERROR: can\'t detect radio. Exiting...')
+
             sys.exit(1)
 
     else:
@@ -3715,7 +3952,8 @@ if __name__ == "__main__":
         mic = mics[sound_id-1]
 
 #
-    ft991a.FREQRANGE = 1 if (freq_range) else 0
+    if (freq_range):
+        ft991a.FREQRANGE = 1
 
 #
     ft991a.PORT = port
@@ -3725,18 +3963,74 @@ if __name__ == "__main__":
 
     if (status != True):
         print('ERROR: can\'t open serial port. Exiting...')
+
         sys.exit(1)
 
     ft991a.set_auto_info(0)
     ft991a.SERIAL_HANDLE.reset_input_buffer()
     ft991a.SERIAL_HANDLE.reset_output_buffer()
-#    ft991a.set_date_time()
+
+#
+    if (wide_gui):
+        from ft991a_wide_ui import Ui_MainWindow
+
+    else:
+        from ft991a_ui import Ui_MainWindow
+
+#
+    if (set_time):
+        print('INFO: setting radio\'s date and time to UTC.')
+
+        ft991a.set_date_time()
+
+        sys.exit(0)
 
 #
     if (dump_ram):
         print('INFO: dumping radio\'s NVRAM... This will take a few minutes.')
 
         dump_memory()
+
+        sys.exit(0)
+
+#
+    if (disp_ram):
+        begin = int(disp_ram[0])
+        end = begin+int(disp_ram[1])*16
+
+        display_memory(begin, end)
+
+        sys.exit(0)
+
+#
+    if (radio_info):
+        radio_id = ft991a.get_menu_value(87)
+        preset_freq = ft991a.get_menu_value(151)
+        identification = ft991a.get_id()
+        call_sign = ''.join([ft991a.spr(address).decode() for address in range(0x013E, 0x0147, 2)])
+        direction = ft991a.spr(0x01AA)[0] & 24
+        lat =  [ft991a.spr(address) for address in range(0x01AB, 0x01AE, 2)]
+        long = [ft991a.spr(address) for address in range(0x01AF, 0x01B4, 2)]
+        VDD = float(ft991a.get_meter('VDD'))
+
+        lat_dir = {0:'N', 1:'S'}[(direction >> 4) & 1]
+        lat_deg = lat[0].hex()[0:2]
+        lat_min = lat[0].hex()[2:4]
+        lat_sec = 60*float('0.%s' % (lat[1].hex()))
+
+        long_dir = {0:'E', 1:'W'}[(direction >> 3) & 1]
+        long_deg = long[0].hex()[1:]
+        long_min = long[1].hex()[0:2]
+        long_sec = 60*float('0.%s' % long[1].hex()[2:4]+long[2].hex()[0:1])
+
+        print()
+        print('Radio ID         : %s' % (radio_id))
+        print('Identification   : %s' % (identification))
+        print('Call sign        : %s' % (call_sign))
+        print('Latitude         : %s\u00b0 %s\u2032 %.0f\u2033 %s' % (lat_deg, lat_min, lat_sec, lat_dir))
+        print('Longitude        : %s\u00b0 %s\u2032 %.0f\u2033 %s' % (long_deg, long_min, long_sec, long_dir))
+        print('Preset frequency : %s' % (preset_freq))
+        print('Drain voltage    : %.2f V' % (13.8*VDD/190.0))
 
         sys.exit(0)
 
@@ -3749,13 +4043,16 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(Q_argv)
 
 #
-    window = MainWindow()
+    main_window = type('main_window', (MainWindow, Ui_MainWindow), {})
+
+    window = main_window()
     window.statusBar().setFixedHeight(31)
 
 #
     window.mic = mic
     window.update_RF_settings(control=-1)
     window.update_Memory()
+    window.update_QuickMemory()
     window.update_Radio_menu()
     window.EQ_get_parameters()
     window.Audio_filter_get_cutoff()

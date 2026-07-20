@@ -2964,7 +2964,7 @@ def get_meter(meter):
              'PO':     '5',
              'SWR':    '6',
              'ID':     '7',
-             'VDD':    '8'}[meter]
+             'VDD':    '8'}[meter.upper()]
 
     command = 'RM%s;' % (meter)
     serial_write(command.encode('ASCII'))
@@ -3104,6 +3104,18 @@ def get_scan():
 
     else:
         return None
+
+##############################
+# Quick Memory
+##############################
+def QMB_store():
+    command = 'QI;'
+    serial_write(command.encode('ASCII'))
+
+#
+def QMB_recall():
+    command = 'QR;'
+    serial_write(command.encode('ASCII'))
 
 ##############################
 # Memory Channel
@@ -3295,8 +3307,8 @@ def set_active_memory(channels):
     return data
 
 #
-def get_memory_direct(channel):
-    address = 0x3249+96*channel
+def get_memory_direct(channel, start=0x3249):
+    address = start+96*channel
 
 #
     data = [0]*96
@@ -3384,8 +3396,8 @@ def get_memory_direct(channel):
     return memory, data
 
 #
-def set_memory_direct(channel, memory):
-    address = 0x3249+96*channel
+def set_memory_direct(channel, memory, start=0x3249):
+    address = start+96*channel
 
 #
     data = [0]*96
@@ -3476,8 +3488,8 @@ def set_memory_direct(channel, memory):
     spw(address+94, data[94:96])
 
 #
-def get_memory_direct_raw(channel):
-    address = 0x3249+96*channel
+def get_memory_direct_raw(channel, start=0x3249):
+    address = start+96*channel
 
 #
     data = [0]*96
@@ -3499,8 +3511,8 @@ def get_memory_direct_raw(channel):
     return data
 
 #
-def set_memory_direct_raw(channel, data):
-    address = 0x3249+96*channel
+def set_memory_direct_raw(channel, data, start=0x3249):
+    address = start+96*channel
 
 #
     for offset in range(48):
@@ -3515,18 +3527,9 @@ def set_memory_direct_raw(channel, data):
 
         TEXT_BROWSER.append(message)
 
-#
-def dump_memory():
-    data = [0]*0x8000
-
-#
-    for address in range(0x000, 0x8000, 2):
-        data[address:address+2] = spr(address)
-
-#
-    return data
-
-#
+##############################
+# NVRAM SPR/SPW
+##############################
 @validate_return_value
 def spr(address):
     if (address < 0) or (address > 32767):
@@ -3561,7 +3564,10 @@ def spr(address):
 #
 @validate_return_value
 def spw(address, data):
-    address_range = [(0x3229, 0x3238), (0x3249, 0x6368)]
+    address_range = [(0x3229, 0x3238), 
+                     (0x3249, 0x6368), 
+                     (0x0158, 0x0158)]
+
     in_range = any(start <= address <= end for start, end in address_range)
 
     if (in_range == False):
